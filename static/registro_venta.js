@@ -1,3 +1,5 @@
+// static/registro_venta.js
+
 $(function() {  
 
     // Petición AJAX para obtener el último número de venta
