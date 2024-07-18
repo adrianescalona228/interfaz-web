@@ -118,3 +118,24 @@ def verificar_numero_venta():
     
     # Devolver si el número de venta existe o no
     return jsonify({'existe': count > 0})
+
+@nueva_venta_bp.route('/actualizar_stock', methods=['POST'])
+def actualizar_stock():
+    data = request.get_json()
+    producto = data.get('producto')
+    cantidad_vendida = float(data.get('cantidadVendida', 0))  # Asegúrate de convertir a float
+
+    db = get_db()
+    cursor = db.execute('SELECT * FROM Inventario WHERE PRODUCTO = ?', (producto,))
+    existing_product = cursor.fetchone()
+
+    if existing_product:
+        new_cantidad = float(existing_product['CANTIDAD']) - cantidad_vendida
+        if new_cantidad < 0:
+            return jsonify({'error': 'No hay suficiente stock'}), 400
+        
+        db.execute('UPDATE Inventario SET CANTIDAD = ? WHERE PRODUCTO = ?', (new_cantidad, producto))
+        db.commit()
+        return jsonify({'message': 'Stock actualizado correctamente'}), 200
+    else:
+        return jsonify({'error': 'Producto no encontrado'}), 404

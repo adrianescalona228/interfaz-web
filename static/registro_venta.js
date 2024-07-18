@@ -80,44 +80,34 @@ $(function() {
         row.find('.total-producto').text('$' + totalProducto.toFixed(2));
         calcularTotalVenta();
     }
-function agregarProducto(producto, cantidad, precio) {
-    var parsedPrecio;
+    
+    function agregarProducto(producto, cantidad, precio) {
+        var parsedPrecio;
 
-    // Intentar convertir el precio a float
-    try {
-        parsedPrecio = parseFloat(precio);
-        if (isNaN(parsedPrecio)) {
-            parsedPrecio = 0; // Establecer precio en 0 si no es un número válido
+        // Intentar convertir el precio a float
+        try {
+            parsedPrecio = parseFloat(precio);
+            if (isNaN(parsedPrecio)) {
+                parsedPrecio = 0; // Establecer precio en 0 si no es un número válido
+            }
+        } catch (error) {
+            console.error('Error al convertir precio:', error);
+            parsedPrecio = 0; // Manejar cualquier error de conversión estableciendo precio en 0
         }
-    } catch (error) {
-        console.error('Error al convertir precio:', error);
-        parsedPrecio = 0; // Manejar cualquier error de conversión estableciendo precio en 0
+    
+        var row = `
+            <tr>
+                <td>${producto}</td>
+                <td><input type="number" class="cantidad" value="${cantidad}" min="1"></td>
+                <td><input type="number" class="precio" value="${precio.toFixed(2)}" step="0.01"></td>
+                <td class="total-producto">$${(cantidad * precio).toFixed(2)}</td>
+                <td><span class="eliminar-producto" title="Eliminar Producto" style="color: red; cursor: pointer;">&#x2716;</span></td>
+            </tr>
+        `;
+        $('#tabla_venta tbody').append(row);
+        calcularTotalVenta();
     }
-
-    var totalProducto = cantidad * parsedPrecio;
-    var row = `
-        <tr>
-            <td>${producto}</td>
-            <td><input type="number" class="cantidad" value="${cantidad}" min="1"></td>
-            <td><input type="number" class="precio" value="${parsedPrecio.toFixed(2)}" step="0.01"></td>
-            <td class="total-producto">$${totalProducto.toFixed(2)}</td>
-            <td><span class="eliminar-producto" title="Eliminar Producto" style="color: red; cursor: pointer;">&#x2716;</span></td>
-        </tr>
-    `;
-    $('#tabla_venta tbody').append(row);
-
-    // Capturar evento de cambio en el campo de precio para actualizar total por producto
-    $('#tabla_venta').on('input', '.precio', function() {
-        var cantidad = $(this).closest('tr').find('.cantidad').val();
-        var nuevoPrecio = parseFloat($(this).val());
-        if (!isNaN(nuevoPrecio)) {
-            $(this).closest('tr').find('.total-producto').text('$' + (cantidad * nuevoPrecio).toFixed(2));
-            calcularTotalVenta();
-        }
-    });
-
-    calcularTotalVenta();
-}  
+    
     function actualizarTotalProducto(row) {
         var cantidad = row.find('.cantidad').val();
         var nuevoPrecio = parseFloat(row.find('.precio').val());
