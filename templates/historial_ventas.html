@@ -7,17 +7,17 @@
     <title>Historial de ventas</title>
 </head>
 <body>
-    <div class="menu-izquierdo">
+    <div id="menu "class="menu-izquierdo">
         <h1>Historial de Ventas</h1>
         <a href="{{ url_for('index') }}">Menu principal</a>
-        <a href="{{ url_for('sumar_stock') }}">Sumar stock</a>
-        <a href="{{ url_for('mostrar_inventario') }}">Inventario</a>
-        <a href="{{ url_for('nueva_venta') }}">Nueva venta</a>
-
-
+        <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar stock</a>
+        <a href="{{ url_for('mostrar_inventario.mostrar_inventario') }}">Inventario</a>
+        <a href="{{ url_for('nueva_venta.nueva_venta') }}">Nueva venta</a>
         <!-- Agrega más enlaces según tus necesidades -->
     </div>
     <div class="contenido-principal">
+        <button id="toggle-button">Toggle Menú</button>
+        <h1 class="titulo_principal">Historial de ventas</h1>
         <div id="historial" class="ventas-container">
             {% for venta in ventas %}
             <div class="venta-card">
@@ -69,6 +69,7 @@
             </div>
             {% endfor %}
         </div>
+        <script src="{{ url_for('static', filename='menu.js') }}"></script>
     </div>
 </body>
 </html>
