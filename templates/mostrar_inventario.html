@@ -1,0 +1,59 @@
+<!-- Archivo: templates/mostrar_inventario.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer; /* Cursor pointer para indicar que es clickeable */
+        }
+        .arrow-link {
+            text-decoration: none;
+            color: black;
+        }
+        .arrow-link::before {
+            content: "\2190 "; /* Unicode character for left arrow */
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="arrow-link">Regresar al Inicio</a>
+    <h1>Inventario</h1>
+    <table>
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">ID</th>
+                <th onclick="sortTable(1)">Producto</th>
+                <th onclick="sortTable(2)">Cantidad</th>
+                <th onclick="sortTable(3)">Precio</th>
+                <th onclick="sortTable(4)">Costo</th>
+                <th onclick="sortTable(5)">Tipo de Producto</th>
+                <th onclick="sortTable(6)">Marca</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in inventario %}
+            <tr>
+                <td>{{ item['id'] }}</td>
+                <td>{{ item['PRODUCTO'] }}</td>
+                <td>{{ item['CANTIDAD'] }}</td>
+                <td>{{ item['PRECIO'] }}</td>
+                <td>{{ item['COSTO'] }}</td>
+                <td>{{ item['TIPO_DE_PRODUCTO'] }}</td>
+                <td>{{ item['MARCA'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

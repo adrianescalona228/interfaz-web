@@ -1,0 +1,20 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+</head>
+<body>
+    <h1>Bienvenido a la Gestión de Inventario</h1>
+    <a href="{{ url_for('agregar_stock') }}">Agregar Stock</a><br>
+    <a href="{{ url_for('sumar_stock') }}">Sumar Stock a Producto Existente</a><br>
+    <a href="{{ url_for('nueva_venta') }}">Nueva venta</a><br>
+    <a href="{{ url_for('historial_ventas') }}">Historial de Ventas</a>
+    <a href="{{ url_for('crear_notas_entrega') }}">Crear Notas de Entrega</a><br>
+    <a href="{{ url_for('manejar_credito') }}">Manejar Crédito</a><br>
+    <a href="{{ url_for('enviar_mensajes') }}">Enviar Mensajes Automáticos</a><br>
+    <a href="{{ url_for('mostrar_inventario') }}">Mostrar Inventario</a>
+</body>
+</html>

@@ -1,0 +1,72 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registro de Venta</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+
+    </head>
+    <body>
+        <div id="menu" class="menu-izquierdo">
+            <h1>Registro de venta</h1>
+            <a href="{{ url_for('index') }}">Menu principal</a>
+            <a href="{{ url_for('sumar_stock') }}">Sumar stock</a>
+            <a href="{{ url_for('mostrar_inventario') }}">Inventario</a>
+            <a href="{{ url_for('historial_ventas') }}">Historial de ventas</a>
+        </div>
+        <div class="contenido-principal">
+            <button id="toggle-button">Toggle Menú</button>
+
+            <h1 class="titulo_principal">Registro de Venta</h1>
+            <form action="/procesar_venta" method="POST" id="form_venta">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente" required><br><br>
+                
+                <label for="numero_venta">Número de Venta:</label>
+                <input type="text" id="numero_venta" name="numero_venta" required><br><br>
+                <span id="mensaje_error_venta" style="color: red;"></span>
+
+                
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required><br><br>
+
+                <label for="producto">Producto:</label>
+                <input type="text" id="producto" name="producto" required>
+
+                <table id="tabla_venta">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total por Producto</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>    
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+                <tr>
+                    <td colspan="4" style="text-align: right;"><strong>Total Venta:</strong></td>
+                    <td><span id="valor_total_venta">$0.00</span></td>
+                    <td></td>
+                </tr>
+                <input type="submit" value="Registrar Venta" formnovalidate>
+                <button type="button" id="vaciar_carrito">Vaciar Carrito</button>
+            </form>
+            <div id="mensaje_venta_procesada">Venta procesada correctamente</div>
+            <script src="{{ url_for('static', filename='registro_venta.js') }}"></script>
+            <script src="{{ url_for('static', filename='menu.js') }}"></script>
+        </div>
+
+
+    </body>
+    </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+    <title>Historial de ventas</title>
+</head>
+<body>
+    <div class="menu-izquierdo">
+        <h1>Historial de Ventas</h1>
+        <a href="{{ url_for('index') }}">Menu principal</a>
+        <a href="{{ url_for('sumar_stock') }}">Sumar stock</a>
+        <a href="{{ url_for('mostrar_inventario') }}">Inventario</a>
+        <a href="{{ url_for('nueva_venta') }}">Nueva venta</a>
+
+
+        <!-- Agrega más enlaces según tus necesidades -->
+    </div>
+    <div class="contenido-principal">
+        <div id="historial" class="ventas-container">
+            {% for venta in ventas %}
+            <div class="venta-card">
+                <div class="venta-header">
+                    <div>
+                        <p><strong>Nro. de venta:</strong> {{ venta.numero_venta }}</p>
+                        <p><strong>Cliente:</strong> {{ venta.cliente }}</p>
+                        <p><strong>Fecha:</strong> {{ venta.fecha }}</p>
+                    </div>
+                    <form action="/eliminar_venta/{{ venta.numero_venta }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <span class="eliminar-venta" title="Eliminar Venta" onclick="this.parentElement.submit()">&#x2716;</span>
+                    </form>
+                </div>
+                <div class="venta-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Total por Producto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for producto in venta.productos %}
+                            <tr>
+                                <td>{{ producto.producto }}</td>
+                                <td>{{ producto.cantidad }}</td>
+                                <td>{{ producto.precio }}</td>
+                                <td>{{ producto.cantidad * producto.precio }}</td>
+                                <td>
+                                    <form action="/eliminar_producto/{{ venta.numero_venta }}/{{ producto.producto }}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <span class="eliminar-venta" title="Eliminar Producto" onclick="this.parentElement.submit()">&#x2716;</span>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"><strong>Total Venta:</strong></td>
+                                <td><strong>{{ venta.total_venta }}</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
