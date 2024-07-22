@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear notas de entrega</title>
     <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
 </head>
 <body>
@@ -14,6 +14,7 @@
         <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar stock</a>
         <a href="{{ url_for('mostrar_inventario.mostrar_inventario') }}">Inventario</a>
         <a href="{{ url_for('historial_ventas.historial_ventas') }}">Historial de ventas</a>
+        <a href="{{ url_for('nueva_venta.nueva_venta') }}">Nueva venta</a>
     </div>
     <div class="contenido-principal">
         <h1 class="titulo_principal">Crear notas de entrega</h1>

@@ -1,3 +1,4 @@
+//registro_venta.js
 $(function() {
     // Inicializar
     inicializarFechaActual();

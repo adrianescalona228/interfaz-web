@@ -5,6 +5,53 @@ from .database import get_db
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
 
+
+# Ruta para procesar el formulario de ventas
+@nueva_venta_bp.route('/procesar_venta', methods=['POST'])
+def procesar_venta():
+    cliente = request.form.get('cliente')
+    producto = request.form.get('producto')
+    cantidad = request.form.get('cantidad')
+    fecha = request.form.get('fecha')
+    numero_venta = request.form.get('numero_venta')
+    
+    # Validar si el número de venta ya existe en la base de datos
+    if venta_existe(numero_venta):
+        return 'Error: El número de venta ya existe en la base de datos. No se puede registrar.'
+
+    # Lógica para obtener precio y costo desde el inventario
+    db = get_db()
+    cursor = db.cursor()
+    
+    # Obtener precio y costo del producto desde el inventario
+    cursor.execute('SELECT precio, costo FROM Inventario WHERE producto = ?', (producto,))
+    result = cursor.fetchone()
+    
+    if result:
+        precio = result['precio']
+        costo = result['costo']
+    else:
+        # Manejo de errores si el producto no existe en el inventario
+        return 'Error: El producto no existe en el inventario'
+    
+    # Obtener el ID del cliente
+    cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (cliente,))
+    cliente_id = cursor.fetchone()['id']
+    
+    # Insertar datos en la tabla Ventas
+    cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                (numero_venta, cliente, producto, cantidad, precio, costo, fecha))
+    
+    # Actualizar stock después de registrar la venta
+    if not actualizar_stock(producto, cantidad):
+        print("no se pudo, rey")
+        return f'Error: No se pudo actualizar el stock para el producto {producto}'
+
+    db.commit()
+
+    return redirect(url_for('procesar_venta'))
+
+
 # Ruta para renderizar el formulario de ventas
 @nueva_venta_bp.route('/nueva_venta')
 def nueva_venta():
@@ -55,45 +102,6 @@ def venta_existe(numero_venta):
         print(f"Error de SQLite: {e}")
         return False
 
-# Ruta para procesar el formulario de ventas
-@nueva_venta_bp.route('/procesar_venta', methods=['POST'])
-def procesar_venta():
-    cliente = request.form.get('cliente')
-    producto = request.form.get('producto')
-    cantidad = request.form.get('cantidad')
-    fecha = request.form.get('fecha')
-    numero_venta = request.form.get('numero_venta')
-    
-    # Validar si el número de venta ya existe en la base de datos
-    if venta_existe(numero_venta):
-        return 'Error: El número de venta ya existe en la base de datos. No se puede registrar.'
-
-    # Lógica para obtener precio y costo desde el inventario
-    db = get_db()
-    cursor = db.cursor()
-    
-    # Obtener precio y costo del producto desde el inventario
-    cursor.execute('SELECT precio, costo FROM Inventario WHERE producto = ?', (producto,))
-    result = cursor.fetchone()
-    
-    if result:
-        precio = result['precio']
-        costo = result['costo']
-    else:
-        # Manejo de errores si el producto no existe en el inventario
-        return 'Error: El producto no existe en el inventario'
-    
-    # Obtener el ID del cliente
-    cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (cliente,))
-    cliente_id = cursor.fetchone()['id']
-    
-    # Insertar datos en la tabla Ventas
-    cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (numero_venta, cliente, producto, cantidad, precio, costo, fecha))
-    db.commit()
-
-    return redirect(url_for('procesar_venta'))
-
 @nueva_venta_bp.route('/obtener_ultimo_numero_venta', methods=['GET'])
 def obtener_ultimo_numero_venta():
     db = get_db()
@@ -119,23 +127,28 @@ def verificar_numero_venta():
     # Devolver si el número de venta existe o no
     return jsonify({'existe': count > 0})
 
-@nueva_venta_bp.route('/actualizar_stock', methods=['POST'])
-def actualizar_stock():
-    data = request.get_json()
-    producto = data.get('producto')
-    cantidad_vendida = float(data.get('cantidadVendida', 0))  # Asegúrate de convertir a float
-
+def actualizar_stock(producto, cantidad_vendida):
     db = get_db()
-    cursor = db.execute('SELECT * FROM Inventario WHERE PRODUCTO = ?', (producto,))
-    existing_product = cursor.fetchone()
+    cursor = db.cursor()
 
-    if existing_product:
-        new_cantidad = float(existing_product['CANTIDAD']) - cantidad_vendida
-        if new_cantidad < 0:
-            return jsonify({'error': 'No hay suficiente stock'}), 400
-        
-        db.execute('UPDATE Inventario SET CANTIDAD = ? WHERE PRODUCTO = ?', (new_cantidad, producto))
+    cursor.execute('SELECT cantidad FROM Inventario WHERE producto = ?', (producto,))
+    result = cursor.fetchone()
+
+    if result:
+
+        cantidad_actual = result['cantidad']
+
+        # Intentar convertir las cantidades a enteros
+        try:
+            cantidad_actual = float(cantidad_actual)
+            cantidad_vendida = float(cantidad_vendida)
+        except ValueError:
+            # Manejo de error si la conversión falla
+            return False
+
+        nueva_cantidad = cantidad_actual - cantidad_vendida
+        cursor.execute('UPDATE Inventario SET cantidad = ? WHERE producto = ?', (nueva_cantidad, producto))
         db.commit()
-        return jsonify({'message': 'Stock actualizado correctamente'}), 200
+        return True
     else:
-        return jsonify({'error': 'Producto no encontrado'}), 404
+        return False
