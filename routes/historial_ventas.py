@@ -2,7 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from .database import get_db
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
 
@@ -11,8 +11,11 @@ def historial_ventas():
     db = get_db()
     
     # Consulta para obtener todas las ventas ordenadas por número de venta
-    cursor = db.execute('SELECT numero_venta, cliente, fecha, producto, cantidad, precio FROM Ventas ORDER BY numero_venta')
+    cursor = db.execute('SELECT id, numero_venta, cliente, fecha, producto, cantidad, precio FROM Ventas ORDER BY numero_venta')
     ventas = cursor.fetchall()
+
+    for venta in ventas:
+        id = venta['id']
     
     # Lista para almacenar las ventas agrupadas
     ventas_agrupadas = []
@@ -48,6 +51,7 @@ def historial_ventas():
         
         
         venta_actual['productos'].append({
+            'id': venta['id'],
             'producto': venta['producto'],
             'cantidad': cantidad,  # Convertir a float
             'precio': precio  # Convertir a float
@@ -80,23 +84,26 @@ def eliminar_venta(numero_venta):
     return redirect(url_for('historial_ventas.historial_ventas'))
 
 # Ruta para eliminar un producto de una venta específica
-@historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<nombre_producto>', methods=['POST'])
-def eliminar_producto(numero_venta, nombre_producto):
+@historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<int:id>', methods=['POST'])
+def eliminar_producto(numero_venta, id):
     db = get_db()
     cursor = db.cursor()
 
-    # Codificar el nombre del producto para asegurar la URL
-    nombre_codificado = quote(nombre_producto)
+    print(id)
 
     # Verificar si el producto existe dentro de la venta
-    cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ? AND producto = ?', (numero_venta, nombre_codificado))
+    cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
     producto = cursor.fetchone()
 
+    print(producto)
+
     if producto:
-        cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND producto = ?', (numero_venta, nombre_codificado))
+        cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
         db.commit()
+        print('si llegaste aqui, tas fino mirei')
         flash('Producto eliminado correctamente', 'success')
     else:
         flash('El producto no existe', 'error')
+        print('si llegaste hasta aqui, no tas fino mirei')
 
-    return redirect(url_for('historial_ventas'))
+    return redirect(url_for('historial_ventas.historial_ventas'))

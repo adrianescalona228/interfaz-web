@@ -52,7 +52,7 @@
                                 <td>{{ producto.precio }}</td>
                                 <td>{{ producto.cantidad * producto.precio }}</td>
                                 <td>
-                                    <form action="/eliminar_producto/{{ venta.numero_venta }}/{{ producto.producto }}" method="post">
+                                    <form action="/eliminar_producto/{{ venta.numero_venta }}/{{ producto.id }}" method="post">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <span class="eliminar-venta" title="Eliminar Producto" onclick="this.parentElement.submit()">&#x2716;</span>
                                     </form>
