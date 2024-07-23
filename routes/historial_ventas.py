@@ -77,7 +77,7 @@ def eliminar_venta(numero_venta):
     else:
         flash('La venta no existe', 'error')
 
-    return redirect(url_for('historial_ventas.eliminar_venta'))
+    return redirect(url_for('historial_ventas.historial_ventas'))
 
 # Ruta para eliminar un producto de una venta específica
 @historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<nombre_producto>', methods=['POST'])
