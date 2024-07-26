@@ -1,8 +1,12 @@
+import os
 import sqlite3
 from flask import g
 
-DATABASE = '/home/apolito/Programacion/Proyectos/interfaz_web/DATABASE/inventory.db'
+# Obtén el directorio actual del script
+basedir = os.path.abspath(os.path.dirname(__file__))
 
+# Configura la base de datos usando una ruta relativa
+DATABASE = os.path.join(basedir, '..', 'DATABASE', 'inventory.db')
 
 def get_db():
     if 'db' not in g:

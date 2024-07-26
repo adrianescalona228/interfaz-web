@@ -1,4 +1,5 @@
 # app.py
+#from flask import Flask, g, render_template
 from flask import Flask, g, render_template
 from routes.agregar_stock import agregar_stock_bp
 from routes.sumar_stock import sumar_stock_bp
@@ -13,7 +14,7 @@ import sqlite3
 
 def cargar_clave_secreta():
     clave_secreta = None
-    with open('/home/apolito/.query.txt', 'r') as f:
+    with open('query.txt', 'r') as f:
         clave_secreta = f.read().strip()
     return clave_secreta
 
@@ -38,6 +39,7 @@ def create_app():
 
     @app.route('/')
     def index():
+        print('hola')
         return render_template('index.html')
 
     # Registrar los Blueprints
@@ -54,4 +56,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
