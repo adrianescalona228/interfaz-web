@@ -17,6 +17,7 @@
             <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar stock</a>
             <a href="{{ url_for('mostrar_inventario.mostrar_inventario') }}">Inventario</a>
             <a href="{{ url_for('historial_ventas.historial_ventas') }}">Historial de ventas</a>
+            <a href="{{ url_for('manejar_credito.manejar_credito') }}">Manejar Crédito</a><br>
         </div>
         <div class="contenido-principal">
             <button id="toggle-button">Toggle Menú</button>
@@ -55,7 +56,7 @@
                 </table>
                 <tr>
                     <td colspan="4" style="text-align: right;"><strong>Total Venta:</strong></td>
-                    <td><span id="valor_total_venta">$0.00</span></td>
+                    <td><span id="valor_total_venta" class="valor_total_venta">$0.00</span></td>
                     <td></td>
                 </tr>
                 <input type="submit" value="Registrar Venta" formnovalidate>

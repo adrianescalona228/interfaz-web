@@ -152,6 +152,7 @@ $(function() {
         var cliente = $('#cliente').val();
         var numero_venta = $('#numero_venta').val();
         var fecha = $('#fecha').val();
+        var montoTotal = parseFloat($('#valor_total_venta').text().replace('$', ''));
 
         if (!cliente || !numero_venta || !fecha) {
             alert('Por favor completa todos los campos obligatorios.');
@@ -165,12 +166,15 @@ $(function() {
         $('#tabla_venta tbody tr').each(function() {
             var producto = $(this).find('td:first').text();
             var cantidad = $(this).find('.cantidad').val();
+            var precio = $(this).find('.precio').val();
             $.post('/procesar_venta', {
                 cliente: cliente,
                 numero_venta: numero_venta,
                 fecha: fecha,
                 producto: producto,
-                cantidad: cantidad
+                cantidad: cantidad,
+                precio: precio,
+                montoTotal: montoTotal
             }, function(response) {
                 console.log(response);
             });

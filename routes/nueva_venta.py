@@ -2,6 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from .database import get_db
+from datetime import datetime, timedelta
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
 
@@ -12,8 +13,10 @@ def procesar_venta():
     cliente = request.form.get('cliente')
     producto = request.form.get('producto')
     cantidad = request.form.get('cantidad')
+    precio = request.form.get('precio')
     fecha = request.form.get('fecha')
     numero_venta = request.form.get('numero_venta')
+    monto_total = request.form.get('montoTotal')
     
     # Validar si el número de venta ya existe en la base de datos
     if venta_existe(numero_venta):
@@ -24,11 +27,10 @@ def procesar_venta():
     cursor = db.cursor()
     
     # Obtener precio y costo del producto desde el inventario
-    cursor.execute('SELECT precio, costo FROM Inventario WHERE producto = ?', (producto,))
+    cursor.execute('SELECT costo FROM Inventario WHERE producto = ?', (producto,))
     result = cursor.fetchone()
     
     if result:
-        precio = result['precio']
         costo = result['costo']
     else:
         # Manejo de errores si el producto no existe en el inventario
@@ -46,7 +48,22 @@ def procesar_venta():
     if not actualizar_stock(producto, cantidad):
         print("no se pudo, rey")
         return f'Error: No se pudo actualizar el stock para el producto {producto}'
+    
+        # Insertar datos en la tabla Facturas
+    fecha_emision = datetime.strptime(fecha, '%Y-%m-%d')
+    fecha_vencimiento = fecha_emision + timedelta(days=15)
 
+    # Crear la factura solo si no existe para esa venta
+    cursor.execute('SELECT id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+    factura = cursor.fetchone()
+
+    if not factura:
+        # Crear la factura
+        fecha_emision = datetime.strptime(fecha, '%Y-%m-%d')
+        fecha_vencimiento = fecha_emision + timedelta(days=15)
+        cursor.execute('INSERT INTO Facturas (numero_venta, cliente_id, monto_total, fecha_emision, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)',
+                       (numero_venta, cliente_id, monto_total, fecha_emision.strftime('%Y-%m-%d'), fecha_vencimiento.strftime('%Y-%m-%d')))
+  
     db.commit()
 
     return redirect(url_for('procesar_venta'))
