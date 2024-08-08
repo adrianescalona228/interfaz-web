@@ -47,3 +47,4 @@ def autocompletar_clientes():
 @manejar_credito_bp.route('/manejar_credito/deudas')
 def deudas():
     return render_template('deudas.html')
+
