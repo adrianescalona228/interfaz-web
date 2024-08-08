@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
 
-
 # Ruta para procesar el formulario de ventas
 @nueva_venta_bp.route('/procesar_venta', methods=['POST'])
 def procesar_venta():
@@ -64,10 +63,17 @@ def procesar_venta():
         cursor.execute('INSERT INTO Facturas (numero_venta, cliente_id, monto_total, fecha_emision, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)',
                        (numero_venta, cliente_id, monto_total, fecha_emision.strftime('%Y-%m-%d'), fecha_vencimiento.strftime('%Y-%m-%d')))
   
+    # Actualizar la tabla Deudas
+    cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+    deuda_actual = cursor.fetchone()['monto_total']
+
+    nuevo_monto_total = deuda_actual + float(monto_total)
+    cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
+    
     db.commit()
+    db.close()
 
     return redirect(url_for('procesar_venta'))
-
 
 # Ruta para renderizar el formulario de ventas
 @nueva_venta_bp.route('/nueva_venta')

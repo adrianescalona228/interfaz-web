@@ -81,6 +81,32 @@ def eliminar_venta(numero_venta):
     else:
         flash('La venta no existe', 'error')
 
+    # Seleccionar la factura en base al número de venta a eliminar
+    cursor.execute('SELECT monto_total, cliente_id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+    factura = cursor.fetchone()
+
+    if factura:
+        # Conseguir el valor del monto total de la factura y el cliente_id
+        monto_factura = factura[0]  # Nota: usando índices porque fetchone() devuelve una tupla
+        cliente_id = factura[1]
+
+        # Seleccionar el monto total de deudas para hacer la resta con el monto de la factura
+        cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+        deuda = cursor.fetchone()
+
+        if deuda:
+            monto_total_deuda = deuda[0]
+            monto_final_deuda = monto_total_deuda - monto_factura
+
+            # Actualizar la deuda en la tabla Deudas
+            cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
+
+        # Aquí agregarías el código para eliminar la factura
+        cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+
+    # Recuerda hacer commit después de realizar cambios
+    db.commit()
+
     return redirect(url_for('historial_ventas.historial_ventas'))
 
 # Ruta para eliminar un producto de una venta específica
@@ -89,16 +115,33 @@ def eliminar_producto(numero_venta, id):
     db = get_db()
     cursor = db.cursor()
 
-    print(id)
-
     # Verificar si el producto existe dentro de la venta
     cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
     producto = cursor.fetchone()
+    precio = producto[5]
+
+    cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+    factura = cursor.fetchone()
+    monto_total_factura = factura[1]
+    cliente_id = int(factura[0])
+    monto_final_factura = monto_total_factura - precio
+
+    cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+    monto_total_deuda = cursor.fetchone()[0]
+    monto_final_deuda = monto_total_deuda - precio
 
     print(producto)
+    print(f'precio producto: {precio}')
+    print(f'total deuda: {monto_total_deuda}')
+    print(f'monto final: {monto_final_deuda}')
+    print(f'monto factura: {monto_total_factura}')
+    print(f'monto final: {monto_final_factura}')
+
 
     if producto:
         cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
+        cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
+        cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
         db.commit()
         print('si llegaste aqui, tas fino mirei')
         flash('Producto eliminado correctamente', 'success')
