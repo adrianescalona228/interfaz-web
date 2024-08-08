@@ -19,30 +19,29 @@ def registrar_abono():
     conn = get_db()
     cursor = conn.cursor()
 
-    # Actualizar o insertar la deuda del cliente
+    # Obtener el ID del cliente
+    cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (cliente,))
+    cliente_id = cursor.fetchone()['id']
+
+    if cliente_id is None:
+        return jsonify({'success': False, 'message': 'Cliente no encontrado'})
+
+
+    # Registrar el abono en la tabla Abonos
+    cursor.execute('INSERT INTO Abonos (cliente_id, monto, fecha) VALUES (?, ?, ?)', 
+                   (cliente_id, monto, fecha))
+    
+        # Actualizar la deuda del cliente en la tabla Deudas
     cursor.execute('''
-        INSERT INTO Deudas (cliente, total_deuda, fecha_actualizacion)
-        VALUES (?, ?, ?)
-        ON CONFLICT(cliente) DO UPDATE SET
-            total_deuda = total_deuda - ?,
-            fecha_actualizacion = ?
-    ''', (cliente, monto, fecha, monto, fecha))
+        UPDATE Deudas 
+        SET total_deuda = total_deuda - ?
+        WHERE cliente_id = ?
+    ''', (monto, cliente_id))
 
     conn.commit()
     conn.close()
     return jsonify({'success': True, 'message': 'Abono registrado correctamente'})
 
-# Ruta para obtener datos de autocompletado de clientes
-@manejar_credito_bp.route('/autocompletar_clientes', methods=['GET'])
-def autocompletar_clientes():
-    term = request.args.get('term', '')
-    
-    # Conexión a la base de datos y consulta
-    db = get_db()
-    cursor = db.execute('SELECT nombre_cliente FROM Clientes WHERE nombre_cliente LIKE ?', ('%' + term + '%',))
-    clientes = [row['nombre_cliente'] for row in cursor.fetchall()]
-    
-    return jsonify(clientes)
 
 @manejar_credito_bp.route('/manejar_credito/deudas')
 def deudas():
