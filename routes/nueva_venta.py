@@ -66,14 +66,16 @@ def procesar_venta():
     # Actualizar la tabla Deudas
     cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
     deuda_actual = cursor.fetchone()['monto_total']
+    print(deuda_actual)
 
     nuevo_monto_total = deuda_actual + float(monto_total)
+    print(nuevo_monto_total)
     cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
     
     db.commit()
     db.close()
 
-    return redirect(url_for('procesar_venta'))
+    return redirect(url_for('nueva_venta_bp.procesar_venta'))
 
 # Ruta para renderizar el formulario de ventas
 @nueva_venta_bp.route('/nueva_venta')

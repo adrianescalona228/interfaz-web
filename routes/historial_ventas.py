@@ -137,11 +137,18 @@ def eliminar_producto(numero_venta, id):
     print(f'monto factura: {monto_total_factura}')
     print(f'monto final: {monto_final_factura}')
 
+    # monto = 0
+    # terminal = 120
+    # cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto, terminal))
+    # db.commit()
 
     if producto:
         cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
-        cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
         cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
+        if monto_final_factura != 0:
+            cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
+        elif monto_final_factura == 0:
+            cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))    
         db.commit()
         print('si llegaste aqui, tas fino mirei')
         flash('Producto eliminado correctamente', 'success')
