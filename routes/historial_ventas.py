@@ -90,12 +90,12 @@ def eliminar_venta(numero_venta):
         monto_factura = factura[0]  # Nota: usando índices porque fetchone() devuelve una tupla
         cliente_id = factura[1]
 
-        # Seleccionar el monto total de deudas para hacer la resta con el monto de la factura
-        cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
-        deuda = cursor.fetchone()
+        # Seleccionar el monto total de factura para hacer la resta con el monto de la factura
+        cursor.execute('SELECT monto_total FROM Facturas WHERE cliente_id = ?', (cliente_id,))
+        factura = cursor.fetchone()
 
-        if deuda:
-            monto_total_deuda = deuda[0]
+        if factura:
+            monto_total_deuda = factura[0]
             monto_final_deuda = monto_total_deuda - monto_factura
 
             # Actualizar la deuda en la tabla Deudas
@@ -137,10 +137,6 @@ def eliminar_producto(numero_venta, id):
     print(f'monto factura: {monto_total_factura}')
     print(f'monto final: {monto_final_factura}')
 
-    # monto = 0
-    # terminal = 120
-    # cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto, terminal))
-    # db.commit()
 
     if producto:
         cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))

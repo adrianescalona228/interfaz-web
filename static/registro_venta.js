@@ -1,4 +1,3 @@
-//registro_venta.js
 $(function() {
     // Inicializar
     inicializarFechaActual();
@@ -68,9 +67,22 @@ $(function() {
             verificarNumeroVenta($(this).val());
         });
 
-        $('#form_venta').submit(function(event) {
+        $('#procesar_venta').click(function(event) {
             event.preventDefault();
             procesarVenta();
+        });
+
+        $('.reset_button_id').click(function() {
+            $.ajax({
+                url: '/reset',
+                type: 'POST',
+                success: function(response) {
+                    console.log('Reset completado:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en el reset:', status, error);
+                }
+            });
         });
     }
     
@@ -85,15 +97,14 @@ $(function() {
     function agregarProducto(producto, cantidad, precio) {
         var parsedPrecio;
 
-        // Intentar convertir el precio a float
         try {
             parsedPrecio = parseFloat(precio);
             if (isNaN(parsedPrecio)) {
-                parsedPrecio = 0; // Establecer precio en 0 si no es un número válido
+                parsedPrecio = 0;
             }
         } catch (error) {
             console.error('Error al convertir precio:', error);
-            parsedPrecio = 0; // Manejar cualquier error de conversión estableciendo precio en 0
+            parsedPrecio = 0;
         }
     
         var row = `
@@ -152,7 +163,8 @@ $(function() {
         var cliente = $('#cliente').val();
         var numero_venta = $('#numero_venta').val();
         var fecha = $('#fecha').val();
-        var montoTotal = parseFloat($('#valor_total_venta').text().replace('$', ''));
+        var monto_total = parseFloat($('#valor_total_venta').text().replace('$', ''));
+        console.log(`este es el monto_total: ${monto_total}`);
 
         if (!cliente || !numero_venta || !fecha) {
             alert('Por favor completa todos los campos obligatorios.');
@@ -163,27 +175,62 @@ $(function() {
             return;
         }
 
+        var productos = [];
         $('#tabla_venta tbody tr').each(function() {
             var producto = $(this).find('td:first').text();
             var cantidad = $(this).find('.cantidad').val();
             var precio = $(this).find('.precio').val();
-            $.post('/procesar_venta', {
-                cliente: cliente,
-                numero_venta: numero_venta,
-                fecha: fecha,
-                producto: producto,
-                cantidad: cantidad,
-                precio: precio,
-                montoTotal: montoTotal
-            }, function(response) {
-                console.log(response);
-            });
+            productos.push({ producto: producto, cantidad: cantidad, precio: precio });
         });
+        
+        // Enviar productos como un array JSON
+        $.post('/procesar_venta', {
+            cliente: cliente,
+            numero_venta: numero_venta,
+            fecha: fecha,
+            productos: JSON.stringify(productos)  // Convertir el array a JSON
+        }, function(response) {
+            console.log(response);
+        });
+        
+        crearFactura(fecha, numero_venta, cliente, monto_total);
+        actualizarDeuda(numero_venta);
+    }
 
-        $('#tabla_venta tbody').empty();
-        $('#mensaje_venta_procesada').text('Venta procesada correctamente');
-        setTimeout(function() {
-            location.reload();
-        }, 1000);
+    function crearFactura(fecha, numero_venta, cliente, monto_total) {
+        $.ajax({
+            url: '/crear_factura',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ 
+                fecha: fecha,
+                numero_venta: numero_venta,
+                cliente: cliente,
+                monto_total: monto_total
+            }),
+            success: function(response) {
+                console.log('Factura creada:', response);
+                // Actualizar deuda después de crear la factura
+                actualizarDeuda(numero_venta);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al crear la factura:', status, error);
+            }
+        });
+    }
+
+    function actualizarDeuda(numero_venta) {
+        return $.ajax({
+            url: '/actualizar_deuda',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ numero_venta: numero_venta }),
+            success: function(response) {
+                console.log('Deuda actualizada:', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al actualizar la deuda:', status, error);
+            }
+        });
     }
 });
