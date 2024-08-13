@@ -1,12 +1,12 @@
 # routes/agregar_stock.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from .database import get_db
+from ...database import get_db
 
-sumar_stock_bp = Blueprint('sumar_stock', __name__)
+comprar_stock_bp = Blueprint('comprar_stock', __name__)
 
-@sumar_stock_bp.route('/sumar_stock', methods=['GET', 'POST'])
-def sumar_stock():
+@comprar_stock_bp.route('/comprar_stock', methods=['GET', 'POST'])
+def comprar_stock():
     if request.method == 'POST':
         producto = request.form.get('producto')
         cantidad = float(request.form.get('cantidad', 0))  # Convertir cantidad a float
@@ -23,7 +23,7 @@ def sumar_stock():
         else:
             flash('El producto no existe en el inventario', 'error')
 
-        return redirect(url_for('sumar_stock'))
+        return redirect(url_for('/compras/comprar_stock'))
 
-    return render_template('sumar_stock.html')
+    return render_template('/compras/comprar_stock.html')
 

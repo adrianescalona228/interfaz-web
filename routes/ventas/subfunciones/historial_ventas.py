@@ -1,10 +1,14 @@
 # routes/historial_ventas.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from .database import get_db
+from ...database import get_db
 from urllib.parse import quote, unquote
 
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
+
+# @historial_ventas_bp.route('/historialv')
+# def historialv():
+#     return render_template('/ventas/historial_ventas.html')
 
 @historial_ventas_bp.route('/historial_ventas')
 def historial_ventas():
@@ -21,7 +25,7 @@ def historial_ventas():
     ventas_agrupadas = []
     current_numero_venta = None
     venta_actual = None
-    
+
     # Procesar cada venta y agruparlas por número de venta
     for venta in ventas:
         if venta['numero_venta'] != current_numero_venta:
@@ -63,7 +67,8 @@ def historial_ventas():
         total_venta = sum(float(producto['cantidad']) * float(producto['precio']) for producto in venta_actual['productos'])
         venta_actual['total_venta'] = total_venta
         ventas_agrupadas.append(venta_actual)
-    return render_template('historial_ventas.html', ventas=ventas_agrupadas)
+
+    return render_template('/ventas/historial_ventas.html', ventas=ventas_agrupadas)
 
 @historial_ventas_bp.route('/eliminar_venta/<int:numero_venta>', methods=['POST'])
 def eliminar_venta(numero_venta):
@@ -107,7 +112,7 @@ def eliminar_venta(numero_venta):
     # Recuerda hacer commit después de realizar cambios
     db.commit()
 
-    return redirect(url_for('historial_ventas.historial_ventas'))
+    return redirect(url_for('/ventas/historial_ventas'))
 
 # Ruta para eliminar un producto de una venta específica
 @historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<int:id>', methods=['POST'])
@@ -152,4 +157,4 @@ def eliminar_producto(numero_venta, id):
         flash('El producto no existe', 'error')
         print('si llegaste hasta aqui, no tas fino mirei')
 
-    return redirect(url_for('historial_ventas.historial_ventas'))
+    return redirect(url_for('/ventas/historial_ventas'))

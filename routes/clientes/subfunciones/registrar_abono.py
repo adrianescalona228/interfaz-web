@@ -1,16 +1,15 @@
 # routes/manejar_credito.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from .database import get_db
+from ...database import get_db
 
+registrar_abono_bp = Blueprint('registrar_abono', __name__)
 
-manejar_credito_bp = Blueprint('manejar_credito', __name__)
+@registrar_abono_bp.route('/template_abonos')
+def template_abonos():
+    return render_template('/clientes/registrar_abono.html')
 
-@manejar_credito_bp.route('/manejar_credito')
-def manejar_credito():
-    return render_template('manejar_credito.html')
-
-@manejar_credito_bp.route('/registrar_abono', methods=['POST'])
+@registrar_abono_bp.route('/registrar_abono', methods=['POST'])
 def registrar_abono():
     cliente = request.form.get('cliente')
     monto = float(request.form.get('monto'))
@@ -41,9 +40,4 @@ def registrar_abono():
     conn.commit()
     conn.close()
     return jsonify({'success': True, 'message': 'Abono registrado correctamente'})
-
-
-@manejar_credito_bp.route('/manejar_credito/deudas')
-def deudas():
-    return render_template('deudas.html')
 

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+</head>
+<body>
+    <a href="{{ url_for('compras.agregar_nuevo_producto.agregar_nuevo_producto') }}">Nuevo producto</a><br>
+    <a href="{{ url_for('compras.comprar_stock.comprar_stock') }}">Comprar</a><br>
+</body>
+</html>

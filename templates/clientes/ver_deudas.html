@@ -15,15 +15,13 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Monto</th>
-                    <th>Fecha</th>
                 </tr>
             </thead>
             <tbody>
                 {% for deuda in deudas %}
                     <tr>
-                        <td>{{ deuda.cliente }}</td>
-                        <td>{{ deuda.monto }}</td>
-                        <td>{{ deuda.fecha }}</td>
+                        <td>{{ deuda['cliente_id'] }}</td>
+                        <td>{{ deuda['monto_total'] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

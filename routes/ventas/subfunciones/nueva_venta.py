@@ -1,11 +1,16 @@
-# routes/nueva_venta.py
+# routes/ventas/subfunciones/nueva_venta.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from .database import get_db
+from ...database import get_db
 from datetime import datetime, timedelta
 import json
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
+
+# Ruta para renderizar el formulario de ventas
+@nueva_venta_bp.route('/nueva_venta')
+def nueva_venta():
+    return render_template('/ventas/formulario_venta.html')
 
 @nueva_venta_bp.route('/procesar_venta', methods=['POST'])
 def procesar_venta():
@@ -151,11 +156,6 @@ def reset():
 
     return f'id del reset: {id}'
     
-
-# Ruta para renderizar el formulario de ventas
-@nueva_venta_bp.route('/nueva_venta')
-def nueva_venta():
-    return render_template('formulario_venta.html')
 
 @nueva_venta_bp.route('/autocomplete', methods=['GET'])
 def autocomplete():

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar cliente nuevo</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+            background-color: #f0f0f0; /* Color de fondo opcional */
+        }
+
+        form {
+            background: #fff; /* Fondo blanco para el formulario */
+            padding: 20px;
+            border-radius: 8px; /* Esquinas redondeadas */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra opcional */
+            max-width: 400px; /* Ancho máximo del formulario */
+            width: 100%; /* Ocupa el ancho disponible */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="window.history.back()">Volver</button> 
+        <h1 class="titulo_principal">Agregar clientes</h1>
+        <form method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br><br>
+    
+            <label for="razon_social">Razon social:</label>
+            <input type="text" id="razon_social" name="razon_social" required><br><br>
+    
+            <label for="rif_cedula">Rif/Cedula:</label>
+            <input type="text" id="rif_cedula" name="rif_cedula" required><br><br>
+    
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" name="direccion" required><br><br>
+    
+            <label for="telegono">Telefono:</label>
+            <input type="text" id="telefono" name="telefono" required><br><br>
+    
+            <input type="submit" id="agregar_cliente">
+        </form>
+    </div>
+
+</body>

@@ -5,17 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-            <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
 
 </head>
 <body>
     <div id="menu "class="menu-izquierdo">
         <h1>Historial de Ventas</h1>
         <a href="{{ url_for('index') }}">Menu principal</a>
-        <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar stock</a>
-        <a href="{{ url_for('historial_ventas.historial_ventas') }}">Historial de ventas</a>
-        <a href="{{ url_for('nueva_venta.nueva_venta') }}">Nueva venta</a>
-        <!-- Agrega más enlaces según tus necesidades -->
     </div>
     <div class="contenido-principal">
         <button id="toggle-button">Toggle Menú</button>

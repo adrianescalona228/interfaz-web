@@ -17,14 +17,10 @@
 <body>
     <div class="contenido-principal">
     <h1>Bienvenido a la Gestión de Inventario</h1>
-    <a href="{{ url_for('agregar_stock.agregar_stock') }}">Agregar Stock</a><br>
-    <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar Stock a Producto Existente</a><br>
-    <a href="{{ url_for('nueva_venta.nueva_venta') }}">Nueva venta</a><br>
-    <a href="{{ url_for('historial_ventas.historial_ventas') }}">Historial de Ventas</a><br>
-    <a href="{{ url_for('crear_notas_entrega.generar_nota_entrega') }}">Crear Notas de Entrega</a><br>
-    <a href="{{ url_for('manejar_credito.manejar_credito') }}">Manejar Crédito</a><br>
-    <a href="{{ url_for('automatizar_mensajes.enviar_mensajes') }}">Enviar Mensajes Automáticos</a><br>
-    <a href="{{ url_for('mostrar_inventario.mostrar_inventario') }}">Mostrar Inventario</a><br>
+    <a href="{{ url_for('ventas.ventas') }}">Ventas</a><br>
+    <a href="{{ url_for('compras.compras') }}">Compras</a><br>
+    <a href="{{ url_for('clientes.clientes') }}">Clientes</a><br>
+    <a href="{{ url_for('inventario.inventario') }}">inventario</a><br>
     </div>
 </body>
 </html>

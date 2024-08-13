@@ -14,11 +14,6 @@
     <div id="menu" class="menu-izquierdo">
         <h1>Manejo de creditos</h1>
         <a href="{{ url_for('index') }}">Menu principal</a>
-        <a href="{{ url_for('sumar_stock.sumar_stock') }}">Sumar stock</a>
-        <a href="{{ url_for('mostrar_inventario.mostrar_inventario') }}">Inventario</a>
-        <a href="{{ url_for('historial_ventas.historial_ventas') }}">Historial de ventas</a>
-        <a href="{{ url_for('nueva_venta.nueva_venta') }}">Nueva venta</a>
-        
     </div>
     <div class="contenido-principal">
         <h1 class="titulo_principal">Manejar creditos</h1>
@@ -26,7 +21,7 @@
         <!-- Formulario de Abono -->
         <div class="form-container">
             <h2>Registrar Abono</h2>
-            <form id="form_abono" action="{{ url_for('manejar_credito.registrar_abono') }}" method="POST">
+            <form id="form_abono" action="{{ url_for('clientes.registrar_abono.registrar_abono') }}" method="POST">
                 <label for="cliente">Cliente:</label>
                 <input type="text" id="cliente" name="cliente" required>
                 
@@ -38,12 +33,6 @@
                 
                 <input type="submit" value="Registrar Abono">
             </form>
-        </div>
-        
-        <!-- Botones de Acción -->
-        <div class="botones-acciones">
-            <a href="{{ url_for('manejar_credito.deudas') }}"  class="btn">Ver Deudas de Clientes</a>
-            <a href="/manejar_credito/facturas_vencidas" class="btn">Ver Facturas Vencidas</a>
         </div>
         
         <!-- Contenedores para resultados -->

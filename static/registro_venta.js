@@ -12,7 +12,7 @@ $(function() {
     
     function obtenerUltimoNumeroVenta() {
         $.ajax({
-            url: '/obtener_ultimo_numero_venta',
+            url: '/nueva_venta/obtener_ultimo_numero_venta',
             method: 'GET',
             success: function(data) {
                 $('#numero_venta').val(data.ultimo_numero);
@@ -27,7 +27,7 @@ $(function() {
         $('#producto').autocomplete({
             source: function(request, response) {
                 $.ajax({
-                    url: "/autocompletar_productos",
+                    url: "/nueva_venta/autocompletar_productos",
                     dataType: "json",
                     data: { term: request.term },
                     success: function(data) {
@@ -41,7 +41,15 @@ $(function() {
                 $('#producto').val('');
                 return false;
             }
+            
         });
+        $(function() {
+            // Autocompletado para cliente
+            $('#cliente').autocomplete({
+                source: '/nueva_venta/autocompletar_clientes'
+            })
+        });
+        
     }
     
     function configurarEventos() {
@@ -59,8 +67,7 @@ $(function() {
         });
 
         $('#vaciar_carrito').click(function() {
-            $('#tabla_venta tbody').empty();
-            calcularTotalVenta();
+            vaciarCarrito()
         });
 
         $('#numero_venta').on('keyup', function() {
@@ -70,11 +77,14 @@ $(function() {
         $('#procesar_venta').click(function(event) {
             event.preventDefault();
             procesarVenta();
+            vaciarCarrito();
+            $('#cliente').val('');
+            $('#numero_venta').val(function(i, val) { return +val + 1; });
         });
 
         $('.reset_button_id').click(function() {
             $.ajax({
-                url: '/reset',
+                url: '/nueva_venta/reset',
                 type: 'POST',
                 success: function(response) {
                     console.log('Reset completado:', response);
@@ -86,6 +96,11 @@ $(function() {
         });
     }
     
+    function vaciarCarrito() {
+        $('#tabla_venta tbody').empty();
+        calcularTotalVenta();
+    }
+
     function calcularTotalProducto(row) {
         var cantidad = parseInt(row.find('.cantidad').val());
         var precio = parseFloat(row.find('.precio').val());
@@ -141,7 +156,7 @@ $(function() {
 
     function verificarNumeroVenta(numero_venta) {
         $.ajax({
-            url: '/verificar_numero_venta',
+            url: '/nueva_venta/verificar_numero_venta',
             method: 'POST',
             data: { numero_venta: numero_venta },
             success: function(data) {
@@ -164,7 +179,7 @@ $(function() {
         var numero_venta = $('#numero_venta').val();
         var fecha = $('#fecha').val();
         var monto_total = parseFloat($('#valor_total_venta').text().replace('$', ''));
-        console.log(`este es el monto_total: ${monto_total}`);
+        // console.log(`este es el monto_total: ${monto_total}`);
 
         if (!cliente || !numero_venta || !fecha) {
             alert('Por favor completa todos los campos obligatorios.');
@@ -184,7 +199,7 @@ $(function() {
         });
         
         // Enviar productos como un array JSON
-        $.post('/procesar_venta', {
+        $.post('/nueva_venta/procesar_venta', {
             cliente: cliente,
             numero_venta: numero_venta,
             fecha: fecha,
@@ -199,7 +214,7 @@ $(function() {
 
     function crearFactura(fecha, numero_venta, cliente, monto_total) {
         $.ajax({
-            url: '/crear_factura',
+            url: '/nueva_venta/crear_factura',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ 
@@ -221,7 +236,7 @@ $(function() {
 
     function actualizarDeuda(numero_venta) {
         return $.ajax({
-            url: '/actualizar_deuda',
+            url: '/nueva_venta/actualizar_deuda',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ numero_venta: numero_venta }),

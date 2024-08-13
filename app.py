@@ -1,14 +1,10 @@
 # app.py
 #from flask import Flask, g, render_template
 from flask import Flask, g, render_template
-from routes.agregar_stock import agregar_stock_bp
-from routes.sumar_stock import sumar_stock_bp
-from routes.automatizar_mensajes import automatizar_mensajes_bp
-from routes.crear_notas_entrega import crear_notas_entrega_bp
-from routes.historial_ventas import historial_ventas_bp
-from routes.manejar_credito import manejar_credito_bp
-from routes.mostrar_inventario import mostrar_inventario_bp
-from routes.nueva_venta import nueva_venta_bp
+from routes.ventas.ventas import ventas_bp
+from routes.compras.compras import compras_bp
+from routes.clientes.clientes import clientes_bp
+from routes.inventario.inventario import inventario_bp
 from routes.database import get_db
 import sqlite3
 
@@ -39,18 +35,13 @@ def create_app():
 
     @app.route('/')
     def index():
-        print('hola')
         return render_template('index.html')
 
     # Registrar los Blueprints
-    app.register_blueprint(agregar_stock_bp)
-    app.register_blueprint(sumar_stock_bp)
-    app.register_blueprint(automatizar_mensajes_bp)
-    app.register_blueprint(crear_notas_entrega_bp)
-    app.register_blueprint(historial_ventas_bp)
-    app.register_blueprint(manejar_credito_bp)
-    app.register_blueprint(mostrar_inventario_bp)
-    app.register_blueprint(nueva_venta_bp)
+    app.register_blueprint(ventas_bp)
+    app.register_blueprint(compras_bp)
+    app.register_blueprint(clientes_bp)
+    app.register_blueprint(inventario_bp)
 
     return app
 
