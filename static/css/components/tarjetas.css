@@ -1,0 +1,78 @@
+/* components/tarjetas.css */
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto; /* Centra el contenedor principal */
+    padding: 3rem 3rem; /* Espacio interno alrededor de las tarjetas */
+    background: #333; /* Color de fondo del contenedor */
+    /* border: 1px solid #ddd; Borde alrededor del contenedor */
+    border-radius: 20px; /* Bordes redondeados del contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
+}
+
+.tarjeta {
+    padding: 1rem 3rem;
+    background-color: var(--color-fondo);
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.6s;
+}
+
+.tarjeta h2 {
+    color: white;
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+/* .tarjeta.ventas {
+    color: #ffffff;
+    background-color: rgba(76, 175, 80, 0.8); /* Color verde con algo de opacidad 
+}
+
+.tarjeta.compras {
+    color: #ffffff;
+    background-color: rgba(255, 87, 34, 0.8); /* Color naranja con algo de opacidad 
+}
+
+.tarjeta.clientes {
+    color: #ffffff;
+    background-color: rgba(3, 169, 244, 0.8); /* Color azul con algo de opacidad 
+}
+
+.tarjeta.inventario {
+    color: #ffffff;
+    background-color: rgba(158, 158, 158, 0.8); /* Color gris con algo de opacidad 
+} */
+
+.tarjeta img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* Efecto Hover */
+.tarjeta:hover {
+    transform: scale(1.02) translateY(-3px); /* Eleva la tarjeta hacia arriba */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.tarjeta.ventas:hover {
+    background-color: #4CAF50; /* Fondo vibrante en hover */
+}
+
+.tarjeta.compras:hover {
+    background-color: #FF5722; /* Fondo vibrante en hover */
+}
+
+.tarjeta.clientes:hover {
+    background-color: #03A9F4; /* Fondo vibrante en hover */
+}
+
+.tarjeta.inventario:hover {
+    background-color: #9E9E9E; /* Fondo vibrante en hover */
+}

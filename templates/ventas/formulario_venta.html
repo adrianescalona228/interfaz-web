@@ -8,17 +8,14 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
-        <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+        <link rel="stylesheet" href="/static//css/global/style.css">
     </head>
     <body>
-        <div id="menu" class="menu-izquierdo">
-            <h1>Registro de venta</h1>
-            <a href="{{ url_for('index') }}">Menu principal</a>
-        </div>
-        <div class="contenido-principal">
-            <button id="toggle-button">Toggle Menú</button>
-            <h1 class="titulo_principal">Registro de Venta</h1>
-            <form method="POST">
+        <header>
+            <h1>Ventas</h1>
+        </header>
+        <main>
+            <form>
                 <label for="cliente">Cliente:</label>
                 <input type="text" id="cliente" name="cliente" required><br><br>
                 
@@ -58,11 +55,13 @@
                 <input type="submit" id="procesar_venta" value="Registrar Venta" formnovalidate>
                 <button type="button" id="vaciar_carrito">Vaciar Carrito</button>
             </form>
-            <div id="mensaje_venta_procesada">Venta procesada correctamente</div>
             <script src="{{ url_for('static', filename='registro_venta.js') }}"></script>
             <script src="{{ url_for('static', filename='menu.js') }}"></script>
 
             <button id="reset_button_id" class="reset_button_id" type="button">Reset</button>
-        </div>
+        </main>
+        <footer>
+            <span>Representaciones EG</span>
+        </footer>
     </body>
-    </html>
+</html>

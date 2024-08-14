@@ -1,26 +1,37 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
-    <style>
-        
-        h1, h2, h3, h4, h5, h6 {
-            color: #000000; /* Color de los encabezados */
-            margin-bottom: 10px; /* Espacio inferior */
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
-    <div class="contenido-principal">
-    <h1>Bienvenido a la Gestión de Inventario</h1>
-    <a href="{{ url_for('ventas.ventas') }}">Ventas</a><br>
-    <a href="{{ url_for('compras.compras') }}">Compras</a><br>
-    <a href="{{ url_for('clientes.clientes') }}">Clientes</a><br>
-    <a href="{{ url_for('inventario.inventario') }}">inventario</a><br>
-    </div>
+    <header>
+
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('ventas.ventas') }}" class="tarjeta ventas">
+                <!-- <img src="/static/icons/ventas.svg" alt="Ventas"> -->
+                <h2>Ventas</h2>
+            </a>
+            <a href="{{ url_for('compras.compras') }}" class="tarjeta compras">
+                <!-- <img src="/static/icons/compras.svg" alt="Compras"> -->
+                <h2>Compras</h2>
+            </a>
+            <a href="{{ url_for('clientes.clientes') }}" class="tarjeta clientes">
+                <!-- <img src="/static/icons/clientes.svg" alt="Clientes"> -->
+                <h2>Clientes</h2>
+            </a>
+            <a href="{{ url_for('inventario.inventario') }}" class="tarjeta inventario">
+                <!-- <img src="/static/icons/inventario.svg" alt="Inventario"> -->
+                <h2>Inventario</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
 </html>

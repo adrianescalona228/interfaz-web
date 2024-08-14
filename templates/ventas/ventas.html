@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ventas</title>
-    <link rel="stylesheet" href="{{ url_for ('static', filename='style.css')}}">
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
-    <a href="{{ url_for('ventas.nueva_venta.nueva_venta') }}">Nueva venta</a><br>
-    <a href="{{ url_for('ventas.historial_ventas.historial_ventas') }}">Historial ventas</a><br>
+    <header>
+        <h1>Ventas</h1>
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('ventas.nueva_venta.nueva_venta') }}" class="tarjeta ventas">
+                <h2>Nueva venta</h2>
+            </a>
+            <a href="{{ url_for('ventas.historial_ventas.historial_ventas') }}" class="tarjeta ventas">
+                <h2>Historial de ventas</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
-</html>
+</html> 
