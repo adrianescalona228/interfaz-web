@@ -144,7 +144,7 @@ def reset():
     db = get_db()
     cursor = db.cursor()
 
-    monto = 0
+    monto = 28
     id = 1
     cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto, id))
 

@@ -1,0 +1,31 @@
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+table th, table td {
+    color: white;
+    background-color: #333 ;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+table th {
+    background-color: #333;
+}
+
+table td button, table th button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+table td button:hover, 
+table th button:hover {
+    background-color: rgb(255, 43, 43);
+}

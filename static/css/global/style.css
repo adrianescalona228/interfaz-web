@@ -1,5 +1,10 @@
 @import url('/static/css/components/tarjetas.css');
+@import url('/static/css/components/formularios.css');
+@import url('/static/css/components/tablas.css');
+@import url('/static/css/layouts/botones.css');
 @import url('/static/css/sections/index.css');
+@import url('/static/css/sections/ventas/formulario_ventas.css');
+@import url('/static/css/sections/ventas/historial_ventas.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {
@@ -20,11 +25,12 @@ body {
 }
 
 header {
-    padding: 1rem 10rem;
-    margin: 1rem 3rem;
+    padding: 0.5rem 10rem;
+    margin: 0.5rem 3rem;
     background-color: #333;
     color: white;
     text-align: center;
+    font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
 }
 
@@ -32,84 +38,19 @@ header {
 main {
     flex: 1; /* Permite que main ocupe todo el espacio disponible */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
+
 }
 
 footer {
-    padding: 1rem 1rem;
-    margin: 1rem 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
     background-color: #333;
     color: white;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
 }
 
-form {
-    color: white;
-    max-width: 800px;
-    margin: 0;
-    background: #333;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-input[type="text"], input[type="date"] {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-input[type="submit"], button[type="button"] {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover, button[type="button"]:hover {
-    background-color: #45a049;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 0.75rem;
-    text-align: center;
-}
-
-table th {
-    background-color: #f2f2f2;
-}
-
-table td button {
-    background-color: #ff5722;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-table td button:hover {
-    background-color: #e64a19;
-}

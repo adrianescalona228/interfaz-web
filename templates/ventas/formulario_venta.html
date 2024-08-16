@@ -15,46 +15,53 @@
             <h1>Ventas</h1>
         </header>
         <main>
-            <form>
-                <label for="cliente">Cliente:</label>
-                <input type="text" id="cliente" name="cliente" required><br><br>
-                
-                <label for="numero_venta">Número de Venta:</label>
-                <input type="text" id="numero_venta" name="numero_venta" required><br><br>
-                <span id="mensaje_error_venta" style="color: red;"></span>
+            <section class="contenedor-form-carrito">
+                <form class="form-left">
+                    <label for="cliente">Cliente:</label>
+                    <input type="text" id="cliente" name="cliente" required><br><br>
+                    
+                    <label for="numero_venta">Número de Venta:</label>
+                    <input type="text" id="numero_venta" name="numero_venta" required><br><br>
+                    <span id="mensaje_error_venta" style="color: red;"></span>
+    
+                    
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required><br><br>
+    
+                    <label for="producto">Producto:</label>
+                    <input type="text" id="producto" name="producto" required>
+    
+                    <tr>
+                        <td colspan="4" style="text-align: right;"><strong>Total Venta:</strong></td>
+                        <td><span id="valor_total_venta" class="valor_total_venta">$0.00</span></td>
+                        <td></td>
+                    </tr>
+                    <div class="botones-container">
+                        <button type="button" id="vaciar_carrito">Vaciar Carrito</button>
+                        <input type="submit" id="procesar_venta" value="Registrar Venta" formnovalidate>
+                    </div>
+                </form>
+                <div class="carrito-derecha">
+                    <table id="tabla_venta">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Total por Producto</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>    
+                        <tfoot>
+        
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
 
-                
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required><br><br>
-
-                <label for="producto">Producto:</label>
-                <input type="text" id="producto" name="producto" required>
-
-                <table id="tabla_venta">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
-                            <th>Total por Producto</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>    
-                    <tfoot>
-
-                    </tfoot>
-                </table>
-                <tr>
-                    <td colspan="4" style="text-align: right;"><strong>Total Venta:</strong></td>
-                    <td><span id="valor_total_venta" class="valor_total_venta">$0.00</span></td>
-                    <td></td>
-                </tr>
-                <input type="submit" id="procesar_venta" value="Registrar Venta" formnovalidate>
-                <button type="button" id="vaciar_carrito">Vaciar Carrito</button>
-            </form>
             <script src="{{ url_for('static', filename='registro_venta.js') }}"></script>
             <script src="{{ url_for('static', filename='menu.js') }}"></script>
 

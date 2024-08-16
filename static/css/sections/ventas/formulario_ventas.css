@@ -1,0 +1,56 @@
+#reset_button_id {
+    display: none;
+}
+
+.contenedor-form-carrito {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Ajusta según tus necesidades */
+    flex-wrap: wrap;
+}
+
+.form-left {
+    flex: 0.4;
+    margin-right: 20px; /* Espacio entre el formulario y el carrito */
+    background: #333;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.carrito-derecha {
+    flex: 1; /* Ajusta el ancho del carrito en relación con el formulario */
+    background: #333;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.botones-container {
+    display: flex;
+    gap: 25px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio arriba de los botones si es necesario */
+}
+
+#procesar_venta, #vaciar_carrito {
+    padding: 10px 20px; /* Ajusta el tamaño del padding según necesites */
+    border: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.6s;
+}
+
+#procesar_venta:hover {
+    background-color: #45a049;
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#vaciar_carrito:hover {
+    background-color: rgb(255, 43, 43);
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}

@@ -5,11 +5,7 @@ from ...database import get_db
 from urllib.parse import quote, unquote
 
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
-
-# @historial_ventas_bp.route('/historialv')
-# def historialv():
-#     return render_template('/ventas/historial_ventas.html')
-
+    
 @historial_ventas_bp.route('/historial_ventas')
 def historial_ventas():
     db = get_db()
@@ -72,6 +68,7 @@ def historial_ventas():
 
 @historial_ventas_bp.route('/eliminar_venta/<int:numero_venta>', methods=['POST'])
 def eliminar_venta(numero_venta):
+    # print('hooooooooooooola')
     db = get_db()
     cursor = db.cursor()
     
@@ -112,11 +109,13 @@ def eliminar_venta(numero_venta):
     # Recuerda hacer commit después de realizar cambios
     db.commit()
 
-    return redirect(url_for('/ventas/historial_ventas'))
+    return '', 200
+
 
 # Ruta para eliminar un producto de una venta específica
 @historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<int:id>', methods=['POST'])
 def eliminar_producto(numero_venta, id):
+    print(numero_venta,id)
     db = get_db()
     cursor = db.cursor()
 
@@ -135,14 +134,6 @@ def eliminar_producto(numero_venta, id):
     monto_total_deuda = cursor.fetchone()[0]
     monto_final_deuda = monto_total_deuda - precio
 
-    print(producto)
-    print(f'precio producto: {precio}')
-    print(f'total deuda: {monto_total_deuda}')
-    print(f'monto final: {monto_final_deuda}')
-    print(f'monto factura: {monto_total_factura}')
-    print(f'monto final: {monto_final_factura}')
-
-
     if producto:
         cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
         cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
@@ -157,4 +148,4 @@ def eliminar_producto(numero_venta, id):
         flash('El producto no existe', 'error')
         print('si llegaste hasta aqui, no tas fino mirei')
 
-    return redirect(url_for('/ventas/historial_ventas'))
+    return '', 200  

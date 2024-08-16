@@ -8,7 +8,6 @@
     margin: 20px auto; /* Centra el contenedor principal */
     padding: 3rem 3rem; /* Espacio interno alrededor de las tarjetas */
     background: #333; /* Color de fondo del contenedor */
-    /* border: 1px solid #ddd; Borde alrededor del contenedor */
     border-radius: 20px; /* Bordes redondeados del contenedor */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
 }
@@ -27,27 +26,6 @@
     font-size: 18px;
     text-align: center;
 }
-
-
-/* .tarjeta.ventas {
-    color: #ffffff;
-    background-color: rgba(76, 175, 80, 0.8); /* Color verde con algo de opacidad 
-}
-
-.tarjeta.compras {
-    color: #ffffff;
-    background-color: rgba(255, 87, 34, 0.8); /* Color naranja con algo de opacidad 
-}
-
-.tarjeta.clientes {
-    color: #ffffff;
-    background-color: rgba(3, 169, 244, 0.8); /* Color azul con algo de opacidad 
-}
-
-.tarjeta.inventario {
-    color: #ffffff;
-    background-color: rgba(158, 158, 158, 0.8); /* Color gris con algo de opacidad 
-} */
 
 .tarjeta img {
     width: 50px;

@@ -1,0 +1,35 @@
+#buscador {
+    width: 30%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contenedor-ventas {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no caben */
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
+
+  }
+
+.contenedor {
+    flex: 1;
+    margin: 2rem;
+    border: 30px solid rgba(255, 255, 255, 0.15);
+
+}
+
+.info-cliente {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.info-productos-body {
+    border-top: 2px solid rgba(255, 255, 255, 0.02);
+}
+
+.total-venta-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}

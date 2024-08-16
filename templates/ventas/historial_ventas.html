@@ -5,70 +5,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static//css/global/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css">
     <title>Historial de ventas</title>
 </head>
 <body>
-    <div id="menu "class="menu-izquierdo">
-        <h1>Historial de Ventas</h1>
-        <a href="{{ url_for('index') }}">Menu principal</a>
-        <!-- Agrega más enlaces según tus necesidades -->
-    </div>
-    <div class="contenido-principal">
-        <button id="toggle-button">Toggle Menú</button>
-        <h1 class="titulo_principal">Historial de ventas</h1>
-        <div id="historial" class="ventas-container">
-            {% for venta in ventas %}
-            <div class="venta-card">
-                <div class="venta-header">
-                    <div>
-                        <p><strong>Nro. de venta:</strong> {{ venta.numero_venta }}</p>
-                        <p><strong>Cliente:</strong> {{ venta.cliente }}</p>
-                        <p><strong>Fecha:</strong> {{ venta.fecha }}</p>
-                    </div>
-                    <form action="/eliminar_venta/{{ venta.numero_venta }}" method="post">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <span class="eliminar-venta" title="Eliminar Venta" onclick="this.parentElement.submit()">&#x2716;</span>
-                    </form>
-                </div>
-                <div class="venta-body">
-                    <table>
+    <header>
+        <h1>Historial de ventas</h1>
+    </header>
+    <main>
+        <input type="text" id="buscador" placeholder="Buscar por número de venta o cliente...">
+        <div class="contenedor-ventas">
+            {% for venta in ventas | reverse%}
+            <section class="contenedor">
+                    <table class="info-cliente">
                         <thead>
                             <tr>
+                                <th><strong>Nro. de venta:</strong></th>
+                                <th><strong>Cliente:</strong></th>
+                                <th><strong>Fecha:</strong></th>
+                                <th><button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>{{ venta.numero_venta }}</td>
+                            <td>{{ venta.cliente }}</td>
+                            <td>{{ venta.fecha }}</td>
+                            <td></td>
+                        </tbody>
+                    </table>
+                    <table class="info-productos">
+                        <thead>
+                            <tr class="info-productos-head">
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Precio Unitario</th>
                                 <th>Total por Producto</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for producto in venta.productos %}
-                            <tr>
+                            <tr class="info-productos-body">
                                 <td>{{ producto.producto }}</td>
                                 <td>{{ producto.cantidad }}</td>
                                 <td>{{ producto.precio }}</td>
                                 <td>{{ producto.cantidad * producto.precio }}</td>
                                 <td>
-                                    <form action="/eliminar_producto/{{ venta.numero_venta }}/{{ producto.id }}" method="post">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <span class="eliminar-venta" title="Eliminar Producto" onclick="this.parentElement.submit()">&#x2716;</span>
-                                    </form>
+                                    <button class="eliminar-producto" title="Eliminar Producto" data-venta-id="{{ venta.numero_venta }}" data-producto-id="{{ producto.id }}">&#x2716;</button>
                                 </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <td colspan="3"><strong>Total Venta:</strong></td>
+                            <tr class="total-venta-row">
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total Venta:</strong></td>
                                 <td><strong>{{ venta.total_venta }}</strong></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-            </div>
+            </section>
             {% endfor %}
         </div>
-        <script src="{{ url_for('static', filename='menu.js') }}"></script>
-    </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+    <script src="{{ url_for('static', filename='menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/ventas/historial_ventas.js')}}"></script>
 </body>
 </html>
