@@ -7,7 +7,21 @@
     <link rel="stylesheet" href="/static//css/global/style.css">
 </head>
 <body>
-    <a href="{{ url_for('compras.agregar_nuevo_producto.agregar_nuevo_producto') }}">Nuevo producto</a><br>
-    <a href="{{ url_for('compras.comprar_stock.comprar_stock') }}">Comprar</a><br>
+    <header>
+        <h1>Compras</h1>
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('compras.agregar_nuevo_producto.agregar_nuevo_producto') }}" class="tarjeta compras">
+                <h2>Nuevo producto</h2>
+            </a>
+            <a href="{{ url_for('compras.comprar_stock.comprar_stock') }}" class="tarjeta compras">
+                <h2>Comprar</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
 </html>

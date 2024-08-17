@@ -14,20 +14,16 @@ def nueva_venta():
 
 @nueva_venta_bp.route('/procesar_venta', methods=['POST'])
 def procesar_venta():
-    cliente = request.form.get('cliente')
-    numero_venta = request.form.get('numero_venta')
-    fecha = request.form.get('fecha')
-    productos_json = request.form.get('productos')
+    data = request.get_json()  # Cambia a request.get_json() para recibir el JSON
 
-    # Verifica si productos_json es None
-    if productos_json is None:
+    cliente = data.get('cliente')  # Extrae los datos del JSON recibido
+    numero_venta = data.get('numero_venta')
+    fecha = data.get('fecha')
+    productos = data.get('productos')  # Ya no necesitas decodificar JSON aquí
+
+    # Verifica si productos es None
+    if not productos:
         return 'Error: No se recibieron productos'
-
-    # Decodifica el JSON
-    try:
-        productos = json.loads(productos_json)
-    except json.JSONDecodeError:
-        return 'Error: No se pudo decodificar el JSON de productos'
 
     print(f'Datos recibidos: {productos}')  # Verificar los datos recibidos
 
@@ -79,7 +75,6 @@ def actualizar_deuda():
     db = get_db()
     cursor = db.cursor()
 
-    
     # Verificar si existe una factura para ese numero_venta
     cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
     factura = cursor.fetchone()
@@ -155,15 +150,6 @@ def reset():
     db.close()
 
     return f'id del reset: {id}'
-    
-
-@nueva_venta_bp.route('/autocomplete', methods=['GET'])
-def autocomplete():
-    term = request.args.get('term', '')
-    db = get_db()
-    cursor = db.execute('SELECT PRODUCTO FROM Inventario WHERE PRODUCTO LIKE ?', ('%' + term + '%',))
-    products = [row['PRODUCTO'] for row in cursor.fetchall()]
-    return jsonify(products)
 
 # Ruta para obtener datos de autocompletado de clientes
 @nueva_venta_bp.route('/autocompletar_clientes', methods=['GET'])
@@ -184,10 +170,10 @@ def autocompletar_productos():
     
     # Conexión a la base de datos y consulta
     db = get_db()
-    cursor = db.execute('SELECT PRODUCTO, PRECIO FROM Inventario WHERE PRODUCTO LIKE ?', ('%' + term + '%',))
+    cursor = db.execute('SELECT PRODUCTO, PRECIO, COSTO FROM Inventario WHERE PRODUCTO LIKE ?', ('%' + term + '%',))
     
     # Recoger resultados y formatearlos en un formato JSON adecuado
-    productos = [{'label': row['PRODUCTO'], 'value': row['PRODUCTO'], 'precio': row['PRECIO']} for row in cursor.fetchall()]
+    productos = [{'label': row['PRODUCTO'], 'value': row['PRODUCTO'], 'precio': row['PRECIO'], 'costo': row['COSTO']} for row in cursor.fetchall()]
     
     return jsonify(productos)
 
@@ -215,12 +201,16 @@ def obtener_ultimo_numero_venta():
     else:
         return jsonify({'ultimo_numero': ultimo_numero + 1})
 
+from flask import request, jsonify
+
 @nueva_venta_bp.route('/verificar_numero_venta', methods=['POST'])
 def verificar_numero_venta():
-    numero_venta = request.form.get('numero_venta')
+    data = request.get_json()  # Obtiene los datos en formato JSON
+    numero_venta = data.get('numero_venta')
     
     db = get_db()
-    cursor = db.execute('SELECT COUNT(*) AS count FROM Ventas WHERE numero_venta = ?', (numero_venta,))
+    cursor = db.execute('SELECT COUNT(*) AS count FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+
     result = cursor.fetchone()
     count = result['count']
     

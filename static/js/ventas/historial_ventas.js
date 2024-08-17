@@ -44,11 +44,11 @@ function eliminarVenta(ventaId) {
     .then(response => {
         if (response.ok) {
             // Opcional: puedes actualizar la página o eliminar el elemento de la lista
-            alert('Venta eliminada exitosamente.');
+
             // Aquí puedes quitar la venta del DOM o hacer un reload
             location.reload();
         } else {
-            alert('Hubo un error al eliminar la venta.');
+
         }
     });
 }

@@ -5,6 +5,7 @@
 @import url('/static/css/sections/index.css');
 @import url('/static/css/sections/ventas/formulario_ventas.css');
 @import url('/static/css/sections/ventas/historial_ventas.css');
+@import url('/static/css/sections/compras/comprar_stock.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {

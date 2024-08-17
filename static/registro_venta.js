@@ -11,29 +11,32 @@ $(function() {
     }
     
     function obtenerUltimoNumeroVenta() {
-        $.ajax({
-            url: '/nueva_venta/obtener_ultimo_numero_venta',
+        fetch('/nueva_venta/obtener_ultimo_numero_venta', {
             method: 'GET',
-            success: function(data) {
-                $('#numero_venta').val(data.ultimo_numero);
-            },
-            error: function() {
-                console.log('Error al obtener el último número de venta.');
+            headers: {
+                'Content-Type': 'application/json'
             }
+        })
+        .then(response => response.json())  // Convertir la respuesta a JSON
+        .then(data => {
+            $('#numero_venta').val(data.ultimo_numero);  // Usar el valor recibido
+        })
+        .catch(error => {
+            console.log('Error al obtener el último número de venta:', error);
         });
-    }
+    }    
     
     function inicializarAutocompletado() {
         $('#producto').autocomplete({
             source: function(request, response) {
-                $.ajax({
-                    url: "/nueva_venta/autocompletar_productos",
-                    dataType: "json",
-                    data: { term: request.term },
-                    success: function(data) {
+                fetch('/nueva_venta/autocompletar_productos?term=' + encodeURIComponent(request.term))
+                    .then(res => res.json())
+                    .then(data => {
                         response(data);
-                    }
-                });
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener productos:', error);
+                    });
             },
             minLength: 2,
             select: function(event, ui) {
@@ -41,20 +44,17 @@ $(function() {
                 $('#producto').val('');
                 return false;
             }
-            
         });
-        $(function() {
-            // Autocompletado para cliente
-            $('#cliente').autocomplete({
-                source: '/nueva_venta/autocompletar_clientes'
-            })
+    
+        $('#cliente').autocomplete({
+            source: '/nueva_venta/autocompletar_clientes'
         });
-        
     }
+    
     
     function configurarEventos() {
         $(document).on('keyup', '.cantidad', function() {
-            calcularTotalProducto($(this).closest('tr'));
+            actualizarTotalProducto($(this).closest('tr'));
         });
 
         $(document).on('input', '.precio', function() {
@@ -83,29 +83,21 @@ $(function() {
         });
 
         $('.reset_button_id').click(function() {
-            $.ajax({
-                url: '/nueva_venta/reset',
-                type: 'POST',
-                success: function(response) {
-                    console.log('Reset completado:', response);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error en el reset:', status, error);
-                }
+            fetch('/nueva_venta/reset', {
+                method: 'POST'
+            })
+            .then(response => response.text())  // Puedes ajustar esto si el servidor devuelve otro tipo de respuesta
+            .then(data => {
+                console.log('Reset completado:', data);
+            })
+            .catch(error => {
+                console.error('Error en el reset:', error);
             });
-        });
+        });        
     }
     
     function vaciarCarrito() {
         $('#tabla_venta tbody').empty();
-        calcularTotalVenta();
-    }
-
-    function calcularTotalProducto(row) {
-        var cantidad = parseInt(row.find('.cantidad').val());
-        var precio = parseFloat(row.find('.precio').val());
-        var totalProducto = cantidad * precio;
-        row.find('.total-producto').text('$' + totalProducto.toFixed(2));
         calcularTotalVenta();
     }
     
@@ -155,41 +147,43 @@ $(function() {
     }
 
     function verificarNumeroVenta(numero_venta) {
-        $.ajax({
-            url: '/nueva_venta/verificar_numero_venta',
+        fetch('/nueva_venta/verificar_numero_venta', {
             method: 'POST',
-            data: { numero_venta: numero_venta },
-            success: function(data) {
-                if (data.existe) {
-                    $('#mensaje_error_venta').text('¡Este número de venta ya existe!');
-                    $('#registrar_venta').prop('disabled', true);
-                } else {
-                    $('#mensaje_error_venta').text('');
-                    $('#registrar_venta').prop('disabled', false);
-                }
+            headers: {
+                'Content-Type': 'application/json'
             },
-            error: function() {
-                console.log('Error al verificar el número de venta.');
+            body: JSON.stringify({ numero_venta: numero_venta })
+        })
+        .then(response => response.json())  // Convierte la respuesta a JSON
+        .then(data => {
+            if (data.existe) {
+                $('#mensaje_error_venta').text('¡Este número de venta ya existe!');
+                $('#procesar_venta').prop('disabled', true);
+            } else {
+                $('#mensaje_error_venta').text('');
+                $('#procesar_venta  ').prop('disabled', false);
             }
+        })
+        .catch(error => {
+            console.error('Error al verificar el número de venta:', error);
         });
-    }
+    }    
 
     function procesarVenta() {
         var cliente = $('#cliente').val();
         var numero_venta = $('#numero_venta').val();
         var fecha = $('#fecha').val();
         var monto_total = parseFloat($('#valor_total_venta').text().replace('$', ''));
-        // console.log(`este es el monto_total: ${monto_total}`);
-
+    
         if (!cliente || !numero_venta || !fecha) {
             alert('Por favor completa todos los campos obligatorios.');
             return;
         }
-
+    
         if ($('#mensaje_error_venta').text() !== '') {
             return;
         }
-
+    
         var productos = [];
         $('#tabla_venta tbody tr').each(function() {
             var producto = $(this).find('td:first').text();
@@ -197,55 +191,70 @@ $(function() {
             var precio = $(this).find('.precio').val();
             productos.push({ producto: producto, cantidad: cantidad, precio: precio });
         });
-        
-        // Enviar productos como un array JSON
-        $.post('/nueva_venta/procesar_venta', {
-            cliente: cliente,
-            numero_venta: numero_venta,
-            fecha: fecha,
-            productos: JSON.stringify(productos)  // Convertir el array a JSON
-        }, function(response) {
-            console.log(response);
+    
+        // Enviar datos con fetch
+        fetch('/nueva_venta/procesar_venta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  // Establece el tipo de contenido como JSON
+            },
+            body: JSON.stringify({
+                cliente: cliente,
+                numero_venta: numero_venta,
+                fecha: fecha,
+                productos: productos  // Envía productos como un array JSON
+            })
+        })
+        .then(response => response.text())  // Puedes ajustar la respuesta según lo que devuelva el backend
+        .then(data => {
+            console.log('Success:', data);
+            // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-        
+
         crearFactura(fecha, numero_venta, cliente, monto_total);
-        actualizarDeuda(numero_venta);
     }
 
     function crearFactura(fecha, numero_venta, cliente, monto_total) {
-        $.ajax({
-            url: '/nueva_venta/crear_factura',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ 
+        fetch('/nueva_venta/crear_factura', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 fecha: fecha,
                 numero_venta: numero_venta,
                 cliente: cliente,
                 monto_total: monto_total
-            }),
-            success: function(response) {
-                console.log('Factura creada:', response);
-                // Actualizar deuda después de crear la factura
-                actualizarDeuda(numero_venta);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al crear la factura:', status, error);
-            }
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            // Actualizar deuda después de crear la factura
+            actualizarDeuda(numero_venta);
+        })
+        .catch(error => {
+            console.error('Error al crear la factura:', error);
         });
     }
 
     function actualizarDeuda(numero_venta) {
-        return $.ajax({
-            url: '/nueva_venta/actualizar_deuda',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ numero_venta: numero_venta }),
-            success: function(response) {
-                console.log('Deuda actualizada:', response);
+        return fetch('/nueva_venta/actualizar_deuda', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            error: function(xhr, status, error) {
-                console.error('Error al actualizar la deuda:', status, error);
-            }
+            body: JSON.stringify({ numero_venta: numero_venta })
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error al actualizar la deuda:', error);
         });
-    }
+    }    
 });
