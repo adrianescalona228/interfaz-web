@@ -3,7 +3,7 @@ import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
 from datetime import datetime, timedelta
-import json
+import json 
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
 
@@ -139,12 +139,12 @@ def reset():
     db = get_db()
     cursor = db.cursor()
 
-    monto = 28
+    monto = 15
     id = 1
     cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto, id))
 
-    numero_venta = 1
-    cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+    # numero_venta = 1
+    # cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
 
     db.commit()
     db.close()

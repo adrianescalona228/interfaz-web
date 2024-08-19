@@ -1,6 +1,7 @@
 $(document).ready(function() {
     inicializarFechaActual()
-    autocompletarProductos()
+    inicializarAutocompletado()
+    obtenerUltimoNumeroVenta()
     configurarEventos()
 });
 
@@ -24,13 +25,32 @@ function configurarEventos() {
     
     $('#procesar_compra').click(function(event) {
         event.preventDefault();
-        procesarVenta();
+        procesarCompra();
         vaciarCarrito();
+        $('#proveedor').val('');
+        $('#numero_compra').val(function(i, val) { return +val + 1; });
     });
 }
 
+function obtenerUltimoNumeroVenta() {
+    fetch('/comprar_stock/obtener_ultimo_numero_venta', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())  // Convertir la respuesta a JSON
+    .then(data => {
+        console.log(data)
+        $('#numero_compra').val(data.ultimo_numero);  // Usar el valor recibido
+    })
+    .catch(error => {
+        console.log('Error al obtener el último número de venta:', error);
+    });
+}   
+
 function vaciarCarrito() {
-    $('#tabla_venta tbody').empty();
+    $('#tabla_compra tbody').empty();
 }
 
 function inicializarFechaActual() {
@@ -38,17 +58,17 @@ function inicializarFechaActual() {
     $('#fecha').val(fechaActual);
 };
 
-function autocompletarProductos() {
+function inicializarAutocompletado() {
     $('#producto').autocomplete({
         source: function(request, response) {
-            $.ajax({
-                url: "/nueva_venta/autocompletar_productos",
-                dataType: "json",
-                data: { term: request.term },
-                success: function(data) {
+            fetch('/nueva_venta/autocompletar_productos?term=' + encodeURIComponent(request.term))
+                .then(res => res.json())
+                .then(data => {
                     response(data);
-                }
-            });
+                })
+                .catch(error => {
+                    console.error('Error al obtener productos:', error);
+                });
         },
         minLength: 2,
         select: function(event, ui) {
@@ -56,8 +76,11 @@ function autocompletarProductos() {
             $('#producto').val('');
             return false;
         }
-    }
-)}
+    });
+    $('#proveedor').autocomplete({
+        source: '/comprar_stock/autocompletar_proveedores'
+    });
+}
 
 function agregarProducto(producto, cantidad, costo) {
     var parsedCosto;
@@ -86,7 +109,7 @@ function agregarProducto(producto, cantidad, costo) {
 
 function actualizarTotalProducto(row) {
     var cantidad = row.find('.cantidad').val();
-    var nuevoPrecio = parseFloat(row.find('.precio').val());
+    var nuevoPrecio = parseFloat(row.find('.costo').val());
     if (!isNaN(nuevoPrecio)) {
         row.find('.total-producto').text('$' + (cantidad * nuevoPrecio).toFixed(2));
     }
@@ -94,10 +117,10 @@ function actualizarTotalProducto(row) {
 
 function procesarCompra() {
     var proveedor = $('#proveedor').val();
-    var numero_compra = $('#numero_compra').val();
+    var compra_id = $('#numero_compra').val();
     var fecha = $('#fecha').val();
 
-    if (!proveedor || !numero_compra || !fecha) {
+    if (!proveedor || !compra_id || !fecha) {
         alert('Por favor completa todos los campos obligatorios.');
         return;
     }
@@ -110,13 +133,13 @@ function procesarCompra() {
     $('#tabla_compra tbody tr').each(function() {
         var producto = $(this).find('td:first').text();
         var cantidad = $(this).find('.cantidad').val();
-        var precio = $(this).find('.precio').val();
-        productos.push({ producto: producto, cantidad: cantidad, precio: precio });
+        var costo = $(this).find('.costo').val();
+        productos.push({ producto: producto, cantidad: cantidad, costo: costo });
     });
 
     var data = {
         proveedor: proveedor,
-        numero_compra: numero_compra,
+        compra_id: compra_id,
         fecha: fecha,
         productos: productos
     };
