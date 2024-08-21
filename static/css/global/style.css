@@ -7,6 +7,7 @@
 @import url('/static/css/sections/ventas/historial_ventas.css');
 @import url('/static/css/sections/compras/comprar_stock.css');
 @import url('/static/css/sections/compras/historial_compras.css');
+@import url('/static/css/sections/inventario/ver_inventario.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {
@@ -29,6 +30,7 @@ body {
 header {
     padding: 0.5rem 10rem;
     margin: 0.5rem 3rem;
+    position: relative;
     background-color: #333;
     color: white;
     text-align: center;
@@ -44,7 +46,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-
+    overflow: hidden;
 }
 
 footer {
@@ -54,5 +56,28 @@ footer {
     color: white;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
+}
+
+/* Adaptación para pantalla de 1080 x 2400 píxeles */
+@media (max-width: 1080px) and (max-height: 2400px) {
+    body {
+        font-size: 0.9rem; /* Ajusta el tamaño de la fuente si es necesario */
+        padding: 0 10px; /* Ajusta el padding del body si es necesario */
+    }
+    header {
+        padding: 0.5rem 2rem;
+        margin: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    main {
+        padding: 5px 10px;
+    }
+    footer {
+        padding: 0.5rem;
+        margin: 0.5rem;
+    }
+    section {
+        margin: 5px 10px;
+    }
 }
 

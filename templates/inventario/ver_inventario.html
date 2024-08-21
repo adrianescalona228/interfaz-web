@@ -5,37 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-    <link rel="stylesheet" href="/static//css/global/style.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
     <header>
         <h1>Inventario</h1>
     </header>
     <main>
-        <section>
-            <table>
+        <div>
+            <input type="text" id="buscador-inventario" placeholder="Buscar producto..."> 
+        </div>
+        <section class="table-container">
+            <table class="tabla-inventario">
                 <thead>
                     <tr>
-                        <th onclick="sortTable(0)">ID</th>
-                        <th onclick="sortTable(1)">Producto</th>
-                        <th onclick="sortTable(2)">Cantidad</th>
-                        <th onclick="sortTable(3)">Precio</th>
-                        <th onclick="sortTable(4)">Costo</th>
-                        <th onclick="sortTable(5)">Tipo de Producto</th>
-                        <th onclick="sortTable(6)">Marca</th>
+                        <th onclick="sortTable(0)" class="th id header">ID</th>
+                        <th onclick="sortTable(1)" class="th producto">Producto</th>
+                        <th onclick="sortTable(2)" class="th">Cantidad</th>
+                        <th onclick="sortTable(3)" class="th">Precio</th>
+                        <th onclick="sortTable(4)" class="th">Costo</th>
+                        <th onclick="sortTable(5)" class="th">Tipo de Producto</th>
+                        <th onclick="sortTable(6)" class="th">Marca</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in inventario %}
-                    <tr>
-                        <td>{{ item['id'] }}</td>
-                        <td>{{ item['PRODUCTO'] }}</td>
-                        <td>{{ item['CANTIDAD'] }}</td>
-                        <td>{{ item['PRECIO'] }}</td>
-                        <td>{{ item['COSTO'] }}</td>
-                        <td>{{ item['TIPO_DE_PRODUCTO'] }}</td>
-                        <td>{{ item['MARCA'] }}</td>
+                    <tr class="table-row-body">
+                        <td class="td id body">{{ item['id'] }}</td>
+                        <td class="td producto">{{ item['PRODUCTO'] }}</td>
+                        <td class="td">{{ item['CANTIDAD'] }}</td>
+                        <td class="td">{{ item['PRECIO'] }}</td>
+                        <td class="td">{{ item['COSTO'] }}</td>
+                        <td class="td">{{ item['TIPO_DE_PRODUCTO'] }}</td>
+                        <td class="td">{{ item['MARCA'] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -45,5 +50,5 @@
     <footer>
         Representaciones EG
     </footer>
-
+    <script src="{{ url_for('static', filename='js/inventario/ver_inventario.js') }}"></script>
 </body>

@@ -1,0 +1,54 @@
+#buscador-inventario {
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    width: 95%; /* Ajusta el ancho según sea necesario */
+    max-width: 600px; /* Opcional: Limita el ancho máximo */
+    background-color: white; /* Opcional: Fija un fondo para el buscador */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+/* Media queries para pantallas pequeñas */
+@media (max-width: 480px){
+    table .id {
+        position: sticky;
+        padding: 0.5rem;
+        left: 0;
+        background-color: #333;
+        z-index: 1;
+        border-bottom: 0.5px solid white;
+    }
+    table .id.header {
+        background-color: #444;
+    }
+    .table-container {
+        flex: 1;
+        width: 100%;
+        overflow-x: auto; /* Habilita el desplazamiento horizontal */
+        margin: 0 auto; /* Centra el contenedor si es necesario */
+    }
+    .tabla-inventario {
+        display: block;
+        overflow-x: auto;
+        overflow-y: auto;
+        white-space: nowrap;
+        height: 80vh;
+    }
+
+    table .th, table .td {
+        padding: 1rem;
+        font-size: 1rem;
+        border-bottom: 0.5px solid white;
+    }
+
+    table .th {
+        background-color: #444;
+    }
+    /* Aplicar a toda la tabla si deseas un ajuste más general */
+    table .td, table .th {
+        word-wrap: break-word;
+    }
+
+    /* Puedes ajustar la alineación del texto si es necesario */
+    table td.producto, table th.producto {
+        text-align: left; /* Alinea el texto a la izquierda para una mejor legibilidad */
+    }
+}
