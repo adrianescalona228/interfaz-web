@@ -6,6 +6,12 @@
     background-color: white; /* Opcional: Fija un fondo para el buscador */
     z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
 }
+.table-container {
+    flex: 1;
+}
+.tabla-inventario {
+    display: block;
+}
 /* Media queries para pantallas pequeñas */
 @media (max-width: 480px){
     table .id {
@@ -26,7 +32,6 @@
         margin: 0 auto; /* Centra el contenedor si es necesario */
     }
     .tabla-inventario {
-        display: block;
         overflow-x: auto;
         overflow-y: auto;
         white-space: nowrap;
