@@ -9,11 +9,20 @@ def historial_compras():
     db = get_db()
     
     # Consulta para obtener todas las compras
-    cursor = db.execute('SELECT c.id AS compra_id, c.numero_compra, c.fecha, p.nombre AS proveedor FROM Compras c JOIN Proveedores p ON c.proveedor_id = p.id ORDER BY c.numero_compra')
+    cursor = db.execute('''SELECT c.id AS compra_id, c.numero_compra, c.fecha, p.nombre AS proveedor 
+                        FROM Compras c 
+                        JOIN Proveedores p ON c.proveedor_id = p.id 
+                        ORDER BY c.numero_compra''')
     compras = cursor.fetchall()
+
+    # Mostrar todos los compra_id de la lista de compras
+    print("Todos los compra_id en la lista de compras:", [compra['numero_compra'] for compra in compras])
+
     
     # Consulta para obtener los productos de cada compra
-    cursor.execute('SELECT cp.compra_id, cp.producto_id, i.PRODUCTO AS producto, cp.cantidad, cp.costo FROM Productos_compras cp JOIN Inventario i ON cp.producto_id = i.id')
+    cursor.execute('''SELECT cp.compra_id, cp.producto_id, i.PRODUCTO AS producto, cp.cantidad, cp.costo 
+                   FROM Productos_compras cp 
+                   JOIN Inventario i ON cp.producto_id = i.id''')
     productos = cursor.fetchall()
 
     # Crear un diccionario para agrupar productos por compra
@@ -28,17 +37,28 @@ def historial_compras():
             'cantidad': producto['cantidad'],
             'costo': producto['costo']
         })
-    
+    print("productos por compra", productos_por_compra)
+
     # Lista para almacenar las compras agrupadas
     compras_agrupadas = []
-    
+
+    # Iterar sobre cada compra
     for compra in compras:
-        compra_id = compra['compra_id']
+        compra_id = int(compra['numero_compra'])
+        
+        # Verificar el valor y tipo de compra_id
+        print(f"Procesando compra_id: {compra_id} (tipo: {type(compra_id)})")
+        
+        # Obtener productos para esta compra
         productos = productos_por_compra.get(compra_id, [])
+        
+        # Verificar si se están obteniendo productos
+        print(f"Productos obtenidos para compra_id {compra_id}: {productos}")
         
         # Calcular el total de la compra
         total_compra = sum(float(p['cantidad']) * float(p['costo']) for p in productos)
         
+        # Añadir la compra agrupada a la lista
         compras_agrupadas.append({
             'numero_compra': compra['numero_compra'],
             'proveedor': compra['proveedor'],
@@ -46,7 +66,9 @@ def historial_compras():
             'productos': productos,
             'total_compra': total_compra
         })
-    
+
+    # Mostrar el resultado final de las compras agrupadas
+    print("compras agrupadas:", compras_agrupadas)
     return render_template('/compras/historial_compras.html', compras=compras_agrupadas)
 
 @historial_compras_bp.route('/eliminar_compra/<int:numero_compra>', methods=['POST'])

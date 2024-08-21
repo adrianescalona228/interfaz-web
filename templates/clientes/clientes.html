@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
-    <link rel="stylesheet" href="/static//css/global/style.css">
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
-    <a href="{{ url_for('clientes.agregar_clientes_nuevos.agregar_clientes_nuevos') }}">Agregar cliente nuevo</a><br>
-    <a href="{{ url_for('clientes.lista_clientes.lista_clientes')}}">Lista de clientes</a>    
-    <a href="{{ url_for('clientes.registrar_abono.template_abonos')}}">Registrar abono</a>
-    <a href="{{ url_for('clientes.deudas.ver_deudas')}}">Ver deudas</a>
+    <header>
+        <h1>Clientes</h1>
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('clientes.agregar_clientes_nuevos.agregar_clientes_nuevos') }}" class="tarjeta clientes">
+                <h2>Agregar cliente nuevo</h2>
+            </a>
+            <a href="{{ url_for('clientes.lista_clientes.lista_clientes') }}" class="tarjeta clientes">
+                <h2>Lista de clientes</h2>
+            </a>
+            <a href="{{ url_for('clientes.registrar_abono.template_abonos') }}" class="tarjeta clientes">
+                <h2>Registrar abono</h2>
+            </a>
+            <a href="{{ url_for('clientes.deudas.ver_deudas') }}" class="tarjeta clientes">
+                <h2>Ver deudas</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
 </html>

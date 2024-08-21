@@ -9,39 +9,41 @@
 
 </head>
 <body>
-    <div id="menu "class="menu-izquierdo">
-        <h1>Historial de Ventas</h1>
-        <a href="{{ url_for('index') }}">Menu principal</a>
-    </div>
-    <div class="contenido-principal">
-        <button id="toggle-button">Toggle Menú</button>
-        <h1 class="titulo_principal">Inventario</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">ID</th>
-                    <th onclick="sortTable(1)">Producto</th>
-                    <th onclick="sortTable(2)">Cantidad</th>
-                    <th onclick="sortTable(3)">Precio</th>
-                    <th onclick="sortTable(4)">Costo</th>
-                    <th onclick="sortTable(5)">Tipo de Producto</th>
-                    <th onclick="sortTable(6)">Marca</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in inventario %}
-                <tr>
-                    <td>{{ item['id'] }}</td>
-                    <td>{{ item['PRODUCTO'] }}</td>
-                    <td>{{ item['CANTIDAD'] }}</td>
-                    <td>{{ item['PRECIO'] }}</td>
-                    <td>{{ item['COSTO'] }}</td>
-                    <td>{{ item['TIPO_DE_PRODUCTO'] }}</td>
-                    <td>{{ item['MARCA'] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <script src="{{ url_for('static', filename='menu.js') }}"></script>
+    <header>
+        <h1>Inventario</h1>
+    </header>
+    <main>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">ID</th>
+                        <th onclick="sortTable(1)">Producto</th>
+                        <th onclick="sortTable(2)">Cantidad</th>
+                        <th onclick="sortTable(3)">Precio</th>
+                        <th onclick="sortTable(4)">Costo</th>
+                        <th onclick="sortTable(5)">Tipo de Producto</th>
+                        <th onclick="sortTable(6)">Marca</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in inventario %}
+                    <tr>
+                        <td>{{ item['id'] }}</td>
+                        <td>{{ item['PRODUCTO'] }}</td>
+                        <td>{{ item['CANTIDAD'] }}</td>
+                        <td>{{ item['PRECIO'] }}</td>
+                        <td>{{ item['COSTO'] }}</td>
+                        <td>{{ item['TIPO_DE_PRODUCTO'] }}</td>
+                        <td>{{ item['MARCA'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>    
+        </section>
+    </main>
+    <footer>
+        Representaciones EG
+    </footer>
+
 </body>

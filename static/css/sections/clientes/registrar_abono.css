@@ -1,0 +1,7 @@
+.form-abono {
+    flex: 0.4;
+    margin-right: 20px; /* Espacio entre el formulario y el carrito */
+    background: #333;
+    padding: 1rem;
+    border-radius: 10px;
+}

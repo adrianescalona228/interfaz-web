@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-    <link rel="stylesheet" href="/static//css/global/style.css">
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
-    <a href="{{ url_for('inventario.ver_inventario.ver_inventario') }}">Ver inventario</a><br>
+    <header>
+        <h1>Inventario</h1>
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('inventario.ver_inventario.ver_inventario') }}" class="tarjeta inventario">
+                <h2>Ver inventario</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
 </html>

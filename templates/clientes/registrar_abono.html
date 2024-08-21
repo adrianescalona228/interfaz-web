@@ -7,48 +7,34 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
-    <link rel="stylesheet" href="/static//css/global/style.css">
+    <link rel="stylesheet" href="/static/css/global/style.css">
 </head>
 <body>
-    <div id="menu" class="menu-izquierdo">
-        <h1>Manejo de creditos</h1>
-        <a href="{{ url_for('index') }}">Menu principal</a>
-    </div>
-    <div class="contenido-principal">
-        <h1 class="titulo_principal">Manejar creditos</h1>
-        <button id="toggle-button">Toggle Menú</button>
+    <header>
+        <h1>Gestión de Crédito</h1>
+    </header>
+    <main class="contenido-principal">
         <!-- Formulario de Abono -->
-        <div class="form-container">
-            <h2>Registrar Abono</h2>
-            <form id="form_abono" action="{{ url_for('clientes.registrar_abono.registrar_abono') }}" method="POST">
+        <section class="form-container">
+            <form id="form_abono">
                 <label for="cliente">Cliente:</label>
                 <input type="text" id="cliente" name="cliente" required>
                 
                 <label for="monto">Monto del Abono:</label>
-                <input type="number" id="monto" name="monto" step="0.01" required>
+                <input type="text" id="monto" name="monto" step="0.01" required>
                 
                 <label for="fecha">Fecha del Abono:</label>
                 <input type="date" id="fecha" name="fecha" required>
                 
-                <input type="submit" value="Registrar Abono">
+                <div class="botones-container">
+                    <button type="submit">Registrar Abono</button>
+                </div>
             </form>
-        </div>
-        
-        <!-- Contenedores para resultados -->
-        <div id="resultados-deudas" class="resultados-container">
-            <h2>Deudas de Clientes</h2>
-            <!-- Aquí se mostrará la información de las deudas -->
-        </div>
-
-        <div id="resultados-facturas" class="resultados-container">
-            <h2>Facturas Vencidas</h2>
-            <!-- Aquí se mostrarán las facturas vencidas -->
-        </div>
-    </div>
-    
-    <script src="{{ url_for('static', filename='menu.js') }}"></script>
-    <script src="{{ url_for('static', filename='manejar_credito.js') }}"></script>
-    <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+        </section>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+    <script src="{{ url_for('static', filename='/js/clientes/registrar_abono.js') }}"></script>
 </body>
 </html>

@@ -25,6 +25,22 @@ document.getElementById('buscador').addEventListener('input', function () {
     });
 });
 
+document.getElementById('mostrar_facturas_vencidas').addEventListener('click', function() {
+    let today = new Date().toISOString().split('T')[0];
+    let contenedoresVentas = document.querySelectorAll('.contenedor');
+
+    contenedoresVentas.forEach(function(contenedor) {
+        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim();
+
+        // Comparar las fechas
+        if (fechaVencimiento && fechaVencimiento < today) {
+            contenedor.style.display = ''; // Mostrar si está vencida
+        } else {
+            contenedor.style.display = 'none'; // Ocultar si no está vencida
+        }
+    });
+});
+
 document.querySelectorAll('.eliminar-venta').forEach(button => {
     button.addEventListener('click', function() {
         const ventaId = this.getAttribute('data-venta-id');

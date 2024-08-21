@@ -11,12 +11,12 @@ def historial_ventas():
     db = get_db()
     
     # Consulta para obtener todas las ventas ordenadas por número de venta
-    cursor = db.execute('SELECT id, numero_venta, cliente, fecha, producto, cantidad, precio FROM Ventas ORDER BY numero_venta')
+    cursor = db.execute('''SELECT v.id, v.numero_venta, v.cliente, v.fecha, v.producto, v.cantidad, v.precio, f.fecha_vencimiento 
+                        FROM Ventas v 
+                        JOIN Facturas f ON v.numero_venta = f.numero_venta
+                        ORDER BY v.numero_venta''')
     ventas = cursor.fetchall()
 
-    for venta in ventas:
-        id = venta['id']
-    
     # Lista para almacenar las ventas agrupadas
     ventas_agrupadas = []
     current_numero_venta = None
@@ -34,7 +34,8 @@ def historial_ventas():
                 'numero_venta': venta['numero_venta'],
                 'cliente': venta['cliente'],
                 'fecha': venta['fecha'],
-                'productos': []
+                'productos': [],
+                'fecha_vencimiento': venta['fecha_vencimiento']
             }
             current_numero_venta = venta['numero_venta']
 

@@ -51,7 +51,6 @@ $(function() {
         });
     }
     
-    
     function configurarEventos() {
         $(document).on('keyup', '.cantidad', function() {
             actualizarTotalProducto($(this).closest('tr'));

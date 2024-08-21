@@ -4,27 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
-    <link rel="stylesheet" href="/static//css/global/style.css">
+    <link rel="stylesheet" href="/static/css/global/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-    <div id="menu" class="menu-izquierdo">
-        <h1>Clientes</h1>
-        <a href="{{ url_for('index') }}">Menu principal</a>
-    </div>
-    <div class="contenido-principal">
-        <button id="toggle-button">Toggle Menú</button>
-        <h1 class="titulo_principal">Lista de clientes</h1>
+    <header>
+        <h1>Lista de clientes</h1>
+    </header>
+    <main>
         <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Razon social</th>
-                    <th>Rif</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
+                    <th>Razón Social</th>
+                    <th>RIF</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +36,9 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    <script src="{{ url_for('static', filename='registro_venta.js') }}"></script>
-    <script src="{{ url_for('static', filename='menu.js') }}"></script>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
 </body>
 </html>

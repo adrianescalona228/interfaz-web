@@ -8,6 +8,8 @@ deudas_bp = Blueprint('deudas', __name__)
 @deudas_bp.route('/ver_deudas')
 def ver_deudas():
     db = get_db()   
-    cursor = db.execute('SELECT * FROM Deudas')
+    cursor = db.execute('''SELECT c.nombre_cliente, d.monto_total
+                        FROM Clientes c
+                        JOIN Deudas d ON c.id = d.cliente_id''')
     deudas = cursor.fetchall()
     return render_template('/clientes/ver_deudas.html', deudas=deudas)

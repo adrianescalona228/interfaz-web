@@ -23,7 +23,7 @@ input[type="text"], input[type="date"] {
     border-radius: 5px;
 }
 
-input[type="submit"], button[type="button"] {
+input[type="submit"], button[type="button"], button[type='submit'] {
     background-color: #333;
     color: #fff;
     border: none;
@@ -35,6 +35,10 @@ input[type="submit"], button[type="button"] {
 }
 
 input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+button[type="submit"]:hover {
     background-color: #45a049;
 }
 

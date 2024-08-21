@@ -17,6 +17,8 @@
     </header>
     <main>
         <input type="text" id="buscador" placeholder="Buscar por número de venta o cliente...">
+        <!-- Botón para mostrar facturas vencidas -->
+        <button id="mostrar_facturas_vencidas">Mostrar Facturas Vencidas</button>
         <div class="contenedor-ventas">
             {% for venta in ventas | reverse%}
             <section class="contenedor">
@@ -33,7 +35,7 @@
                             <td>{{ venta.numero_venta }}</td>
                             <td>{{ venta.cliente }}</td>
                             <td>{{ venta.fecha }}</td>
-                            <td></td>
+                            <td style="display: none;">{{ venta.fecha_vencimiento }}</td>
                         </tbody>
                     </table>
                     <table class="info-productos">
