@@ -1,1 +1,4 @@
-.pyc
+*.pyc
+*.sqlite3
+*.db
+DATABASE/inventory2.db
