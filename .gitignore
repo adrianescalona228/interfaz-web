@@ -1,1 +1,9 @@
-.pyc
+# Ignorar archivos .pyc generados por Python
+*.pyc
+
+# Ignorar archivos SQLite
+*.sqlite3
+*.db
+
+# Ignorar la base de datos específica en la carpeta DATABASE
+DATABASE/inventory2.db
