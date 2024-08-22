@@ -1,0 +1,8 @@
+#buscador-abonos {
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    width: 95%; /* Ajusta el ancho según sea necesario */
+    max-width: 600px; /* Opcional: Limita el ancho máximo */
+    background-color: white; /* Opcional: Fija un fondo para el buscador */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}

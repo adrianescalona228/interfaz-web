@@ -8,6 +8,7 @@
 @import url('/static/css/sections/compras/comprar_stock.css');
 @import url('/static/css/sections/compras/historial_compras.css');
 @import url('/static/css/sections/inventario/ver_inventario.css');
+@import url('/static/css/sections/clientes/historial_abonos.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {

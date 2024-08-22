@@ -38,7 +38,7 @@ def procesar_venta():
     for producto in productos:
         print('dentro del bucle for')
         nombre_producto = producto['producto']
-        cantidad = int(producto['cantidad'])
+        cantidad = float(producto['cantidad'])
         precio = float(producto['precio'])
 
         print(f'Producto recibido: {nombre_producto}, {cantidad}, {precio}')

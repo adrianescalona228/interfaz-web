@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 *.pyc
 *.sqlite3
 *.db
+=======
+# Ignorar archivos .pyc generados por Python
+*.pyc
+
+# Ignorar archivos SQLite
+*.sqlite3
+*.db
+
+# Ignorar la base de datos específica en la carpeta DATABASE
+>>>>>>> 4f8d77774b5eaa2a6203c3786f6348c013a10ad8
 DATABASE/inventory2.db
