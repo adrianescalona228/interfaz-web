@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css">
+    <title>Historial de Abonos</title>
+</head>
+<body>
+    <header>
+        <h1>Historial de Abonos</h1>
+    </header>
+    <main>
+        <input type="text" id="buscador-abonos" placeholder="Buscar por cliente...">
+
+            <section class="table-container">
+                <table class="tabla-inventario">
+                    <thead>
+                        <tr>
+                            <th><strong>Cliente:</strong></th>
+                            <th><strong>Fecha:</strong></th>
+                            <th><strong>Monto:</strong></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for abono in abonos | reverse %}
+                        <tr class="table-row-body-deudas">
+                            <td class="nombre-cliente">{{ abono.nombre_cliente }}</td>
+                            <td>{{ abono.fecha }}</td>
+                            <td>{{ abono.monto }}</td>
+                            <td><button class="eliminar-abono" title="Eliminar abono" 
+                                data-abono-id="{{ abono.id }}">&#x2716;</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+    <script src="{{ url_for('static', filename='js/clientes/historial_abonos.js') }}"></script>
+</body>
+</html>

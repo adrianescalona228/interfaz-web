@@ -14,6 +14,8 @@
         <h1>Deudas de Clientes</h1>
     </header>
     <main>
+        <h1>total deuda:</h1>
+        <span id="valor_total_deuda" class="valor_total_deuda">$0.00</span>
         <table>
             <thead>
                 <tr>
@@ -25,7 +27,7 @@
                 {% for deuda in deudas %}
                     <tr>
                         <td>{{ deuda['nombre_cliente'] }}</td>
-                        <td>{{ deuda['monto_total'] }}</td>
+                        <td class="monto">{{ deuda['monto_total'] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -34,5 +36,6 @@
     <footer>
         <span>Representaciones EG</span>
     </footer>
+    <script src="{{ url_for('static', filename='/js/clientes/ver_deudas.js') }}"></script>
 </body>
 </html>
