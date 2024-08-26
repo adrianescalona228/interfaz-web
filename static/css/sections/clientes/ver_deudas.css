@@ -1,0 +1,17 @@
+#buscador-deuda {
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    max-width: 600px; /* Opcional: Limita el ancho máximo */
+    background-color: white; /* Opcional: Fija un fondo para el buscador */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.tabla-deudas {
+    display: block;
+}
+
+.tabla-deudas tbody td{
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+

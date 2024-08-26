@@ -1,4 +1,3 @@
-<!-- Archivo: templates/mostrar_inventario.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,6 +8,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/static/css/global/style.css">
+    <style>
+
+    </style>
 </head>
 <body>
     <header>
@@ -22,25 +24,25 @@
             <table class="tabla-inventario">
                 <thead>
                     <tr>
-                        <th onclick="sortTable(0)" class="th id header">ID</th>
-                        <th onclick="sortTable(1)" class="th producto">Producto</th>
-                        <th onclick="sortTable(2)" class="th">Cantidad</th>
-                        <th onclick="sortTable(3)" class="th">Precio</th>
-                        <th onclick="sortTable(4)" class="th">Costo</th>
-                        <th onclick="sortTable(5)" class="th">Tipo de Producto</th>
-                        <th onclick="sortTable(6)" class="th">Marca</th>
+                        <th class="th id header">ID</th>
+                        <th class="th producto">Producto</th>
+                        <th class="th">Cantidad</th>
+                        <th class="th">Precio</th>
+                        <th class="th">Costo</th>
+                        <th class="th">Tipo de Producto</th>
+                        <th class="th">Marca</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in inventario %}
-                    <tr class="table-row-body">
-                        <td class="td id body">{{ item['id'] }}</td>
-                        <td class="td producto">{{ item['PRODUCTO'] }}</td>
-                        <td class="td">{{ item['CANTIDAD'] }}</td>
-                        <td class="td">{{ item['PRECIO'] }}</td>
-                        <td class="td">{{ item['COSTO'] }}</td>
-                        <td class="td">{{ item['TIPO_DE_PRODUCTO'] }}</td>
-                        <td class="td">{{ item['MARCA'] }}</td>
+                    <tr class="table-row-body" data-id="{{ item['id'] }}">
+                        <td class="td id body editable">{{ item['id'] }}</td>
+                        <td class="td producto editable">{{ item['PRODUCTO'] }}</td>
+                        <td class="td cantidad editable">{{ item['CANTIDAD'] }}</td>
+                        <td class="td precio editable">{{ item['PRECIO'] }}</td>
+                        <td class="td costo editable">{{ item['COSTO'] }}</td>
+                        <td class="td tipo_de_producto editable">{{ item['TIPO_DE_PRODUCTO'] }}</td>
+                        <td class="td marca editable">{{ item['MARCA'] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -52,3 +54,4 @@
     </footer>
     <script src="{{ url_for('static', filename='js/inventario/ver_inventario.js') }}"></script>
 </body>
+</html>

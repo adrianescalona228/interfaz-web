@@ -6,3 +6,10 @@ button:hover {
     transform: scale(1.01) translateY(-1px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
 }
+.editable {
+    cursor: pointer;
+}
+.editable input {
+    width: 100%;
+    box-sizing: border-box;
+}

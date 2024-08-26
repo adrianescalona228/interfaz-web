@@ -13,3 +13,55 @@ document.getElementById('buscador-inventario').addEventListener('input', functio
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.querySelector('.tabla-inventario');
+
+    table.addEventListener('dblclick', function(event) {
+        const target = event.target;
+
+        if (target.classList.contains('editable')) {
+            const originalText = target.textContent.trim();
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = originalText;
+            target.innerHTML = ''; // Limpiar el contenido
+            target.appendChild(input);
+            input.focus();
+
+            input.addEventListener('blur', function() {
+                const newValue = input.value.trim();
+                target.innerHTML = newValue;
+
+                const row = target.closest('tr');
+                const id = row.dataset.id;
+                const column = target.classList[1]; // Obtener la clase para identificar la columna
+
+                // Enviar los datos al backend
+                fetch('/actualizar_producto', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        column: column,
+                        value: newValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Actualización exitosa:', data.message);
+                    } else {
+                        console.error('Error al actualizar:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+    });
+});
+
