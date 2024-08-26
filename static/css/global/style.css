@@ -9,6 +9,7 @@
 @import url('/static/css/sections/compras/historial_compras.css');
 @import url('/static/css/sections/inventario/ver_inventario.css');
 @import url('/static/css/sections/clientes/historial_abonos.css');
+@import url('/static/css/sections/clientes/ver_deudas.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {
@@ -57,6 +58,13 @@ footer {
     color: white;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra del contenedor */
+}
+
+h1 {
+    color: white;
+}
+span {
+    color: white;
 }
 
 /* Adaptación para pantalla de 1080 x 2400 píxeles */

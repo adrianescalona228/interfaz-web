@@ -16,22 +16,26 @@
     <main>
         <h1>total deuda:</h1>
         <span id="valor_total_deuda" class="valor_total_deuda">$0.00</span>
-        <table>
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Monto</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for deuda in deudas %}
+
+        <section class="table-container">
+            <input type="text" id="buscador-deuda" placeholder="Buscar cliente...">
+            <table class="tabla-deudas">
+                <thead>
                     <tr>
-                        <td>{{ deuda['nombre_cliente'] }}</td>
-                        <td class="monto">{{ deuda['monto_total'] }}</td>
+                        <th>Cliente</th>
+                        <th>Monto</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for deuda in deudas %}
+                        <tr class="table-row-body-deudas">
+                            <td class="nombre-cliente">{{ deuda['nombre_cliente'] }}</td>
+                            <td class="monto">{{ deuda['monto_total'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
     </main>
     <footer>
         <span>Representaciones EG</span>
