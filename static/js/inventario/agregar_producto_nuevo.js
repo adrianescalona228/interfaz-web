@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.success) {
                     // Opcional: Vaciar el formulario
                     formInventario.reset();
-                    console.log(data.message);
+                    alert('Producto agregado correctamente: ' + data.message);
                 } else {
                     alert('Error al agregar producto: ' + data.message);
                 }

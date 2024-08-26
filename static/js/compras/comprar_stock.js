@@ -1,7 +1,6 @@
 $(document).ready(function() {
     inicializarFechaActual()
     inicializarAutocompletado()
-    obtenerUltimoNumeroVenta()
     configurarEventos()
 });
 
@@ -26,9 +25,7 @@ function configurarEventos() {
     $('#procesar_compra').click(function(event) {
         event.preventDefault();
         procesarCompra();
-        vaciarCarrito();
-        $('#proveedor').val('');
-        $('#numero_compra').val(function(i, val) { return +val + 1; });
+
     });
 }
 
@@ -154,10 +151,13 @@ function procesarCompra() {
     })
     .then(response => response.json())  // Parsear la respuesta como JSON
     .then(data => {
-        console.log('Success:', data);  // Manejar la respuesta con éxito
+        vaciarCarrito();
+        $('#proveedor').val('');
+        $('#numero_compra').val('');
+        alert('Success:', data);  // Manejar la respuesta con éxito
         // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito o redirigir
     })
     .catch((error) => {
-        console.error('Error:', error);  // Manejar cualquier error
+        alert('Error:', error);  // Manejar cualquier error
     });
 } 

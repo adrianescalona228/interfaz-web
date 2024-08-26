@@ -81,12 +81,24 @@ def eliminar_venta(numero_compra):
     compra = cursor.fetchone()
 
     if compra:
-        # Eliminar los productos asociados a la compra
-        cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ?', (compra['id'],))
-        db.commit()  # Hacer commit después de eliminar los productos
+
+        # Obtener los productos asociados a la compra
+        cursor.execute('SELECT producto_id, cantidad FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
+        productos = cursor.fetchall()
 
         # Eliminar la compra
         cursor.execute('DELETE FROM Compras WHERE numero_compra = ?', (numero_compra,))
+
+        # Actualizar el inventario
+        for producto in productos:
+            producto_id = producto['producto_id']
+            cantidad = producto['cantidad']
+            print(f'producto id: {producto_id}, cantidad: {cantidad}')
+
+            # Aumentar la cantidad del producto en el inventario
+            cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))
+            cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
+
         db.commit()  # Hacer commit después de eliminar la compra
 
         flash('Compra y productos asociados eliminados correctamente', 'success')
@@ -107,12 +119,18 @@ def eliminar_producto(compra_id, producto_id):
     producto = cursor.fetchone()
 
     if producto:
+        cantidad = producto['cantidad']
+
         # Eliminar el producto de Productos_Compras
         cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ? AND producto_id = ?', (compra_id, producto_id))
         
         # Restar el costo del producto al total de la compra en la tabla Compras
         total_restar = float(producto['cantidad']) * float(producto['costo'])
         cursor.execute('UPDATE Compras SET total_compra = total_compra - ? WHERE id = ?', (total_restar, compra_id))
+
+        # Actualizar el inventario
+        cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))
+
         
         db.commit()  # Hacer commit para guardar los cambios
         flash('Producto eliminado y total actualizado correctamente.', 'success')
