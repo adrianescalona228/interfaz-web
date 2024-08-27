@@ -24,11 +24,21 @@ def eliminar_abono(abono_id):
     abono = cursor.fetchone()
 
     if abono:
+        # Obtener el monto del abono
+        monto_abono = abono['monto']
+
+        # Obtener el id del cliente asociado con el abono
+        cliente_id = abono['cliente_id']
+
         # Eliminar el abono
         cursor.execute('DELETE FROM Abonos WHERE id = ?', (abono_id,))
-        db.commit()  # Hacer commit después de eliminar
+        db.commit()  # Hacer commit después de eliminar el abono
 
-        flash('Abono eliminado correctamente', 'success')
+        # Actualizar la deuda del cliente
+        cursor.execute('UPDATE Deudas SET monto_total = monto_total + ? WHERE cliente_id = ?', (monto_abono, cliente_id))
+        db.commit()  # Hacer commit después de actualizar la deuda
+
+        flash('Abono eliminado correctamente y deuda actualizada', 'success')
     else:
         flash('El abono no existe', 'error')
 

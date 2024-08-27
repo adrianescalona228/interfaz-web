@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <h1>Deudas de Clientes</h1>
+        <h1 id="click-catcher">Deudas de Clientes</h1>
     </header>
     <main>
         <h1>total deuda:</h1>
@@ -28,9 +28,9 @@
                 </thead>
                 <tbody>
                     {% for deuda in deudas %}
-                        <tr class="table-row-body-deudas">
-                            <td class="nombre-cliente">{{ deuda['nombre_cliente'] }}</td>
-                            <td class="monto">{{ deuda['monto_total'] }}</td>
+                        <tr class="table-row-body-deudas" data-nombre="{{ deuda['nombre_cliente']}}">
+                            <td class="td cliente">{{ deuda['nombre_cliente'] }}</td>
+                            <td class="td monto editable">{{ deuda['monto_total'] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

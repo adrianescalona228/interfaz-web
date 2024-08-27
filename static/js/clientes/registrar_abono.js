@@ -1,7 +1,6 @@
 $(document).ready(function() {
     inicializarFechaActual();
     inicializarAutocompletado();
-    
 });
 
 function inicializarFechaActual() {
@@ -41,6 +40,7 @@ document.getElementById('form_abono').addEventListener('submit', function(event)
             alert('Abono registrado correctamente');
             // Vaciar el formulario
             document.getElementById('form_abono').reset();
+            inicializarFechaActual();
         } else {
             alert('Error: ' + data.message);
         }
