@@ -35,6 +35,7 @@
                             <td>{{ venta.numero_venta }}</td>
                             <td>{{ venta.cliente }}</td>
                             <td>{{ venta.fecha }}</td>
+                            <td style="text-transform: uppercase;">{{ venta.estado }}</td>
                             <td style="display: none;">{{ venta.fecha_vencimiento }}</td>
                         </tbody>
                     </table>
@@ -66,7 +67,7 @@
                                 <td></td>
                                 <td></td>
                                 <td><strong>Total Venta:</strong></td>
-                                <td><strong>{{ venta.total_venta }}</strong></td>
+                                <td><strong>{{ venta.monto_pagado }}/{{ venta.total_venta }}</strong></td>
                                 <td></td>
                             </tr>
                         </tfoot>
