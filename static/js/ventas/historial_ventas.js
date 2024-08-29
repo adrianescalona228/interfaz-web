@@ -8,6 +8,7 @@
 //         minLength: 1 // El autocompletado comenzará después de escribir 2 caracteres
 //     });
 // }
+let filtroActivo = false; // Variable para llevar el seguimiento del estado del filtro de vencimiento
 
 document.getElementById('buscador').addEventListener('input', function () {
     let filtro = this.value.toLowerCase();
@@ -16,29 +17,48 @@ document.getElementById('buscador').addEventListener('input', function () {
     contenedoresVentas.forEach(function (contenedor) {
         let numeroVenta = contenedor.querySelector('tbody td:nth-child(1)').textContent.toLowerCase();
         let nombreCliente = contenedor.querySelector('tbody td:nth-child(2)').textContent.toLowerCase();
+        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(5)').textContent.trim();
+        let estado = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim(); // Ajusta según la columna de estado
 
-        if (numeroVenta.includes(filtro) || nombreCliente.includes(filtro)) {
-            contenedor.style.display = '';
-        } else {
-            contenedor.style.display = 'none';
+        let mostrar = numeroVenta.includes(filtro) || nombreCliente.includes(filtro);
+
+        if (filtroActivo) {
+            // Si el filtro de vencimiento está activo, verificamos también la fecha y el estado
+            mostrar = mostrar && fechaVencimiento && fechaVencimiento < new Date().toISOString().split('T')[0] && estado.toUpperCase() === 'PENDIENTE';
         }
+
+        contenedor.style.display = mostrar ? '' : 'none';
     });
 });
 
 document.getElementById('mostrar_facturas_vencidas').addEventListener('click', function() {
+    filtroActivo = !filtroActivo; // Alternar el estado del filtro de vencimiento
+
     let today = new Date().toISOString().split('T')[0];
     let contenedoresVentas = document.querySelectorAll('.contenedor');
 
     contenedoresVentas.forEach(function(contenedor) {
-        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim();
+        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(5)').textContent.trim();
+        let estado = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim(); // Ajusta según la columna de estado
 
-        // Comparar las fechas
-        if (fechaVencimiento && fechaVencimiento < today) {
-            contenedor.style.display = ''; // Mostrar si está vencida
-        } else {
-            contenedor.style.display = 'none'; // Ocultar si no está vencida
+        let mostrar = true;
+
+        if (filtroActivo) {
+            // Si el filtro de vencimiento está activo, mostramos solo las facturas vencidas y pendientes
+            mostrar = fechaVencimiento && fechaVencimiento < today && estado.toUpperCase() === 'PENDIENTE';
         }
+
+        // Aplicar el filtro de búsqueda también
+        let filtro = document.getElementById('buscador').value.toLowerCase();
+        let numeroVenta = contenedor.querySelector('tbody td:nth-child(1)').textContent.toLowerCase();
+        let nombreCliente = contenedor.querySelector('tbody td:nth-child(2)').textContent.toLowerCase();
+        
+        mostrar = mostrar && (numeroVenta.includes(filtro) || nombreCliente.includes(filtro));
+
+        contenedor.style.display = mostrar ? '' : 'none';
     });
+
+    this.textContent = filtroActivo ? 'Mostrar Todas las Facturas' : 'Mostrar Facturas Vencidas';
 });
 
 document.querySelectorAll('.eliminar-venta').forEach(button => {
