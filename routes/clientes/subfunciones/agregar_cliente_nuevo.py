@@ -30,6 +30,15 @@ def guardar_cliente():
             VALUES (?, ?, ?, ?, ?)
         ''', (nombre, razon_social, rif_cedula, direccion, telefono))
 
+        # Obtener el ID del cliente recién insertado
+        cliente_id = cursor.lastrowid
+
+        # Insertar la nueva entrada en la tabla Deudas con monto 0
+        cursor.execute('''
+            INSERT INTO Deudas (id_cliente, monto_total)
+            VALUES (?, ?)
+        ''', (cliente_id, 0))
+
         db.commit()
         db.close()
 

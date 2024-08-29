@@ -1,0 +1,11 @@
+------------------------------------------------------------------------------------------------
+insertar_deuda_automatica:
+
+CREATE TRIGGER insertar_deuda_automatica 
+AFTER INSERT ON Clientes 
+FOR EACH ROW BEGIN -- 
+
+Insertar una nueva fila en la tabla Deudas con el cliente_id del nuevo cliente y monto_total 0 
+INSERT INTO Deudas (cliente_id, monto_total) VALUES (NEW.id, 0); END
+
+-------------------------------------------------------------------------------------------------
