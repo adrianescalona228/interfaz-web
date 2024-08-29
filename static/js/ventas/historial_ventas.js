@@ -1,13 +1,34 @@
-// $(document).ready(function () {
-//     autocompletar_clientes();
-// });
+// historial_ventas.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar todos los botones de crear nota de entrega
+    document.querySelectorAll('.crear-nota-entrega').forEach(button => {
+        button.addEventListener('click', () => {
+            const numeroVenta = button.getAttribute('data-venta-id');
 
-// function autocompletar_clientes() {
-//     $('#buscador').autocomplete({
-//         source: '/nueva_venta/autocompletar_clientes',
-//         minLength: 1 // El autocompletado comenzará después de escribir 2 caracteres
-//     });
-// }
+            // Envío del número de venta al servidor con fetch
+            fetch('/historial_ventas/generar_nota_entrega', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ numero_venta: numeroVenta })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Nota de entrega creada con éxito.');
+                    // Aquí podrías redirigir a una página de confirmación o mostrar más información
+                } else {
+                    alert('Error al crear la nota de entrega.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al crear la nota de entrega.');
+            });
+        });
+    });
+});
+    
 let filtroActivo = false; // Variable para llevar el seguimiento del estado del filtro de vencimiento
 
 document.getElementById('buscador').addEventListener('input', function () {
