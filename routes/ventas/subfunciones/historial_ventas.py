@@ -168,14 +168,10 @@ def generar_nota_entrega():
     numero_venta= data.get('numero_venta')
     
     datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
-    print(datos_cliente)
+    crear_nota_entrega(datos_cliente)
 
     if not datos_cliente:
             return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
-    
-    ruta_completa = crear_nota_entrega(datos_cliente)
-
-    os.startfile(ruta_completa)
     
     return jsonify({"message": "Nota de entrega generada"}), 200
 
@@ -237,6 +233,28 @@ def obtener_datos_cliente_y_venta(numero_venta):
             'error': 'No se encontró la venta'
         }
     
+def insertar_direccion(sheet, direccion, fila_inicial):
+    ancho_maximo = 80
+
+    if len(direccion) > ancho_maximo:
+        punto_corte = direccion.rfind(' ', 0, ancho_maximo)
+        if punto_corte == -1:
+            punto_corte = ancho_maximo
+
+        direccion_1 = direccion[:punto_corte]
+        direccion_2 = direccion[punto_corte + 1:]
+
+        # Insertar la primera parte en la primera celda
+        rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
+        rango_celda_1.Cells(1, 1).Value = direccion_1
+
+        # Insertar la segunda parte en la celda de abajo
+        rango_celda_2 = sheet.Cells(fila_inicial + 1, 6).MergeArea
+        rango_celda_2.Cells(1, 1).Value = direccion_2
+    else:
+        rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
+        rango_celda_1.Cells(1, 1).Value = direccion
+
 def crear_nota_entrega(datos_cliente):
     pythoncom.CoInitialize()
 
@@ -254,7 +272,10 @@ def crear_nota_entrega(datos_cliente):
     sheet = workbook.ActiveSheet
     sheet.Cells(3, 9).Value = datos_cliente['razon_social']  # I3
     sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']  # AC3
-    sheet.Cells(5, 6).Value = datos_cliente['direccion']  # F5
+    
+    # Insertar la dirección con la función personalizada
+    insertar_direccion(sheet, datos_cliente['direccion'], 5)  # F5 es la fila inicial
+    
     sheet.Cells(7, 29).Value = datos_cliente['telefono']  # AC7
 
     if datos_cliente['ventas']:
@@ -274,6 +295,8 @@ def crear_nota_entrega(datos_cliente):
     ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
     workbook.SaveAs(ruta_completa)
     workbook.Close()
-    excel.Quit()
+
+    os.startfile(ruta_completa)
+    print('hola')
 
     return ruta_completa
