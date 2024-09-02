@@ -159,7 +159,7 @@ def autocompletar_clientes():
     # Conexión a la base de datos y consulta
     db = get_db()
     cursor = db.execute('SELECT nombre_cliente FROM Clientes WHERE nombre_cliente LIKE ?', ('%' + term + '%',))
-    clientes = [row['nombre_cliente'].strip() for row in cursor.fetchall()]
+    clientes = [row['nombre_cliente'] for row in cursor.fetchall()]
     
     return jsonify(clientes)
 
