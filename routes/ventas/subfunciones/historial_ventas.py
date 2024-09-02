@@ -8,7 +8,7 @@ from openpyxl import load_workbook
 
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
 
-ruta_libro = '/home/apolito/Programacion/Proyectos/interfaz_web/DATABASE/NDE_PLANTILLA.xlsx'
+ruta_libro = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE_PLANTILLA.xlsx"
 
 @historial_ventas_bp.route('/historial_ventas')
 def historial_ventas():
@@ -122,7 +122,6 @@ def eliminar_venta(numero_venta):
     db.close()
     return '', 200
 
-
 # Ruta para eliminar un producto de una venta específica
 @historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<int:id>', methods=['POST'])
 def eliminar_producto(numero_venta, id):
@@ -164,20 +163,37 @@ def eliminar_producto(numero_venta, id):
 
 @historial_ventas_bp.route('/generar_nota_entrega', methods=['GET', 'POST'])
 def generar_nota_entrega():
-    if request.method == 'POST':
-        numero_venta = request.form.get('numero_venta')
-        datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
-        
-        if not datos_cliente:
+    print('llegaste correctamente a /generar_nota_entrega')
+    data = request.json
+    numero_venta= data.get('numero_venta')
+    
+    datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
+    print(datos_cliente)
+
+    if not datos_cliente:
             return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
-           
-        libro = abrir_libro_excel(ruta_libro)
-        ruta_archivo = crear_nota_entrega(libro, datos_cliente)
+    
+    libro = abrir_libro_excel(ruta_libro)
+    crear_nota_entrega(libro, datos_cliente)
+    
+
+    return jsonify({"message": "Nota de entrega generada"}), 200
+
+
+    # if request.method == 'POST':
+    #     numero_venta = request.form.get('numero_venta')
+    #     datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
         
-        # Aquí puedes redirigir a una página de éxito o simplemente renderizar una plantilla de confirmación
-        return render_template('crear_notas_entrega.html', ruta_archivo=ruta_archivo)
-    else:
-        return render_template('crear_notas_entrega.html')
+    #     if not datos_cliente:
+    #         return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
+           
+    #     libro = abrir_libro_excel(ruta_libro)
+    #     ruta_archivo = crear_nota_entrega(libro, datos_cliente)
+        
+    #     # Aquí puedes redirigir a una página de éxito o simplemente renderizar una plantilla de confirmación
+    #     return render_template('crear_notas_entrega.html', ruta_archivo=ruta_archivo)
+    # else:
+    #     return render_template('crear_notas_entrega.html')
     
 def abrir_libro_excel(ruta_archivo):
     return load_workbook(ruta_archivo)
@@ -202,26 +218,42 @@ def obtener_datos_cliente_y_venta(numero_venta):
     
     razon_social, rif_cedula, direccion, telefono = cliente
     
-    # Obtener ventas asociadas al número de venta específico
+    # Obtener todas las ventas asociadas al número de venta específico
     cursor.execute("SELECT numero_venta, producto, cantidad, precio, fecha FROM Ventas WHERE numero_venta = ?", (numero_venta,))
-    ventas = cursor.fetchall()
+    productos = cursor.fetchall()  # Obtener todas las ventas asociadas
     
-    db.close()
-    
-    return {
-        'nombre_cliente': nombre_cliente,
-        'razon_social': razon_social,
-        'rif_cedula': rif_cedula,
-        'direccion': direccion,
-        'telefono': telefono,
-        'ventas': [
-            {'numero_venta': numero_venta, 'producto': producto, 'cantidad': cantidad, 'precio': precio, 'fecha': fecha}
-            for numero_venta, producto, cantidad, precio, fecha in ventas
-        ]
-    }
+    print(cliente)
+    print(productos)
 
+    db.close()
+        
+    if productos:
+        # Organizar todas las ventas en una lista de diccionarios
+        ventas_list = [
+            {
+                'numero_venta': producto[0],
+                'producto': producto[1].strip(),
+                'cantidad': producto[2],
+                'precio': producto[3],
+                'fecha': producto[4]
+            }
+            for producto in productos
+        ]
+
+        return {
+            'nombre_cliente': nombre_cliente.strip(),
+            'razon_social': razon_social.strip(),
+            'rif_cedula': rif_cedula.strip(),
+            'direccion': direccion.strip(),
+            'telefono': telefono.strip(),
+            'ventas': ventas_list  # Ahora es una lista de ventas
+        }
+    else:
+        return {
+            'error': 'No se encontró la venta'
+        }
 def crear_nota_entrega(libro, datos_cliente):
-    hoja = libro.active  # Supongamos que la plantilla usa la hoja activa
+    hoja = libro.active  # Usar la hoja activa de la plantilla
     
     # Insertar datos del cliente
     hoja['I3'] = datos_cliente['razon_social']
@@ -231,26 +263,25 @@ def crear_nota_entrega(libro, datos_cliente):
 
     # Obtener fecha y número de venta del primer elemento en las ventas
     if datos_cliente['ventas']:
-        primer_venta = datos_cliente['ventas'][0]
-        hoja['G7'] = primer_venta['fecha']
-        hoja['AF1'] = primer_venta['numero_venta']
+        primer_producto = datos_cliente['ventas'][0]  # Corregido para obtener el primer producto
+        hoja['G7'] = primer_producto['fecha']
+        hoja['AF1'] = primer_producto['numero_venta']
 
     # Insertar datos de las ventas
-    fila_inicio = 12  # Supongamos que comenzamos a escribir las ventas en la fila 7
-    for venta in datos_cliente['ventas']:   
-            hoja[f'D{fila_inicio}'] = venta['producto']
-            hoja[f'A{fila_inicio}'] = venta['cantidad']
-            hoja[f'Y{fila_inicio}'] = venta['precio']
-            fila_inicio += 1
+    fila_inicio = 12  # Supongamos que comenzamos a escribir las ventas en la fila 12
+    for producto in datos_cliente['ventas']:  # Corregido a 'ventas'
+        hoja[f'D{fila_inicio}'] = producto['producto']
+        hoja[f'A{fila_inicio}'] = producto['cantidad']
+        hoja[f'Y{fila_inicio}'] = producto['precio']
+        fila_inicio += 1
     
     # Definir la ruta de guardado
-    #ruta_guardar = "home/apolito/Programacion/Proyectos/interfaz_web/DATABASE/Notas_de_entrega"
-    ruta_guardar = "/mnt/c/Trabajo/Notas_de_entrega"
+    ruta_guardar = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE"
     if not os.path.exists(ruta_guardar):
         os.makedirs(ruta_guardar)
     
     # Crear el nombre del archivo
-    nombre_archivo = f"NDE_{primer_venta['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
+    nombre_archivo = f"NDE_{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
     
     # Ruta completa
     ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
