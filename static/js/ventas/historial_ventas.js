@@ -15,10 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Nota de entrega creada con éxito.');
+                    console.log('Nota de entrega creada correctamente')
                     // Aquí podrías redirigir a una página de confirmación o mostrar más información
                 } else {
-                    alert('Error al crear la nota de entrega.');
                 }
             })
             .catch(error => {

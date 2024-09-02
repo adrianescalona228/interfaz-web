@@ -5,10 +5,10 @@ from ...database import get_db
 from urllib.parse import quote, unquote
 import os
 from openpyxl import load_workbook
+import win32com.client as win32
+import pythoncom
 
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
-
-ruta_libro = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE_PLANTILLA.xlsx"
 
 @historial_ventas_bp.route('/historial_ventas')
 def historial_ventas():
@@ -173,28 +173,12 @@ def generar_nota_entrega():
     if not datos_cliente:
             return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
     
-    libro = abrir_libro_excel(ruta_libro)
-    crear_nota_entrega(libro, datos_cliente)
-    
+    ruta_completa = crear_nota_entrega(datos_cliente)
 
+    os.startfile(ruta_completa)
+    
     return jsonify({"message": "Nota de entrega generada"}), 200
 
-
-    # if request.method == 'POST':
-    #     numero_venta = request.form.get('numero_venta')
-    #     datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
-        
-    #     if not datos_cliente:
-    #         return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
-           
-    #     libro = abrir_libro_excel(ruta_libro)
-    #     ruta_archivo = crear_nota_entrega(libro, datos_cliente)
-        
-    #     # Aquí puedes redirigir a una página de éxito o simplemente renderizar una plantilla de confirmación
-    #     return render_template('crear_notas_entrega.html', ruta_archivo=ruta_archivo)
-    # else:
-    #     return render_template('crear_notas_entrega.html')
-    
 def abrir_libro_excel(ruta_archivo):
     return load_workbook(ruta_archivo)
 
@@ -252,41 +236,44 @@ def obtener_datos_cliente_y_venta(numero_venta):
         return {
             'error': 'No se encontró la venta'
         }
-def crear_nota_entrega(libro, datos_cliente):
-    hoja = libro.active  # Usar la hoja activa de la plantilla
     
-    # Insertar datos del cliente
-    hoja['I3'] = datos_cliente['razon_social']
-    hoja['AC3'] = datos_cliente['rif_cedula']
-    hoja['F5'] = datos_cliente['direccion']
-    hoja['AC7'] = datos_cliente['telefono']
+def crear_nota_entrega(datos_cliente):
+    pythoncom.CoInitialize()
 
-    # Obtener fecha y número de venta del primer elemento en las ventas
-    if datos_cliente['ventas']:
-        primer_producto = datos_cliente['ventas'][0]  # Corregido para obtener el primer producto
-        hoja['G7'] = primer_producto['fecha']
-        hoja['AF1'] = primer_producto['numero_venta']
-
-    # Insertar datos de las ventas
-    fila_inicio = 12  # Supongamos que comenzamos a escribir las ventas en la fila 12
-    for producto in datos_cliente['ventas']:  # Corregido a 'ventas'
-        hoja[f'D{fila_inicio}'] = producto['producto']
-        hoja[f'A{fila_inicio}'] = producto['cantidad']
-        hoja[f'Y{fila_inicio}'] = producto['precio']
-        fila_inicio += 1
-    
-    # Definir la ruta de guardado
+    ruta_plantilla = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE\NDE._PLANTILLA\NDE._PLANTILLA.xlsx"
     ruta_guardar = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE"
-    if not os.path.exists(ruta_guardar):
-        os.makedirs(ruta_guardar)
-    
-    # Crear el nombre del archivo
+
+    # Iniciar Excel
+    excel = win32.Dispatch('Excel.Application')
+    excel.Visible = False
+
+    # Abrir la plantilla
+    workbook = excel.Workbooks.Open(ruta_plantilla)
+
+    # Modificar la hoja activa con los datos del cliente
+    sheet = workbook.ActiveSheet
+    sheet.Cells(3, 9).Value = datos_cliente['razon_social']  # I3
+    sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']  # AC3
+    sheet.Cells(5, 6).Value = datos_cliente['direccion']  # F5
+    sheet.Cells(7, 29).Value = datos_cliente['telefono']  # AC7
+
+    if datos_cliente['ventas']:
+        primer_producto = datos_cliente['ventas'][0]
+        sheet.Cells(7, 7).Value = primer_producto['fecha']  # G7
+        sheet.Cells(1, 32).Value = primer_producto['numero_venta']  # AF1
+
+    fila_inicio = 12
+    for producto in datos_cliente['ventas']:
+        sheet.Cells(fila_inicio, 1).Value = producto['cantidad']  # A
+        sheet.Cells(fila_inicio, 4).Value = producto['producto']  # D
+        sheet.Cells(fila_inicio, 25).Value = producto['precio']  # Y
+        fila_inicio += 1
+
+    # Guardar el archivo
     nombre_archivo = f"NDE_{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
-    
-    # Ruta completa
     ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
-    
-    # Guardar archivo
-    libro.save(ruta_completa)
-    
+    workbook.SaveAs(ruta_completa)
+    workbook.Close()
+    excel.Quit()
+
     return ruta_completa
