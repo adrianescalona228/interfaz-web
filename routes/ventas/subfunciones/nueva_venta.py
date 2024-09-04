@@ -71,7 +71,6 @@ def procesar_venta():
 def actualizar_deuda():
     data = request.json
     numero_venta = data['numero_venta']
-    print(numero_venta)
 
     db = get_db()
     cursor = db.cursor()

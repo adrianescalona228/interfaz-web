@@ -6,7 +6,63 @@ from routes.compras.compras import compras_bp
 from routes.clientes.clientes import clientes_bp
 from routes.inventario.inventario import inventario_bp
 from routes.database import get_db
-import sqlite3
+import os
+import logging
+import socket
+import sys
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
+
+class StreamToLogger:
+    def __init__(self, logger, level):
+        self.logger = logger
+        self.level = level
+        self.linebuf = ''
+
+    def write(self, buf):
+        for line in buf.strip().splitlines():
+            self.logger.log(self.level, line.strip())
+
+    def flush(self):
+        pass
+
+def configurar_logging():
+    # Crear el directorio de logs si no existe
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+
+    hostname = socket.gethostname()
+    fecha_actual = datetime.now().strftime("%Y-%m-%d")
+    archivo_log = f'logs/app_{hostname}_{fecha_actual}.log'
+
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # Configurar el manejador de archivo con rotación diaria y codificación UTF-8
+    file_handler = TimedRotatingFileHandler(
+        archivo_log,
+        when='midnight',       # Rotar a medianoche
+        interval=1,           # Intervalo de 1 día
+        backupCount=30        # Mantener archivos de log de los últimos 30 días
+    )
+    file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+    file_handler.setLevel(logging.INFO)
+    file_handler.encoding = 'utf-8'  # Configurar la codificación para el archivo
+
+    logger.addHandler(file_handler)
+
+    # Configurar salida en la consola
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+    console_handler.setLevel(logging.INFO)
+    logger.addHandler(console_handler)
+
+    # Redirigir stdout y stderr a los logs
+    sys.stdout = StreamToLogger(logger, logging.INFO)
+    sys.stderr = StreamToLogger(logger, logging.ERROR)
+
+    logging.info('Logging configurado correctamente')
+
 
 def cargar_clave_secreta():
     clave_secreta = None
@@ -46,5 +102,6 @@ def create_app():
     return app
 
 if __name__ == '__main__':
+    configurar_logging()
     app = create_app()
     app.run(host="0.0.0.0", port=5000, debug=True)
