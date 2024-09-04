@@ -7,7 +7,9 @@ import os
 from openpyxl import load_workbook
 import win32com.client as win32
 import pythoncom
+import logging
 
+logger = logging.getLogger(__name__)
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
 
 @historial_ventas_bp.route('/historial_ventas')
@@ -160,191 +162,186 @@ def eliminar_producto(numero_venta, id):
 
     return '', 200  
 
-
-@historial_ventas_bp.route('/generar_nota_entrega', methods=['GET', 'POST'])
+@historial_ventas_bp.route('/generar_nota_entrega', methods=['POST'])
 def generar_nota_entrega():
+    try:
+        data = request.json
+        numero_venta = data.get('numero_venta')
 
-    data = request.json
-    numero_venta= data.get('numero_venta')
-    
-    datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
-    crear_nota_entrega(datos_cliente)
-
-    if not datos_cliente:
+        datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
+        if not datos_cliente:
+            logging.error('Cliente o venta no encontrado para el número de venta: %s', numero_venta)
             return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
-    
-    return jsonify({"message": "Nota de entrega generada"}), 200
+
+        ruta_nota = crear_nota_entrega(datos_cliente)
+        return jsonify({"message": "Nota de entrega generada", "ruta": ruta_nota}), 200
+
+    except Exception as e:
+        logging.error('Error al generar la nota de entrega: %s', e, exc_info=True)
+        return jsonify({'error': 'Error interno del servidor'}), 500
 
 def abrir_libro_excel(ruta_archivo):
-    return load_workbook(ruta_archivo)
+    try:
+        return load_workbook(ruta_archivo)
+    except Exception as e:
+        logging.error('Error al abrir el libro de Excel: %s', e, exc_info=True)
+        raise
 
 def obtener_datos_cliente_y_venta(numero_venta):
     db = get_db()
     cursor = db.cursor()
 
-    # Obtener el nombre del cliente basado en el número de venta
-    cursor.execute("SELECT cliente FROM Ventas WHERE numero_venta = ?", (numero_venta,))
-    cliente = cursor.fetchone()
-    if not cliente:
-        return None
-    
-    nombre_cliente = cliente[0]
-
-    # Obtener datos del cliente
-    cursor.execute("SELECT razon_social, rif_cedula, direccion, telefono FROM Clientes WHERE nombre_cliente = ?", (nombre_cliente,))
-    cliente = cursor.fetchone()
-    if not cliente:
-        return None
-    
-    razon_social, rif_cedula, direccion, telefono = cliente
-    
-    # Obtener todas las ventas asociadas al número de venta específico
-    cursor.execute("SELECT numero_venta, producto, cantidad, precio, fecha FROM Ventas WHERE numero_venta = ?", (numero_venta,))
-    productos = cursor.fetchall()  # Obtener todas las ventas asociadas
-    
-    db.close()
+    try:
+        cursor.execute("SELECT cliente FROM Ventas WHERE numero_venta = ?", (numero_venta,))
+        cliente = cursor.fetchone()
+        if not cliente:
+            return None
         
-    if productos:
-        # Organizar todas las ventas en una lista de diccionarios
-        ventas_list = [
-            {
-                'numero_venta': producto[0],
-                'producto': producto[1].strip(),
-                'cantidad': producto[2],
-                'precio': producto[3],
-                'fecha': producto[4]
+        nombre_cliente = cliente[0]
+
+        cursor.execute("SELECT razon_social, rif_cedula, direccion, telefono FROM Clientes WHERE nombre_cliente = ?", (nombre_cliente,))
+        cliente = cursor.fetchone()
+        if not cliente:
+            return None
+        
+        razon_social, rif_cedula, direccion, telefono = cliente
+        
+        cursor.execute("SELECT numero_venta, producto, cantidad, precio, fecha FROM Ventas WHERE numero_venta = ?", (numero_venta,))
+        productos = cursor.fetchall()  # Obtener todas las ventas asociadas
+
+        if productos:
+            ventas_list = [
+                {
+                    'numero_venta': producto[0],
+                    'producto': producto[1].strip(),
+                    'cantidad': producto[2],
+                    'precio': producto[3],
+                    'fecha': producto[4]
+                }
+                for producto in productos
+            ]
+
+            return {
+                'nombre_cliente': nombre_cliente.strip(),
+                'razon_social': razon_social.strip(),
+                'rif_cedula': rif_cedula.strip(),
+                'direccion': direccion.strip(),
+                'telefono': telefono.strip(),
+                'ventas': ventas_list
             }
-            for producto in productos
-        ]
+        else:
+            return {'error': 'No se encontró la venta'}
 
-        return {
-            'nombre_cliente': nombre_cliente.strip(),
-            'razon_social': razon_social.strip(),
-            'rif_cedula': rif_cedula.strip(),
-            'direccion': direccion.strip(),
-            'telefono': telefono.strip(),
-            'ventas': ventas_list  # Ahora es una lista de ventas
-        }
-    else:
-        return {
-            'error': 'No se encontró la venta'
-        }
-    
+    except Exception as e:
+        logging.error('Error al obtener datos del cliente y la venta: %s', e, exc_info=True)
+        raise
+    finally:
+        db.close()
+
 def insertar_direccion(sheet, direccion, fila_inicial):
-    ancho_maximo = 80
+    try:
+        ancho_maximo = 80
 
-    if len(direccion) > ancho_maximo:
-        punto_corte = direccion.rfind(' ', 0, ancho_maximo)
-        if punto_corte == -1:
-            punto_corte = ancho_maximo
+        if len(direccion) > ancho_maximo:
+            punto_corte = direccion.rfind(' ', 0, ancho_maximo)
+            if punto_corte == -1:
+                punto_corte = ancho_maximo
 
-        direccion_1 = direccion[:punto_corte]
-        direccion_2 = direccion[punto_corte + 1:]
+            direccion_1 = direccion[:punto_corte]
+            direccion_2 = direccion[punto_corte + 1:]
 
-        # Insertar la primera parte en la primera celda
-        rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
-        rango_celda_1.Cells(1, 1).Value = direccion_1
+            rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
+            rango_celda_1.Cells(1, 1).Value = direccion_1
 
-        # Insertar la segunda parte en la celda de abajo
-        rango_celda_2 = sheet.Cells(fila_inicial + 1, 6).MergeArea
-        rango_celda_2.Cells(1, 1).Value = direccion_2
-    else:
-        rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
-        rango_celda_1.Cells(1, 1).Value = direccion
+            rango_celda_2 = sheet.Cells(fila_inicial + 1, 6).MergeArea
+            rango_celda_2.Cells(1, 1).Value = direccion_2
+        else:
+            rango_celda_1 = sheet.Cells(fila_inicial, 6).MergeArea
+            rango_celda_1.Cells(1, 1).Value = direccion
+    except Exception as e:
+        logging.error('Error al insertar dirección en la hoja de Excel: %s', e, exc_info=True)
+        raise
 
 def crear_nota_entrega(datos_cliente):
-    print("Iniciando la creación de la nota de entrega...")
+    logging.info("Iniciando la creación de la nota de entrega...")
     try:
-        # Inicializar la COM de Python
         pythoncom.CoInitialize()
-        print("COM de Python inicializada correctamente.")
+        logging.info("COM de Python inicializada correctamente.")
 
-        # Rutas
-        ruta_plantilla = r"C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx"
-        ruta_guardar = r"C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0"
-        #ruta_guardar = r"C:\Users\arnaldo\Desktop"
-        print(f"Ruta de la plantilla: {ruta_plantilla}")
-        print(f"Ruta para guardar: {ruta_guardar}")
+        ruta_plantilla = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE\NDE._PLANTILLA\NDE._PLANTILLA.xlsx"
+        ruta_guardar = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE"
 
-        # Verificar que el archivo de plantilla existe
         if not os.path.exists(ruta_plantilla):
             raise FileNotFoundError(f"La plantilla no se encontró en la ruta: {ruta_plantilla}")
 
-        # Iniciar Excel
         try:
             excel = win32.DispatchEx('Excel.Application')
-            print("Excel iniciado correctamente.")
+            logging.info("Excel iniciado correctamente.")
         except Exception as e:
-            print(f"Error al iniciar Excel: {e}")
+            logging.error('Error al iniciar Excel: %s', e, exc_info=True)
             raise
 
-        # Verificar que Excel se inicializó correctamente
         if excel is None:
             raise RuntimeError("No se pudo iniciar Excel. Asegúrate de que esté instalado correctamente.")
 
-        # Abrir la plantilla
         try:
             workbook = excel.Workbooks.Open(ruta_plantilla)
-            print("Plantilla de Excel abierta correctamente.")
+            logging.info("Plantilla de Excel abierta correctamente.")
         except Exception as e:
-            print(f"Error al abrir la plantilla de Excel: {e}")
+            logging.error('Error al abrir la plantilla de Excel: %s', e, exc_info=True)
             raise
 
-        # Modificar la hoja activa con los datos del cliente
         try:
             sheet = workbook.ActiveSheet
-            print("Hoja activa seleccionada correctamente.")
+            logging.info("Hoja activa seleccionada correctamente.")
 
-            sheet.Cells(3, 9).Value = datos_cliente['razon_social']  # I3
-            sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']  # AC3
-            print("Datos del cliente (razón social y RIF/Cédula) insertados correctamente.")
+            sheet.Cells(3, 9).Value = datos_cliente['razon_social']
+            sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']
+            logging.info("Datos del cliente (razón social y RIF/Cédula) insertados correctamente.")
             
-            # Insertar la dirección con la función personalizada
-            insertar_direccion(sheet, datos_cliente['direccion'], 5)  # F5 es la fila inicial
-            print("Dirección del cliente insertada correctamente.")
+            insertar_direccion(sheet, datos_cliente['direccion'], 5)
+            logging.info("Dirección del cliente insertada correctamente.")
             
-            sheet.Cells(7, 29).Value = datos_cliente['telefono']  # AC7
-            print("Teléfono del cliente insertado correctamente.")
+            sheet.Cells(7, 29).Value = datos_cliente['telefono']
+            logging.info("Teléfono del cliente insertado correctamente.")
 
             if datos_cliente['ventas']:
                 primer_producto = datos_cliente['ventas'][0]
-                sheet.Cells(7, 7).Value = primer_producto['fecha']  # G7
-                sheet.Cells(1, 32).Value = primer_producto['numero_venta']  # AF1
-                print("Datos de la primera venta insertados correctamente.")
+                sheet.Cells(7, 7).Value = primer_producto['fecha']
+                sheet.Cells(1, 32).Value = primer_producto['numero_venta']
 
             fila_inicio = 12
             for producto in datos_cliente['ventas']:
-                sheet.Cells(fila_inicio, 1).Value = producto['cantidad']  # A
-                sheet.Cells(fila_inicio, 4).Value = producto['producto']  # D
-                sheet.Cells(fila_inicio, 25).Value = producto['precio']  # Y
+                sheet.Cells(fila_inicio, 1).Value = producto['cantidad']
+                sheet.Cells(fila_inicio, 4).Value = producto['producto']
+                sheet.Cells(fila_inicio, 25).Value = producto['precio']
                 fila_inicio += 1
-            print("Datos de todos los productos insertados correctamente.")
+            logging.info("Datos de todos los productos insertados correctamente.")
 
         except Exception as e:
-            print(f"Error al modificar la hoja activa: {e}")
+            logging.error('Error al modificar la hoja activa: %s', e, exc_info=True)
             raise
 
-        # Guardar el archivo
         try:
             nombre_archivo = f"NDE.{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
             ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
             workbook.SaveAs(ruta_completa)
             workbook.Close()
-            print(f"Archivo guardado correctamente en: {ruta_completa}")
+            logging.info("Archivo guardado correctamente en: %s", ruta_completa)
         except Exception as e:
-            print(f"Error al guardar el archivo: {e}")
+            logging.error('Error al guardar el archivo: %s', e, exc_info=True)
             raise
 
-        # Abrir el archivo guardado
         try:
             os.startfile(ruta_completa)
-            print(f"Archivo {nombre_archivo} abierto correctamente.")
+            logging.info("Archivo %s abierto correctamente.", nombre_archivo)
         except Exception as e:
-            print(f"Error al abrir el archivo guardado: {e}")
+            logging.error('Error al abrir el archivo guardado: %s', e, exc_info=True)
             raise
 
-        print("Proceso de creación de la nota de entrega completado.")
+        logging.info("Proceso de creación de la nota de entrega completado.")
         return ruta_completa
 
     except Exception as e:
-        print(f"Se encontró un error: {e}")
+        logging.error('Se encontró un error: %s', e, exc_info=True)
+        raise
