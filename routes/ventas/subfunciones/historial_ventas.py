@@ -163,7 +163,7 @@ def eliminar_producto(numero_venta, id):
 
 @historial_ventas_bp.route('/generar_nota_entrega', methods=['GET', 'POST'])
 def generar_nota_entrega():
-    print('llegaste correctamente a /generar_nota_entrega')
+
     data = request.json
     numero_venta= data.get('numero_venta')
     
@@ -202,9 +202,6 @@ def obtener_datos_cliente_y_venta(numero_venta):
     cursor.execute("SELECT numero_venta, producto, cantidad, precio, fecha FROM Ventas WHERE numero_venta = ?", (numero_venta,))
     productos = cursor.fetchall()  # Obtener todas las ventas asociadas
     
-    print(cliente)
-    print(productos)
-
     db.close()
         
     if productos:
@@ -256,47 +253,98 @@ def insertar_direccion(sheet, direccion, fila_inicial):
         rango_celda_1.Cells(1, 1).Value = direccion
 
 def crear_nota_entrega(datos_cliente):
-    pythoncom.CoInitialize()
+    print("Iniciando la creación de la nota de entrega...")
+    try:
+        # Inicializar la COM de Python
+        pythoncom.CoInitialize()
+        print("COM de Python inicializada correctamente.")
 
-    ruta_plantilla = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE\NDE._PLANTILLA\NDE._PLANTILLA.xlsx"
-    ruta_guardar = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE"
+        # Rutas
+        ruta_plantilla = r"C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx"
+        ruta_guardar = r"C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0"
+        #ruta_guardar = r"C:\Users\arnaldo\Desktop"
+        print(f"Ruta de la plantilla: {ruta_plantilla}")
+        print(f"Ruta para guardar: {ruta_guardar}")
 
-    # Iniciar Excel
-    excel = win32.Dispatch('Excel.Application')
-    excel.Visible = False
+        # Verificar que el archivo de plantilla existe
+        if not os.path.exists(ruta_plantilla):
+            raise FileNotFoundError(f"La plantilla no se encontró en la ruta: {ruta_plantilla}")
 
-    # Abrir la plantilla
-    workbook = excel.Workbooks.Open(ruta_plantilla)
+        # Iniciar Excel
+        try:
+            excel = win32.DispatchEx('Excel.Application')
+            print("Excel iniciado correctamente.")
+        except Exception as e:
+            print(f"Error al iniciar Excel: {e}")
+            raise
 
-    # Modificar la hoja activa con los datos del cliente
-    sheet = workbook.ActiveSheet
-    sheet.Cells(3, 9).Value = datos_cliente['razon_social']  # I3
-    sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']  # AC3
-    
-    # Insertar la dirección con la función personalizada
-    insertar_direccion(sheet, datos_cliente['direccion'], 5)  # F5 es la fila inicial
-    
-    sheet.Cells(7, 29).Value = datos_cliente['telefono']  # AC7
+        # Verificar que Excel se inicializó correctamente
+        if excel is None:
+            raise RuntimeError("No se pudo iniciar Excel. Asegúrate de que esté instalado correctamente.")
 
-    if datos_cliente['ventas']:
-        primer_producto = datos_cliente['ventas'][0]
-        sheet.Cells(7, 7).Value = primer_producto['fecha']  # G7
-        sheet.Cells(1, 32).Value = primer_producto['numero_venta']  # AF1
+        # Abrir la plantilla
+        try:
+            workbook = excel.Workbooks.Open(ruta_plantilla)
+            print("Plantilla de Excel abierta correctamente.")
+        except Exception as e:
+            print(f"Error al abrir la plantilla de Excel: {e}")
+            raise
 
-    fila_inicio = 12
-    for producto in datos_cliente['ventas']:
-        sheet.Cells(fila_inicio, 1).Value = producto['cantidad']  # A
-        sheet.Cells(fila_inicio, 4).Value = producto['producto']  # D
-        sheet.Cells(fila_inicio, 25).Value = producto['precio']  # Y
-        fila_inicio += 1
+        # Modificar la hoja activa con los datos del cliente
+        try:
+            sheet = workbook.ActiveSheet
+            print("Hoja activa seleccionada correctamente.")
 
-    # Guardar el archivo
-    nombre_archivo = f"NDE_{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
-    ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
-    workbook.SaveAs(ruta_completa)
-    workbook.Close()
+            sheet.Cells(3, 9).Value = datos_cliente['razon_social']  # I3
+            sheet.Cells(3, 29).Value = datos_cliente['rif_cedula']  # AC3
+            print("Datos del cliente (razón social y RIF/Cédula) insertados correctamente.")
+            
+            # Insertar la dirección con la función personalizada
+            insertar_direccion(sheet, datos_cliente['direccion'], 5)  # F5 es la fila inicial
+            print("Dirección del cliente insertada correctamente.")
+            
+            sheet.Cells(7, 29).Value = datos_cliente['telefono']  # AC7
+            print("Teléfono del cliente insertado correctamente.")
 
-    os.startfile(ruta_completa)
-    print('hola')
+            if datos_cliente['ventas']:
+                primer_producto = datos_cliente['ventas'][0]
+                sheet.Cells(7, 7).Value = primer_producto['fecha']  # G7
+                sheet.Cells(1, 32).Value = primer_producto['numero_venta']  # AF1
+                print("Datos de la primera venta insertados correctamente.")
 
-    return ruta_completa
+            fila_inicio = 12
+            for producto in datos_cliente['ventas']:
+                sheet.Cells(fila_inicio, 1).Value = producto['cantidad']  # A
+                sheet.Cells(fila_inicio, 4).Value = producto['producto']  # D
+                sheet.Cells(fila_inicio, 25).Value = producto['precio']  # Y
+                fila_inicio += 1
+            print("Datos de todos los productos insertados correctamente.")
+
+        except Exception as e:
+            print(f"Error al modificar la hoja activa: {e}")
+            raise
+
+        # Guardar el archivo
+        try:
+            nombre_archivo = f"NDE.{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
+            ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
+            workbook.SaveAs(ruta_completa)
+            workbook.Close()
+            print(f"Archivo guardado correctamente en: {ruta_completa}")
+        except Exception as e:
+            print(f"Error al guardar el archivo: {e}")
+            raise
+
+        # Abrir el archivo guardado
+        try:
+            os.startfile(ruta_completa)
+            print(f"Archivo {nombre_archivo} abierto correctamente.")
+        except Exception as e:
+            print(f"Error al abrir el archivo guardado: {e}")
+            raise
+
+        print("Proceso de creación de la nota de entrega completado.")
+        return ruta_completa
+
+    except Exception as e:
+        print(f"Se encontró un error: {e}")
