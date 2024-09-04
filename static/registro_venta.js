@@ -209,6 +209,11 @@ $(function() {
             // Mostrar alerta de éxito si la venta se registró correctamente
             if (data.includes('Venta procesada correctamente')) {
                 alert('¡Venta registrada correctamente!');
+                
+                // Limpia el carrito y los campos de entrada
+                vaciarCarrito();
+                $('#cliente').val('');
+                $('#numero_venta').val(function(i, val) { return +val + 1; });
             } else {
                 // Si el backend devuelve algo inesperado, mostrarlo también como alerta de error
                 alert('Ocurrió un error: ' + data);
@@ -222,9 +227,5 @@ $(function() {
             alert('Ocurrió un error al procesar la venta. Por favor, intenta de nuevo.');
         });        
 
-        crearFactura(fecha, numero_venta, cliente, monto_total);
-        vaciarCarrito();
-        $('#cliente').val('');
-        $('#numero_venta').val(function(i, val) { return +val + 1; });
     }
 });

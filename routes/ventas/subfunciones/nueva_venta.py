@@ -3,7 +3,9 @@ import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
 from datetime import datetime, timedelta
-import json 
+import logging
+
+logger = logging.getLogger(__name__)
 
 nueva_venta_bp = Blueprint('nueva_venta', __name__)
 
@@ -14,112 +16,150 @@ def nueva_venta():
 
 @nueva_venta_bp.route('/procesar_venta', methods=['POST'])
 def procesar_venta():
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    cliente = data.get('cliente')
-    numero_venta = data.get('numero_venta')
-    fecha = data.get('fecha')
-    productos = data.get('productos')
-    monto_total = data.get('monto_total')
+        cliente = data.get('cliente')
+        numero_venta = data.get('numero_venta')
+        fecha = data.get('fecha')
+        productos = data.get('productos')
+        monto_total = data.get('monto_total')
 
-    if not productos:
-        return 'Error: No se recibieron productos'
+        if not productos:
+            logger.error('No se recibieron productos')
+            return jsonify({'error': 'No se recibieron productos'}), 400
 
-    print(f'Datos recibidos: {productos}')
+        logger.info(f'Datos recibidos: cliente={cliente}, numero_venta={numero_venta}, fecha={fecha}, productos={productos}, monto_total={monto_total}')
 
-    if venta_existe(numero_venta):
-        return 'Error: El número de venta ya existe en la base de datos. No se puede registrar.'
+        if venta_existe(numero_venta):
+            logger.error('El número de venta ya existe en la base de datos. No se puede registrar.')
+            return jsonify({'error': 'El número de venta ya existe en la base de datos. No se puede registrar.'}), 400
 
-    db = get_db()
-    cursor = db.cursor()
+        db = get_db()
+        cursor = db.cursor()
 
-    for producto in productos:
+        for producto in productos:
+            try:
+                nombre_producto = producto['producto']
+                cantidad = float(producto['cantidad'].replace(',', '.'))  # Convertir coma a punto
+                precio = float(producto['precio'].replace(',', '.'))  # Asegurarse de que el precio sea correcto
+
+                logger.info(f'Procesando producto: nombre_producto={nombre_producto}, cantidad={cantidad}, precio={precio}')
+
+                cursor.execute('SELECT costo FROM Inventario WHERE producto = ?', (nombre_producto,))
+                result = cursor.fetchone()
+
+                if result:
+                    costo = result['costo']
+                    logger.info(f'Costo obtenido para {nombre_producto}: {costo}')
+                else:
+                    logger.error(f'El producto {nombre_producto} no existe en el inventario')
+                    return jsonify({'error': f'El producto {nombre_producto} no existe en el inventario'}), 400
+
+                cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                               (numero_venta, cliente, nombre_producto, cantidad, precio, costo, fecha))
+                logger.info(f'Producto {nombre_producto} insertado correctamente en la tabla Ventas')
+
+                if not actualizar_stock(nombre_producto, cantidad):
+                    logger.error(f'No se pudo actualizar el stock para el producto {nombre_producto}')
+                    return jsonify({'error': f'No se pudo actualizar el stock para el producto {nombre_producto}'}), 400
+
+            except Exception as e:
+                logger.error(f'Error al procesar el producto {nombre_producto}: {e}')
+                return jsonify({'error': f'Error al procesar el producto {nombre_producto}: {e}'}), 500
+
+        crear_factura(fecha, numero_venta, cliente, monto_total)    
+        actualizar_deuda(numero_venta, cliente)
+
+        db.commit()
+        logger.info(f'Venta procesada correctamente para el número de venta {numero_venta}')
+        return jsonify({'message': f'Venta procesada correctamente para el número de venta {numero_venta}'}), 200
+
+    except Exception as e:
+        logger.error(f'Error al procesar la venta: {e}')
+        return jsonify({'error': 'Error al procesar la venta'}), 500
+
+    finally:
         try:
-            nombre_producto = producto['producto']
-            cantidad = float(producto['cantidad'].replace(',', '.'))  # Convertir coma a punto
-            precio = float(producto['precio'].replace(',', '.'))  # Asegurarse de que el precio sea correcto
-
-            print(f'Procesando producto: {nombre_producto}, Cantidad: {cantidad}, Precio: {precio}')
-
-            cursor.execute('SELECT costo FROM Inventario WHERE producto = ?', (nombre_producto,))
-            result = cursor.fetchone()
-
-            if result:
-                costo = result['costo']
-                print(f'Costo obtenido para {nombre_producto}: {costo}')
-            else:
-                print(f"Error: El producto {nombre_producto} no existe en el inventario")
-                return f'Error: El producto {nombre_producto} no existe en el inventario'
-
-            cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                           (numero_venta, cliente, nombre_producto, cantidad, precio, costo, fecha))
-            print(f'Producto {nombre_producto} insertado correctamente en la tabla Ventas')
-
-            if not actualizar_stock(nombre_producto, cantidad):
-                print(f"Error: No se pudo actualizar el stock para el producto {nombre_producto}")
-                return f'Error: No se pudo actualizar el stock para el producto {nombre_producto}'
-
-        except Exception as e:
-            print(f"Error al procesar el producto {nombre_producto}: {e}")
-            return f"Error al procesar el producto {nombre_producto}: {e}"
+            db.close()
+        except:
+            logger.warning('Error al cerrar la conexión a la base de datos')
         
-    crear_factura(fecha, numero_venta, cliente, monto_total)    
-    actualizar_deuda(numero_venta)
-
-    db.commit()
-    db.close()
-
-    print(f'Venta procesada correctamente para el número de venta {numero_venta}')
-    return f'Venta procesada correctamente para el número de venta {numero_venta}'
-
-def actualizar_deuda(numero_venta):
-
-    db = get_db()
-    cursor = db.cursor()
-
-    # Verificar si existe una factura para ese numero_venta
-    cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
-    factura = cursor.fetchone()
-
-    if factura:
-        cliente_id = factura[0]
-        monto_total = factura[1]
-
-        # Actualizar la tabla Deudas
-        cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
-        deuda_actual = cursor.fetchone()['monto_total']
-
-        nuevo_monto_total = deuda_actual + float(monto_total)
-
-        cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
-
-    else:
-        print('Factura no encontrada para el número de venta:', numero_venta)
-
-    return "Deuda actualizada correctamente"
-
 def crear_factura(fecha, numero_venta, cliente, monto_total):
+    try:
+        db = get_db()
+        cursor = db.cursor()
 
-    db = get_db()
-    cursor = db.cursor()
+        # Obtener el ID del cliente
+        cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (cliente,))
+        cliente_id_row = cursor.fetchone()
 
-    # Obtener el ID del cliente
-    cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (cliente,))
-    cliente_id = cursor.fetchone()['id']
+        if cliente_id_row:
+            cliente_id = cliente_id_row['id']
+        else:
+            logger.error(f'Cliente no encontrado: {cliente}')
+            return 'Error: Cliente no encontrado'
 
-    # Crear la factura solo si no existe para esa venta
-    cursor.execute('SELECT id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
-    factura = cursor.fetchone()
+        # Crear la factura solo si no existe para esa venta
+        cursor.execute('SELECT id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+        factura = cursor.fetchone()
 
-    if not factura:
-        # Insertar datos en la tabla Facturas
-        fecha_emision = datetime.strptime(fecha, '%Y-%m-%d')
-        fecha_vencimiento = fecha_emision + timedelta(days=15)
-        
-        cursor.execute('INSERT INTO Facturas (numero_venta, cliente_id, monto_total, fecha_emision, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)',
-                       (numero_venta, cliente_id, monto_total, fecha_emision.strftime('%Y-%m-%d'), fecha_vencimiento.strftime('%Y-%m-%d')))
+        if not factura:
+            # Insertar datos en la tabla Facturas
+            fecha_emision = datetime.strptime(fecha, '%Y-%m-%d')
+            fecha_vencimiento = fecha_emision + timedelta(days=15)
 
-    return 'Factura creada correctamente'
+            cursor.execute('INSERT INTO Facturas (numero_venta, cliente_id, monto_total, fecha_emision, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)',
+                           (numero_venta, cliente_id, monto_total, fecha_emision.strftime('%Y-%m-%d'), fecha_vencimiento.strftime('%Y-%m-%d')))
+            db.commit()
+
+            logger.info(f'Factura creada correctamente para el número de venta {numero_venta}')
+        else:
+            logger.info(f'La factura con el número de venta {numero_venta} ya existe')
+
+        return 'Factura creada correctamente'
+
+    except Exception as e:
+        logger.error(f'Error al crear la factura para el número de venta {numero_venta}: {e}')
+        return f'Error al crear la factura: {e}'
+
+def actualizar_deuda(numero_venta, cliente):
+    try:
+        db = get_db()
+        cursor = db.cursor()
+
+        # Verificar si existe una factura para ese numero_venta
+        cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+        factura = cursor.fetchone()
+
+        if factura:
+            cliente_id = factura[0]
+            monto_total = factura[1]
+
+            # Actualizar la tabla Deudas
+            cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+            deuda_actual = cursor.fetchone()
+
+            if deuda_actual:
+                deuda_actual = deuda_actual['monto_total']
+            else:
+                deuda_actual = 0.0  # Si no hay deuda previa, inicializar en 0
+
+            nuevo_monto_total = deuda_actual + float(monto_total)
+
+            cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
+
+            logger.info(f'Deuda actualizada para cliented {cliente}. Nuevo monto_total={nuevo_monto_total}')
+        else:
+            logger.error(f'Factura no encontrada para el número de venta: {numero_venta}')
+            return "Error: Factura no encontrada"
+
+        db.commit()
+        return "Deuda actualizada correctamente"
+
+    except Exception as e:
+        logger.error(f'Error al actualizar la deuda para el número de venta {numero_venta}: {e}')
+        return f"Error al actualizar la deuda: {e}"
 
 # Ruta para obtener datos de autocompletado de clientes
 @nueva_venta_bp.route('/autocompletar_clientes', methods=['GET'])
