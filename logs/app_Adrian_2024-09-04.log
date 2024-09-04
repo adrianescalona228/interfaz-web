@@ -975,3 +975,154 @@ ValueError: too many values to unpack (expected 2)
 2024-09-04 11:18:24,603 - INFO - Logging configurado correctamente
 2024-09-04 11:18:24,619 - WARNING -  * Debugger is active!
 2024-09-04 11:18:24,622 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:19:11,392 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:19:11,489 - INFO -  * Restarting with stat
+2024-09-04 11:19:12,011 - INFO - Logging configurado correctamente
+2024-09-04 11:19:12,027 - WARNING -  * Debugger is active!
+2024-09-04 11:19:12,035 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:20:33,299 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:20:33,390 - INFO -  * Restarting with stat
+2024-09-04 11:20:33,874 - INFO - Logging configurado correctamente
+2024-09-04 11:20:33,890 - WARNING -  * Debugger is active!
+2024-09-04 11:20:33,893 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:21:05,295 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:21:05,420 - INFO -  * Restarting with stat
+2024-09-04 11:21:06,200 - INFO - Logging configurado correctamente
+2024-09-04 11:21:06,217 - WARNING -  * Debugger is active!
+2024-09-04 11:21:06,222 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:21:22,793 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-04 11:21:22,808 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "GET /static/registro_venta.js HTTP/1.1" 200 -
+2024-09-04 11:21:22,809 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,822 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,822 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,822 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,834 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,835 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,835 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,835 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,842 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,842 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,851 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,851 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,851 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:21:22,867 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:22] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-04 11:21:29,758 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:29] "GET /nueva_venta/autocompletar_clientes?term=alfrem HTTP/1.1" 200 -
+2024-09-04 11:21:32,907 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:32] "GET /nueva_venta/autocompletar_productos?term=inco HTTP/1.1" 200 -
+2024-09-04 11:21:33,395 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:33] "GET /nueva_venta/autocompletar_productos?term=incol HTTP/1.1" 200 -
+2024-09-04 11:21:34,577 - INFO - Datos recibidos: [{'producto': 'BANDA INCOLBEST 5926 DYNA DEL - HINO 300 20193', 'cantidad': '1', 'precio': '30.00'}]
+2024-09-04 11:21:34,578 - INFO - Procesando producto: BANDA INCOLBEST 5926 DYNA DEL - HINO 300 20193, Cantidad: 1.0, Precio: 30.0
+2024-09-04 11:21:34,579 - INFO - Costo obtenido para BANDA INCOLBEST 5926 DYNA DEL - HINO 300 20193: 22.16
+2024-09-04 11:21:34,588 - INFO - Producto BANDA INCOLBEST 5926 DYNA DEL - HINO 300 20193 insertado correctamente en la tabla Ventas
+2024-09-04 11:21:34,609 - INFO - 127.0.0.1 - - [04/Sep/2024 11:21:34] "[35m[1mPOST /nueva_venta/procesar_venta HTTP/1.1[0m" 500 -
+2024-09-04 11:21:34,610 - ERROR - Traceback (most recent call last):
+2024-09-04 11:21:34,610 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+2024-09-04 11:21:34,611 - ERROR - return self.wsgi_app(environ, start_response)
+2024-09-04 11:21:34,611 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,612 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+2024-09-04 11:21:34,613 - ERROR - response = self.handle_exception(e)
+2024-09-04 11:21:34,614 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,614 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+2024-09-04 11:21:34,616 - ERROR - response = self.full_dispatch_request()
+2024-09-04 11:21:34,616 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,617 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+2024-09-04 11:21:34,617 - ERROR - rv = self.handle_user_exception(e)
+2024-09-04 11:21:34,618 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,618 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+2024-09-04 11:21:34,618 - ERROR - rv = self.dispatch_request()
+2024-09-04 11:21:34,619 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,619 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+2024-09-04 11:21:34,620 - ERROR - return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+2024-09-04 11:21:34,620 - ERROR - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-09-04 11:21:34,620 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\routes\ventas\subfunciones\nueva_venta.py", line 69, in procesar_venta
+2024-09-04 11:21:34,620 - ERROR - actualizar_deuda(numero_venta)
+2024-09-04 11:21:34,621 - ERROR - File "C:\Users\adria\Documents\programacion\interfaz-web\routes\ventas\subfunciones\nueva_venta.py", line 77, in actualizar_deuda
+2024-09-04 11:21:34,621 - ERROR - cursor = db.cursor()
+2024-09-04 11:21:34,621 - ERROR - ^^^^^^^^^^^
+2024-09-04 11:21:34,621 - ERROR - sqlite3.ProgrammingError: Cannot operate on a closed database.
+2024-09-04 11:23:29,458 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:23:29,557 - INFO -  * Restarting with stat
+2024-09-04 11:23:30,140 - INFO - Logging configurado correctamente
+2024-09-04 11:23:30,162 - WARNING -  * Debugger is active!
+2024-09-04 11:23:30,167 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:23:40,513 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:23:40,607 - INFO -  * Restarting with stat
+2024-09-04 11:23:41,176 - INFO - Logging configurado correctamente
+2024-09-04 11:23:41,195 - WARNING -  * Debugger is active!
+2024-09-04 11:23:41,200 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:23:43,274 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:23:43,328 - INFO -  * Restarting with stat
+2024-09-04 11:23:43,828 - INFO - Logging configurado correctamente
+2024-09-04 11:23:43,842 - WARNING -  * Debugger is active!
+2024-09-04 11:23:43,846 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:23:48,958 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:23:49,021 - INFO -  * Restarting with stat
+2024-09-04 11:23:49,567 - INFO - Logging configurado correctamente
+2024-09-04 11:23:49,589 - WARNING -  * Debugger is active!
+2024-09-04 11:23:49,593 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:23:53,105 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-04 11:23:53,117 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,120 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,134 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,138 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,141 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,142 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,143 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,148 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,151 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,153 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,156 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,156 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,158 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,159 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:23:53,167 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:53] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-04 11:23:55,613 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:55] "GET /nueva_venta/autocompletar_clientes?term=alfrem HTTP/1.1" 200 -
+2024-09-04 11:23:58,306 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:58] "GET /nueva_venta/autocompletar_productos?term=incol HTTP/1.1" 200 -
+2024-09-04 11:23:59,549 - INFO - Datos recibidos: [{'producto': 'BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101', 'cantidad': '1', 'precio': '29.00'}]
+2024-09-04 11:23:59,549 - INFO - Procesando producto: BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101, Cantidad: 1.0, Precio: 29.0
+2024-09-04 11:23:59,550 - INFO - Costo obtenido para BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101: 23.95
+2024-09-04 11:23:59,553 - INFO - Producto BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101 insertado correctamente en la tabla Ventas
+2024-09-04 11:23:59,558 - INFO - Factura no encontrada para el número de venta:
+2024-09-04 11:23:59,558 - INFO - 3038
+2024-09-04 11:23:59,575 - INFO - Venta procesada correctamente para el número de venta 3038
+2024-09-04 11:23:59,576 - INFO - 127.0.0.1 - - [04/Sep/2024 11:23:59] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-04 11:26:12,584 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:26:12,681 - INFO -  * Restarting with stat
+2024-09-04 11:26:13,203 - INFO - Logging configurado correctamente
+2024-09-04 11:26:13,227 - WARNING -  * Debugger is active!
+2024-09-04 11:26:13,232 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:26:14,289 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:26:14,349 - INFO -  * Restarting with stat
+2024-09-04 11:26:14,855 - INFO - Logging configurado correctamente
+2024-09-04 11:26:14,871 - WARNING -  * Debugger is active!
+2024-09-04 11:26:14,874 - INFO -  * Debugger PIN: 120-269-170
+2024-09-04 11:26:17,553 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-04 11:26:17,568 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,571 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,586 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,590 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,592 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,593 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,594 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,596 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,600 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,600 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,604 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,605 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,606 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,608 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-04 11:26:17,618 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:17] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-04 11:26:19,591 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:19] "GET /nueva_venta/autocompletar_clientes?term=alfrem HTTP/1.1" 200 -
+2024-09-04 11:26:22,121 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:22] "GET /nueva_venta/autocompletar_productos?term=incol HTTP/1.1" 200 -
+2024-09-04 11:26:23,258 - INFO - Datos recibidos: [{'producto': 'BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101', 'cantidad': '1', 'precio': '29.00'}]
+2024-09-04 11:26:23,263 - INFO - Procesando producto: BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101, Cantidad: 1.0, Precio: 29.0
+2024-09-04 11:26:23,264 - INFO - Costo obtenido para BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101: 23.95
+2024-09-04 11:26:23,272 - INFO - Producto BANDA INCOLBEST 1482 NPR LIGA DEL/TRAS 20101 insertado correctamente en la tabla Ventas
+2024-09-04 11:26:23,283 - INFO - 3
+2024-09-04 11:26:23,283 - INFO - 29.0
+2024-09-04 11:26:23,288 - INFO - Venta procesada correctamente para el número de venta 3039
+2024-09-04 11:26:23,288 - INFO - 127.0.0.1 - - [04/Sep/2024 11:26:23] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-04 11:27:04,223 - INFO -  * Detected change in 'C:\\Users\\adria\\Documents\\programacion\\interfaz-web\\routes\\ventas\\subfunciones\\nueva_venta.py', reloading
+2024-09-04 11:27:04,330 - INFO -  * Restarting with stat
+2024-09-04 11:27:04,864 - INFO - Logging configurado correctamente
+2024-09-04 11:27:04,881 - WARNING -  * Debugger is active!
+2024-09-04 11:27:04,885 - INFO -  * Debugger PIN: 120-269-170

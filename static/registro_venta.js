@@ -198,7 +198,8 @@ $(function() {
                 cliente: cliente,
                 numero_venta: numero_venta,
                 fecha: fecha,
-                productos: productos  // Envía productos como un array JSON
+                productos: productos,  // Envía productos como un array JSON
+                monto_total: monto_total
             })
         })
         .then(response => response.text())  // Puedes ajustar la respuesta según lo que devuelva el backend
@@ -226,45 +227,4 @@ $(function() {
         $('#cliente').val('');
         $('#numero_venta').val(function(i, val) { return +val + 1; });
     }
-
-    function crearFactura(fecha, numero_venta, cliente, monto_total) {
-        fetch('/nueva_venta/crear_factura', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                fecha: fecha,
-                numero_venta: numero_venta,
-                cliente: cliente,
-                monto_total: monto_total
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
-            // Actualizar deuda después de crear la factura
-            actualizarDeuda(numero_venta);
-        })
-        .catch(error => {
-            console.error('Error al crear la factura:', error);
-        });
-    }
-
-    function actualizarDeuda(numero_venta) {
-        return fetch('/nueva_venta/actualizar_deuda', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ numero_venta: numero_venta })
-        })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Error al actualizar la deuda:', error);
-        });
-    }    
 });

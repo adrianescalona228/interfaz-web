@@ -20,6 +20,7 @@ def procesar_venta():
     numero_venta = data.get('numero_venta')
     fecha = data.get('fecha')
     productos = data.get('productos')
+    monto_total = data.get('monto_total')
 
     if not productos:
         return 'Error: No se recibieron productos'
@@ -61,16 +62,17 @@ def procesar_venta():
         except Exception as e:
             print(f"Error al procesar el producto {nombre_producto}: {e}")
             return f"Error al procesar el producto {nombre_producto}: {e}"
+        
+    crear_factura(fecha, numero_venta, cliente, monto_total)    
+    actualizar_deuda(numero_venta)
 
     db.commit()
     db.close()
 
+    print(f'Venta procesada correctamente para el número de venta {numero_venta}')
     return f'Venta procesada correctamente para el número de venta {numero_venta}'
 
-@nueva_venta_bp.route('/actualizar_deuda', methods=['POST'])
-def actualizar_deuda():
-    data = request.json
-    numero_venta = data['numero_venta']
+def actualizar_deuda(numero_venta):
 
     db = get_db()
     cursor = db.cursor()
@@ -83,33 +85,21 @@ def actualizar_deuda():
         cliente_id = factura[0]
         monto_total = factura[1]
 
-        print(cliente_id, monto_total)
-
         # Actualizar la tabla Deudas
         cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
         deuda_actual = cursor.fetchone()['monto_total']
-        # print(deuda_actual)
 
         nuevo_monto_total = deuda_actual + float(monto_total)
-        # print(nuevo_monto_total)
+
         cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
 
-        db.commit()
     else:
         print('Factura no encontrada para el número de venta:', numero_venta)
 
-    db.close()
-
     return "Deuda actualizada correctamente"
 
-@nueva_venta_bp.route('/crear_factura', methods=['POST'])
-def crear_factura():
-    data = request.json
-    fecha = data['fecha']
-    numero_venta = data['numero_venta']
-    cliente = data['cliente']
-    monto_total = data['monto_total']
-    
+def crear_factura(fecha, numero_venta, cliente, monto_total):
+
     db = get_db()
     cursor = db.cursor()
 
@@ -128,28 +118,8 @@ def crear_factura():
         
         cursor.execute('INSERT INTO Facturas (numero_venta, cliente_id, monto_total, fecha_emision, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)',
                        (numero_venta, cliente_id, monto_total, fecha_emision.strftime('%Y-%m-%d'), fecha_vencimiento.strftime('%Y-%m-%d')))
-        db.commit()  # Asegura que los cambios se guarden en la base de datos
-
-    db.close()  # Cierra la conexión a la base de datos
 
     return 'Factura creada correctamente'
-
-@nueva_venta_bp.route('/reset', methods=['POST'])
-def reset():
-    db = get_db()
-    cursor = db.cursor()
-
-    monto = 15
-    id = 1
-    cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto, id))
-
-    # numero_venta = 1
-    # cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
-
-    db.commit()
-    db.close()
-
-    return f'id del reset: {id}'
 
 # Ruta para obtener datos de autocompletado de clientes
 @nueva_venta_bp.route('/autocompletar_clientes', methods=['GET'])
