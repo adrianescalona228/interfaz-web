@@ -84,27 +84,32 @@ document.getElementById('mostrar_facturas_vencidas').addEventListener('click', f
 document.querySelectorAll('.eliminar-venta').forEach(button => {
     button.addEventListener('click', function() {
         const ventaId = this.getAttribute('data-venta-id');
-        eliminarVenta(ventaId);
+        const nombreCliente = this.closest('section').querySelector('tbody td:nth-child(2)').textContent.trim();
+        eliminarVenta(ventaId, nombreCliente);
     });
 });
 
-function eliminarVenta(ventaId) {
+function eliminarVenta(ventaId, nombreCliente) {
     // Aquí puedes implementar la lógica para enviar la solicitud al backend
     fetch(`/historial_ventas/eliminar_venta/${ventaId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: '_method=DELETE'
+        body: new URLSearchParams({
+            '_method': 'DELETE',
+            'cliente': nombreCliente
+        })
     })
     .then(response => {
         if (response.ok) {
-            // Opcional: puedes actualizar la página o eliminar el elemento de la lista
-
+            // Mostrar alerta con el número de venta eliminado
+            alert(`Venta #${ventaId} eliminada correctamente.`);
             // Aquí puedes quitar la venta del DOM o hacer un reload
             location.reload();
         } else {
-
+            // Manejo de errores
+            console.error('Error al eliminar la venta');
         }
     });
 }

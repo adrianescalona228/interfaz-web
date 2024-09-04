@@ -33,11 +33,11 @@
                         </thead>
                         <tbody>
                             <td>{{ venta.numero_venta }}</td>
-                            <td>{{ venta.cliente }}</td>
+                            <td class="cliente">{{ venta.cliente }}</td> <!-- Cambié id por class -->
                             <td>{{ venta.fecha }}</td>
                             <td style="text-transform: uppercase;">{{ venta.estado }}</td>
                             <td style="display: none;">{{ venta.fecha_vencimiento }}</td>
-                        </tbody>
+                        </tbody>                        
                     </table>
                     <table class="info-productos">
                         <thead>

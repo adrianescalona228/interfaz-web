@@ -78,89 +78,130 @@ def historial_ventas():
 
 @historial_ventas_bp.route('/eliminar_venta/<int:numero_venta>', methods=['POST'])
 def eliminar_venta(numero_venta):
+    cliente = request.form.get('cliente')
+    logger = logging.getLogger(__name__)  # Obtén el logger para esta ruta
     db = get_db()
     cursor = db.cursor()
     
-    # Verificar si la venta existe
-    cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ?', (numero_venta,))
-    venta = cursor.fetchone()
+    try:
+        logger.info(f'Intentando eliminar la venta con número {numero_venta}')
+        
+        # Verificar si la venta existe
+        cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ?', (numero_venta,))
+        venta = cursor.fetchone()
 
-    if venta:
-        # Seleccionar la factura asociada a la venta
-        cursor.execute('SELECT monto_total, cliente_id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
-        factura = cursor.fetchone()
+        if venta:
+            # Seleccionar la factura asociada a la venta
+            cursor.execute('SELECT monto_total, cliente_id FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+            factura = cursor.fetchone()
 
-        if factura:
-            monto_factura = factura[0]
-            cliente_id = factura[1]
+            if factura:
+                monto_factura = factura[0]
+                cliente_id = factura[1]
 
-            # Eliminar la venta
-            cursor.execute('DELETE FROM Ventas WHERE numero_venta = ?', (numero_venta,))
+                try:
+                    # Eliminar la venta
+                    cursor.execute('DELETE FROM Ventas WHERE numero_venta = ?', (numero_venta,))
+                    logger.info(f'Venta con número {numero_venta} eliminada.')
 
-            # Eliminar la factura
-            cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+                    # Eliminar la factura
+                    cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+                    logger.info(f'Factura asociada a la venta {numero_venta} eliminada.')
 
-            # Actualizar la deuda del cliente
-            cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
-            deuda_actual = cursor.fetchone()
+                    # Actualizar la deuda del cliente
+                    cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+                    deuda_actual = cursor.fetchone()
 
-            if deuda_actual:
-                monto_total_deuda = deuda_actual[0]
-                monto_final_deuda = monto_total_deuda - monto_factura
+                    if deuda_actual:
+                        monto_total_deuda = deuda_actual[0]
+                        monto_final_deuda = monto_total_deuda - monto_factura
 
-                # Solo actualizar si la deuda es positiva
-                if monto_final_deuda >= 0:
-                    cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
-                else:
-                    cursor.execute('DELETE FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+                        if monto_final_deuda >= 0:
+                            cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
+                            logger.info(f'Deuda del cliente {cliente} actualizada a {monto_final_deuda}.')
+                        else:
+                            cursor.execute('DELETE FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+                            logger.info(f'Deuda del cliente {cliente} eliminada debido a saldo negativo.')
+                    else:
+                        logger.warning(f'No se encontró deuda para el cliente {cliente_id}.')
+                    
+                except Exception as e:
+                    db.rollback()  # Deshacer cualquier cambio en caso de error
+                    logger.error(f'Error al eliminar la venta o actualizar la deuda: {e}')
+                    flash('Ocurrió un error al eliminar la venta o actualizar la deuda', 'error')
+                    return '', 500
+
+                db.commit()
+                flash('Venta y factura eliminadas correctamente', 'success')
+            else:
+                flash('Factura no encontrada para la venta', 'error')
+                logger.error(f'Factura no encontrada para la venta {numero_venta}.')
         else:
-            flash('Factura no encontrada para la venta', 'error')
+            flash('La venta no existe', 'error')
+            logger.error(f'La venta con número {numero_venta} no existe.')
 
-        db.commit()
-        flash('Venta y factura eliminadas correctamente', 'success')
-    else:
-        flash('La venta no existe', 'error')
+    except Exception as e:
+        logger.error(f'Ocurrió un error general al intentar eliminar la venta: {e}')
+        flash('Ocurrió un error al eliminar la venta', 'error')
+    
+    finally:
+        db.close()
 
-    db.close()
     return '', 200
 
-# Ruta para eliminar un producto de una venta específica
 @historial_ventas_bp.route('/eliminar_producto/<int:numero_venta>/<int:id>', methods=['POST'])
 def eliminar_producto(numero_venta, id):
-    print(numero_venta,id)
-    db = get_db()
-    cursor = db.cursor()
+    try:
+        logger.info(f'Intentando eliminar producto con id {id} de la venta {numero_venta}')
+        
+        db = get_db()
+        cursor = db.cursor()
 
-    # Verificar si el producto existe dentro de la venta
-    cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
-    producto = cursor.fetchone()
-    precio = producto[5]
+        # Verificar si el producto existe dentro de la venta
+        cursor.execute('SELECT * FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
+        producto = cursor.fetchone()
 
-    cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
-    factura = cursor.fetchone()
-    monto_total_factura = factura[1]
-    cliente_id = int(factura[0])
-    monto_final_factura = monto_total_factura - precio
+        if producto:
+            precio = producto[5]
 
-    cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
-    monto_total_deuda = cursor.fetchone()[0]
-    monto_final_deuda = monto_total_deuda - precio
+            # Obtener datos de la factura
+            cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+            factura = cursor.fetchone()
 
-    if producto:
-        cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
-        cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
-        if monto_final_factura != 0:
-            cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
-        elif monto_final_factura == 0:
-            cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))    
-        db.commit()
-        print('si llegaste aqui, tas fino mirei')
-        flash('Producto eliminado correctamente', 'success')
-    else:
-        flash('El producto no existe', 'error')
-        print('si llegaste hasta aqui, no tas fino mirei')
+            if factura:
+                monto_total_factura = factura[1]
+                cliente_id = int(factura[0])
+                monto_final_factura = monto_total_factura - precio
 
-    return '', 200  
+                # Obtener datos de la deuda
+                cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
+                monto_total_deuda = cursor.fetchone()[0]
+                monto_final_deuda = monto_total_deuda - precio
+
+                # Eliminar el producto de la venta y actualizar factura y deuda
+                cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
+                cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
+                
+                if monto_final_factura != 0:
+                    cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
+                else:
+                    cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+                
+                db.commit()
+                logger.info(f'Producto con id {id} eliminado de la venta {numero_venta}.')
+                flash('Producto eliminado correctamente', 'success')
+            else:
+                logger.error(f'Factura no encontrada para el número de venta {numero_venta}.')
+                flash('Factura no encontrada', 'error')
+        else:
+            logger.error(f'Producto con id {id} no encontrado en la venta {numero_venta}.')
+            flash('El producto no existe', 'error')
+    
+    except Exception as e:
+        logger.error(f'Ocurrió un error al eliminar el producto: {e}')
+        flash('Ocurrió un error al eliminar el producto', 'error')
+    
+    return '', 200
 
 @historial_ventas_bp.route('/generar_nota_entrega', methods=['POST'])
 def generar_nota_entrega():
