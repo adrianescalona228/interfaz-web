@@ -76,9 +76,6 @@ $(function() {
         $('#procesar_venta').click(function(event) {
             event.preventDefault();
             procesarVenta();
-            vaciarCarrito();
-            $('#cliente').val('');
-            $('#numero_venta').val(function(i, val) { return +val + 1; });
         });
 
         $('.reset_button_id').click(function() {
@@ -207,13 +204,27 @@ $(function() {
         .then(response => response.text())  // Puedes ajustar la respuesta según lo que devuelva el backend
         .then(data => {
             console.log('Success:', data);
+            
+            // Mostrar alerta de éxito si la venta se registró correctamente
+            if (data.includes('Venta procesada correctamente')) {
+                alert('¡Venta registrada correctamente!');
+            } else {
+                // Si el backend devuelve algo inesperado, mostrarlo también como alerta de error
+                alert('Ocurrió un error: ' + data);
+            }
+        
             // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito
         })
         .catch(error => {
             console.error('Error:', error);
-        });
+            // Mostrar alerta de error en caso de que haya un problema con la solicitud
+            alert('Ocurrió un error al procesar la venta. Por favor, intenta de nuevo.');
+        });        
 
         crearFactura(fecha, numero_venta, cliente, monto_total);
+        vaciarCarrito();
+        $('#cliente').val('');
+        $('#numero_venta').val(function(i, val) { return +val + 1; });
     }
 
     function crearFactura(fecha, numero_venta, cliente, monto_total) {

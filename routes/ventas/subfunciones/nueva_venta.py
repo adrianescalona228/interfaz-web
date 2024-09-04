@@ -14,52 +14,53 @@ def nueva_venta():
 
 @nueva_venta_bp.route('/procesar_venta', methods=['POST'])
 def procesar_venta():
-    data = request.get_json()  # Cambia a request.get_json() para recibir el JSON
+    data = request.get_json()
 
-    cliente = data.get('cliente')  # Extrae los datos del JSON recibido
+    cliente = data.get('cliente')
     numero_venta = data.get('numero_venta')
     fecha = data.get('fecha')
-    productos = data.get('productos')  # Ya no necesitas decodificar JSON aquí
+    productos = data.get('productos')
 
-    # Verifica si productos es None
     if not productos:
         return 'Error: No se recibieron productos'
 
-    print(f'Datos recibidos: {productos}')  # Verificar los datos recibidos
+    print(f'Datos recibidos: {productos}')
 
-    # Validar si el número de venta ya existe en la base de datos
     if venta_existe(numero_venta):
         return 'Error: El número de venta ya existe en la base de datos. No se puede registrar.'
 
-    # Lógica para insertar la venta y productos
     db = get_db()
     cursor = db.cursor()
 
     for producto in productos:
-        print('dentro del bucle for')
-        nombre_producto = producto['producto']
-        cantidad = float(producto['cantidad'])
-        precio = float(producto['precio'])
+        try:
+            nombre_producto = producto['producto']
+            cantidad = float(producto['cantidad'].replace(',', '.'))  # Convertir coma a punto
+            precio = float(producto['precio'].replace(',', '.'))  # Asegurarse de que el precio sea correcto
 
-        print(f'Producto recibido: {nombre_producto}, {cantidad}, {precio}')
-        
-        # Obtener costo del producto desde el inventario
-        cursor.execute('SELECT costo FROM Inventario WHERE producto = ?', (nombre_producto,))
-        result = cursor.fetchone()
-        
-        if result:
-            costo = result['costo']
-        else:
-            # Manejo de errores si el producto no existe en el inventario
-            return f'Error: El producto {nombre_producto} no existe en el inventario'
-        
-        # Insertar datos en la tabla Ventas
-        cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                    (numero_venta, cliente, nombre_producto, cantidad, precio, costo, fecha))
-        
-        # Actualizar stock después de registrar la venta
-        if not actualizar_stock(nombre_producto, cantidad):
-            return f'Error: No se pudo actualizar el stock para el producto {nombre_producto}'
+            print(f'Procesando producto: {nombre_producto}, Cantidad: {cantidad}, Precio: {precio}')
+
+            cursor.execute('SELECT costo FROM Inventario WHERE producto = ?', (nombre_producto,))
+            result = cursor.fetchone()
+
+            if result:
+                costo = result['costo']
+                print(f'Costo obtenido para {nombre_producto}: {costo}')
+            else:
+                print(f"Error: El producto {nombre_producto} no existe en el inventario")
+                return f'Error: El producto {nombre_producto} no existe en el inventario'
+
+            cursor.execute('INSERT INTO Ventas (numero_venta, cliente, producto, cantidad, precio, costo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                           (numero_venta, cliente, nombre_producto, cantidad, precio, costo, fecha))
+            print(f'Producto {nombre_producto} insertado correctamente en la tabla Ventas')
+
+            if not actualizar_stock(nombre_producto, cantidad):
+                print(f"Error: No se pudo actualizar el stock para el producto {nombre_producto}")
+                return f'Error: No se pudo actualizar el stock para el producto {nombre_producto}'
+
+        except Exception as e:
+            print(f"Error al procesar el producto {nombre_producto}: {e}")
+            return f"Error al procesar el producto {nombre_producto}: {e}"
 
     db.commit()
     db.close()

@@ -14,6 +14,9 @@
         <h1>Lista de clientes</h1>
     </header>
     <main>
+        <div>
+            <input type="text" id="buscador-cliente" placeholder="Buscar producto..."> 
+        </div>
         <table>
             <thead>
                 <tr>
@@ -26,12 +29,12 @@
             </thead>
             <tbody>
                 {% for item in clientes %}
-                <tr>
-                    <td onclick="sortTable(0)">{{ item['nombre_cliente'] }}</td>
-                    <td onclick="sortTable(1)">{{ item['razon_social'] }}</td>
-                    <td onclick="sortTable(2)">{{ item['rif_cedula'] }}</td>
-                    <td onclick="sortTable(3)">{{ item['direccion'] }}</td>
-                    <td onclick="sortTable(4)">{{ item['telefono'] }}</td>
+                <tr class="table-row-body">
+                    <td onclick="sortTable(0)" class="td nombre editable">{{ item['nombre_cliente'] }}</td>
+                    <td onclick="sortTable(1)" class="td razon_social editable">{{ item['razon_social'] }}</td>
+                    <td onclick="sortTable(2)" class="td rif editable">{{ item['rif_cedula'] }}</td>
+                    <td onclick="sortTable(3)" class="td direccion editable">{{ item['direccion'] }}</td>
+                    <td onclick="sortTable(4)" class="td telefono editable">{{ item['telefono'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -40,5 +43,6 @@
     <footer>
         <span>Representaciones EG</span>
     </footer>
+    <script src="{{ url_for('static', filename='js/clientes/lista_clientes.js') }}"></script>
 </body>
 </html>
