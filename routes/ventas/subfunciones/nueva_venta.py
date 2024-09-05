@@ -149,7 +149,7 @@ def actualizar_deuda(numero_venta, cliente):
 
             cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (nuevo_monto_total, cliente_id))
 
-            logger.info(f'Deuda actualizada para cliented {cliente}. Nuevo monto_total={nuevo_monto_total}')
+            logger.info(f'Deuda actualizada para cliente {cliente}. Nuevo monto_total={nuevo_monto_total}')
         else:
             logger.error(f'Factura no encontrada para el número de venta: {numero_venta}')
             return "Error: Factura no encontrada"
