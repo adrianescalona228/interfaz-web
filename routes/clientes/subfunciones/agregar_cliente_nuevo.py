@@ -2,6 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
+import logging
 
 agregar_clientes_nuevos_bp = Blueprint('agregar_clientes_nuevos', __name__)
 
@@ -11,18 +12,17 @@ def agregar_clientes_nuevos():
 
 @agregar_clientes_nuevos_bp.route('/guardar_cliente', methods=['POST'])
 def guardar_cliente():
+    db = get_db()
+    cursor = db.cursor()
+
     try:
-        data = request.get_json()
-        print(data)
-        # Obtén los datos del formulario
-        nombre = request.json.get('nombre')
-        razon_social = request.json.get('razon_social')
+        nombre = request.json.get('nombre').upper()
+        razon_social = request.json.get('razon_social').upper()
         rif_cedula = request.json.get('rif_cedula')
-        direccion = request.json.get('direccion')
+        direccion = request.json.get('direccion').upper()
         telefono = request.json.get('telefono')
-        
-        db = get_db()
-        cursor = db.cursor()
+
+        logging.info(f'Guardando cliente: {nombre}, {razon_social}, {rif_cedula}, {direccion}, {telefono}')
 
         # Insertar los datos en la tabla Clientes
         cursor.execute('''
@@ -35,14 +35,13 @@ def guardar_cliente():
 
         # Insertar la nueva entrada en la tabla Deudas con monto 0
         cursor.execute('''
-            INSERT INTO Deudas (id_cliente, monto_total)
+            INSERT INTO Deudas (cliente_id, monto_total)
             VALUES (?, ?)
         ''', (cliente_id, 0))
 
         db.commit()
-        db.close()
+        logging.info(f'Cliente con ID {cliente_id} agregado correctamente.')
 
-        # Responder con éxito
         response_data = {
             'success': True,
             'message': 'Cliente agregado correctamente',
@@ -54,14 +53,18 @@ def guardar_cliente():
                 'telefono': telefono
             }
         }
-        return jsonify(response_data)
+        return jsonify(response_data), 201
 
     except Exception as e:
-        # Manejo de errores
-        cursor.rollback()  # Deshacer cambios en caso de error
-        db.close()
+        logging.error(f'Error al agregar el cliente: {e}', exc_info=True)
+        db.rollback()  # Deshacer cambios en caso de error
+
         response_data = {
             'success': False,
-            'message': str(e)
+            'message': 'Ocurrió un error al agregar el cliente'
         }
-        return jsonify(response_data)
+        return jsonify(response_data), 500
+
+    finally:
+        cursor.close()  # Asegurarse de cerrar el cursor
+        db.close()  # Asegurarse de cerrar la conexión

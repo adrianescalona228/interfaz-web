@@ -2,6 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
+import logging
 
 registrar_producto_nuevo_bp = Blueprint('registrar_producto_nuevo', __name__)
 
@@ -13,26 +14,27 @@ def registrar_producto_nuevo():
 @registrar_producto_nuevo_bp.route('/guardar_producto', methods=['POST'])
 def guardar_producto():
     data = request.json 
-    print(f'Datos recibidos: {data}')
+    logging.info(f'DATOS RECIBIDOS: {data}')
 
     # Extraer los campos del producto desde el JSON recibido
-    producto = data.get('producto')
+    producto = data.get('producto', '').upper()
     cantidad = 0
-    precio = float(data.get('precio'))
-    costo = float(data.get('costo'))
-    tipo_de_producto = data.get('tipo_de_producto', '')
-    marca = data.get('marca', '')
+    precio = float(data.get('precio', 0))
+    costo = float(data.get('costo', 0))
+    tipo_de_producto = data.get('tipo_de_producto', '').upper()
+    marca = data.get('marca', '').upper()
 
-    print(f'Producto: {producto}')
-    print(f'Cantidad: {cantidad}')
-    print(f'Precio: {precio}')
-    print(f'Costo: {costo}')
-    print(f'Tipo de Producto: {tipo_de_producto}')
-    print(f'Marca: {marca}')
+    logging.info(f'PRODUCTO: {producto}')
+    logging.info(f'CANTIDAD: {cantidad}')
+    logging.info(f'PRECIO: {precio}')
+    logging.info(f'COSTO: {costo}')
+    logging.info(f'TIPO DE PRODUCTO: {tipo_de_producto}')
+    logging.info(f'MARCA: {marca}')
 
     # Validación simple
     if precio <= 0 or costo <= 0:
-        return jsonify({'success': False, 'message': 'Faltan campos obligatorios o valores incorrectos'}), 400
+        logging.error('FALTAN CAMPOS O VALORES INCORRECTOS')
+        return jsonify({'success': False, 'message': 'FALTAN CAMPOS O VALORES INCORRECTOS'}), 400
 
     try:
         db = get_db()
@@ -45,10 +47,12 @@ def guardar_producto():
         ''', (producto, cantidad, precio, costo, tipo_de_producto, marca))
 
         db.commit()  # Confirmar la transacción
-        cursor.close()
-
-        return jsonify({'success': True, 'message': 'Producto agregado exitosamente'}), 201
+        logging.info('PRODUCTO AGREGADO EXITOSAMENTE')
+        
+        return jsonify({'success': True, 'message': 'PRODUCTO AGREGADO EXITOSAMENTE'}), 201
     except Exception as e:
-        print(f'Error al intentar guardar el producto: {e}')
-        return jsonify({'success': False, 'message': 'Error al agregar el producto'}), 500
-
+        logging.error(f'ERROR AL INTENTAR GUARDAR EL PRODUCTO: {e}', exc_info=True)
+        return jsonify({'success': False, 'message': 'ERROR AL AGREGAR EL PRODUCTO'}), 500
+    finally:
+        cursor.close()
+        db.close()

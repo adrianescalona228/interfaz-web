@@ -2,6 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
+import logging
 
 ver_inventario_bp = Blueprint('ver_inventario', __name__)
 
@@ -44,7 +45,12 @@ def actualizar_producto():
             WHERE id = ?
         ''', (valor, producto_id))
         db.commit()
+        logging.info(f'Producto con ID {producto_id} actualizado. Columna: {columna_db.upper()}, Nuevo valor: {valor.upper()}')
         return jsonify({'success': True, 'message': 'Producto actualizado exitosamente'}), 200
     except Exception as e:
-        print(f'Error: {e}')
+        logging.error(f'Error al actualizar el producto. ID: {producto_id}, Columna: {columna_db.upper()}, Valor: {valor.upper()} - Error: {e}', exc_info=True)
         return jsonify({'success': False, 'message': 'Error al actualizar el producto'}), 500
+
+    finally:
+        cursor.close()  # Asegurarse de cerrar el cursor
+        db.close()  # Asegurarse de cerrar la conexión

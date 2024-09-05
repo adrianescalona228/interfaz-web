@@ -164,6 +164,9 @@ def eliminar_producto(numero_venta, id):
 
         if producto:
             precio = producto[5]
+            cantidad = producto[4]
+
+            monto_total_producto = precio * cantidad
 
             # Obtener datos de la factura
             cursor.execute('SELECT cliente_id, monto_total FROM Facturas WHERE numero_venta = ?', (numero_venta,))
@@ -172,12 +175,12 @@ def eliminar_producto(numero_venta, id):
             if factura:
                 monto_total_factura = factura[1]
                 cliente_id = int(factura[0])
-                monto_final_factura = monto_total_factura - precio
+                monto_final_factura = monto_total_factura - monto_total_producto
 
                 # Obtener datos de la deuda
                 cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (cliente_id,))
                 monto_total_deuda = cursor.fetchone()[0]
-                monto_final_deuda = monto_total_deuda - precio
+                monto_final_deuda = monto_total_deuda - monto_total_producto
 
                 # Eliminar el producto de la venta y actualizar factura y deuda
                 cursor.execute('DELETE FROM Ventas WHERE numero_venta = ? AND id = ?', (numero_venta, id))
