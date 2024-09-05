@@ -211,8 +211,6 @@ def obtener_ultimo_numero_venta():
     else:
         return jsonify({'ultimo_numero': ultimo_numero + 1})
 
-from flask import request, jsonify
-
 @nueva_venta_bp.route('/verificar_numero_venta', methods=['POST'])
 def verificar_numero_venta():
     data = request.get_json()  # Obtiene los datos en formato JSON
@@ -231,24 +229,30 @@ def actualizar_stock(producto, cantidad_vendida):
     db = get_db()
     cursor = db.cursor()
 
-    cursor.execute('SELECT cantidad FROM Inventario WHERE producto = ?', (producto,))
-    result = cursor.fetchone()
+    try:
+        cursor.execute('SELECT cantidad FROM Inventario WHERE producto = ?', (producto,))
+        result = cursor.fetchone()
 
-    if result:
+        if result:
+            cantidad_actual = result['cantidad']
 
-        cantidad_actual = result['cantidad']
+            # Intentar convertir las cantidades a enteros
+            try:
+                cantidad_actual = float(cantidad_actual)
+                cantidad_vendida = float(cantidad_vendida)
+            except ValueError as e:
+                logger.error(f"Error de conversión: {e} - Producto: {producto}")
+                return False
 
-        # Intentar convertir las cantidades a enteros
-        try:
-            cantidad_actual = float(cantidad_actual)
-            cantidad_vendida = float(cantidad_vendida)
-        except ValueError:
-            # Manejo de error si la conversión falla
+            nueva_cantidad = cantidad_actual - cantidad_vendida
+            cursor.execute('UPDATE Inventario SET cantidad = ? WHERE producto = ?', (nueva_cantidad, producto))
+            db.commit()
+            logger.info(f"Stock actualizado: Producto: {producto}, Cantidad anterior: {cantidad_actual}, Cantidad vendida: {cantidad_vendida}, Nueva cantidad: {nueva_cantidad}")
+            return True
+        else:
+            logger.warning(f"Producto no encontrado en inventario: {producto}")
             return False
 
-        nueva_cantidad = cantidad_actual - cantidad_vendida
-        cursor.execute('UPDATE Inventario SET cantidad = ? WHERE producto = ?', (nueva_cantidad, producto))
-        db.commit()
-        return True
-    else:
+    except Exception as e:
+        logger.error(f"Error al actualizar stock: {e} - Producto: {producto}")
         return False
