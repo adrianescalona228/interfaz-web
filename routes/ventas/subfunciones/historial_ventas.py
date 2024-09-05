@@ -8,6 +8,7 @@ from openpyxl import load_workbook
 import win32com.client as win32
 import pythoncom
 import logging
+from config_global import config_global
 
 logger = logging.getLogger(__name__)
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
@@ -305,12 +306,12 @@ def insertar_direccion(sheet, direccion, fila_inicial):
 
 def crear_nota_entrega(datos_cliente):
     logging.info("Iniciando la creación de la nota de entrega...")
+
+    ruta_plantilla, ruta_guardar = config_global()
+
     try:
         pythoncom.CoInitialize()
         logging.info("COM de Python inicializada correctamente.")
-
-        ruta_plantilla = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE\NDE._PLANTILLA\NDE._PLANTILLA.xlsx"
-        ruta_guardar = r"C:\Users\adria\Documents\programacion\interfaz-web\DATABASE\NDE"
 
         if not os.path.exists(ruta_plantilla):
             raise FileNotFoundError(f"La plantilla no se encontró en la ruta: {ruta_plantilla}")
