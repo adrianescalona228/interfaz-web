@@ -62,42 +62,46 @@ def historial_compras():
     finally:
         db.close()
 
-
 @historial_compras_bp.route('/eliminar_compra/<int:numero_compra>', methods=['POST'])
 def eliminar_venta(numero_compra):
     db = get_db()
     cursor = db.cursor()
 
-    # Verificar si la compra existe en la tabla Compras
-    cursor.execute('SELECT * FROM Compras WHERE numero_compra = ?', (numero_compra,))
-    compra = cursor.fetchone()
+    try:
+        # Verificar si la compra existe en la tabla Compras
+        cursor.execute('SELECT * FROM Compras WHERE numero_compra = ?', (numero_compra,))
+        compra = cursor.fetchone()
 
-    if compra:
+        if compra:
+            # Obtener los productos asociados a la compra
+            cursor.execute('SELECT producto_id, cantidad FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
+            productos = cursor.fetchall()
 
-        # Obtener los productos asociados a la compra
-        cursor.execute('SELECT producto_id, cantidad FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
-        productos = cursor.fetchall()
+            # Eliminar la compra
+            cursor.execute('DELETE FROM Compras WHERE numero_compra = ?', (numero_compra,))
 
-        # Eliminar la compra
-        cursor.execute('DELETE FROM Compras WHERE numero_compra = ?', (numero_compra,))
+            # Actualizar el inventario
+            for producto in productos:
+                producto_id = producto['producto_id']
+                cantidad = producto['cantidad']
+                logging.info(f'Producto id: {producto_id}, cantidad: {cantidad}')
 
-        # Actualizar el inventario
-        for producto in productos:
-            producto_id = producto['producto_id']
-            cantidad = producto['cantidad']
-            print(f'producto id: {producto_id}, cantidad: {cantidad}')
+                # Aumentar la cantidad del producto en el inventario
+                cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))  # Ajustado a + en lugar de -
+                cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
 
-            # Aumentar la cantidad del producto en el inventario
-            cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))
-            cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ?', (numero_compra,))
+            db.commit()  # Hacer commit después de eliminar la compra
 
-        db.commit()  # Hacer commit después de eliminar la compra
+            flash('Compra y productos asociados eliminados correctamente', 'success')
+        else:
+            flash('La compra no existe', 'error')
 
-        flash('Compra y productos asociados eliminados correctamente', 'success')
-    else:
-        flash('La compra no existe', 'error')
+    except Exception as e:
+        logging.error(f'Error al eliminar compra {numero_compra}: {str(e)}')
+        flash('Ocurrió un error al intentar eliminar la compra', 'error')
 
-    cursor.close()  # Cerrar el cursor después de la operación
+    finally:
+        cursor.close()  # Cerrar el cursor después de la operación
 
     return '', 200
 
@@ -106,28 +110,48 @@ def eliminar_producto(compra_id, producto_id):
     db = get_db()
     cursor = db.cursor()
 
-    # Obtener el costo del producto antes de eliminarlo
-    cursor.execute('SELECT cantidad, costo FROM Productos_Compras WHERE compra_id = ? AND producto_id = ?', (compra_id, producto_id))
-    producto = cursor.fetchone()
+    try:
+        # Obtener el costo y la cantidad del producto antes de eliminarlo
+        cursor.execute('SELECT cantidad, costo FROM Productos_Compras WHERE compra_id = ? AND producto_id = ?', (compra_id, producto_id))
+        producto = cursor.fetchone()
 
-    if producto:
-        cantidad = producto['cantidad']
+        if producto:
+            cantidad = producto['cantidad']
+            costo = producto['costo']
+            total_restar = float(cantidad) * float(costo)
 
-        # Eliminar el producto de Productos_Compras
-        cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ? AND producto_id = ?', (compra_id, producto_id))
-        
-        # Restar el costo del producto al total de la compra en la tabla Compras
-        total_restar = float(producto['cantidad']) * float(producto['costo'])
-        cursor.execute('UPDATE Compras SET total_compra = total_compra - ? WHERE id = ?', (total_restar, compra_id))
+            # Registrar el estado del inventario antes de la actualización
+            cursor.execute('SELECT cantidad FROM Inventario WHERE id = ?', (producto_id,))
+            inventario_before = cursor.fetchone()
+            cantidad_inventario_before = inventario_before['cantidad'] if inventario_before else 'No disponible'
 
-        # Actualizar el inventario
-        cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))
+            # Eliminar el producto de Productos_Compras
+            cursor.execute('DELETE FROM Productos_Compras WHERE compra_id = ? AND producto_id = ?', (compra_id, producto_id))
 
-        
-        db.commit()  # Hacer commit para guardar los cambios
-        flash('Producto eliminado y total actualizado correctamente.', 'success')
-    else:
-        flash('El producto no existe en esta compra.', 'error')
+            # Restar el costo del producto al total de la compra en la tabla Compras
+            cursor.execute('UPDATE Compras SET total_compra = total_compra - ? WHERE id = ?', (total_restar, compra_id))
 
-    cursor.close()
+            # Actualizar el inventario
+            cursor.execute('UPDATE Inventario SET cantidad = cantidad - ? WHERE id = ?', (cantidad, producto_id))
+
+            # Registrar el estado del inventario después de la actualización
+            cursor.execute('SELECT cantidad FROM Inventario WHERE id = ?', (producto_id,))
+            inventario_after = cursor.fetchone()
+            cantidad_inventario_after = inventario_after['cantidad'] if inventario_after else 'No disponible'
+
+            db.commit()  # Hacer commit para guardar los cambios
+
+            logging.info(f'Producto eliminado: Compra ID {compra_id}, Producto ID {producto_id}. '
+                         f'Total restado: {total_restar}. Cantidad restada: {cantidad}. '
+                         f'Inventario antes: {cantidad_inventario_before}. Inventario después: {cantidad_inventario_after}.')
+        else:
+            flash('El producto no existe en esta compra.', 'error')
+
+    except Exception as e:
+        logging.error(f'Error al eliminar producto: Compra ID {compra_id}, Producto ID {producto_id}. Error: {str(e)}')
+        flash('Ocurrió un error al intentar eliminar el producto.', 'error')
+
+    finally:
+        cursor.close()  # Cerrar el cursor después de la operación
+
     return '', 200
