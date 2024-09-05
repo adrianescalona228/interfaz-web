@@ -2,6 +2,7 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
+import logging
 
 deudas_bp = Blueprint('deudas', __name__)
 
@@ -27,29 +28,45 @@ def actualizar_deuda():
 
         # Obtener el ID del cliente
         cursor.execute('SELECT id FROM Clientes WHERE nombre_cliente = ?', (nombre,))
-        id = cursor.fetchone()['id']
+        cliente = cursor.fetchone()
 
-        # Obtener el valor actual de la deuda antes de actualizar
-        cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (id,))
-        valor_original = cursor.fetchone()['monto_total']
+        if cliente:
+            id = cliente['id']
 
-        # Almacenar el valor original en la sesión para el rollback
-        session['valor_original'] = valor_original
-        session['cliente_id'] = id
+            # Obtener el valor actual de la deuda antes de actualizar
+            cursor.execute('SELECT monto_total FROM Deudas WHERE cliente_id = ?', (id,))
+            deuda = cursor.fetchone()
 
-        # Actualizar la deuda
-        cursor.execute('''
-            UPDATE Deudas
-            SET monto_total = ?
-            WHERE cliente_id = ?
-        ''', (valor, id))
-        db.commit()
+            if deuda:
+                valor_original = deuda['monto_total']
 
-        return jsonify({'success': True, 'message': 'Deuda actualizada exitosamente'}), 200
+                # Almacenar el valor original en la sesión para el rollback
+                session['valor_original'] = valor_original
+                session['cliente_id'] = id
+
+                # Actualizar la deuda
+                cursor.execute('''
+                    UPDATE Deudas
+                    SET monto_total = ?
+                    WHERE cliente_id = ?
+                ''', (valor, id))
+                db.commit()
+
+                logging.info(f'Deuda actualizada: Cliente ID {id}. Valor original: {valor_original}. Nuevo valor: {valor}.')
+                return jsonify({'success': True, 'message': 'Deuda actualizada exitosamente'}), 200
+            else:
+                logging.warning(f'No se encontró deuda para el Cliente ID {id}.')
+                return jsonify({'success': False, 'message': 'Deuda no encontrada para el cliente'}), 404
+        else:
+            logging.warning(f'No se encontró cliente con nombre {nombre}.')
+            return jsonify({'success': False, 'message': 'Cliente no encontrado'}), 404
 
     except Exception as e:
-        print(f'Error: {e}')
+        logging.error(f'Error al actualizar la deuda: {str(e)}')
         return jsonify({'success': False, 'message': 'Error al actualizar la deuda'}), 500
+
+    finally:
+        cursor.close()  # Asegurarse de cerrar el cursor después de la operación
 
 @deudas_bp.route('/rollback_deuda', methods=['POST'])
 def rollback_deuda():
@@ -70,10 +87,15 @@ def rollback_deuda():
             ''', (valor_original, id))
             db.commit()
 
+            logging.info(f'Rollback realizado: Cliente ID {id}. Valor revertido a: {valor_original}.')
             return jsonify({'success': True, 'message': 'Rollback exitoso'}), 200
         else:
+            logging.warning('No hay cambios para deshacer. Valor original o ID del cliente no encontrados en la sesión.')
             return jsonify({'success': False, 'message': 'No hay cambios para deshacer'}), 400
 
     except Exception as e:
-        print(f'Error: {e}')
+        logging.error(f'Error al realizar el rollback: {str(e)}')
         return jsonify({'success': False, 'message': 'Error al realizar el rollback'}), 500
+
+    finally:
+        cursor.close()  # Asegurarse de cerrar el cursor después de la operación
