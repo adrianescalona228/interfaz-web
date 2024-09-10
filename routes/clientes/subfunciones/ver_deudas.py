@@ -3,6 +3,8 @@ import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database import get_db
 import logging
+from flask import session
+
 
 deudas_bp = Blueprint('deudas', __name__)
 
@@ -11,10 +13,10 @@ def ver_deudas():
     db = get_db()   
     cursor = db.execute('''SELECT c.nombre_cliente, d.monto_total
                         FROM Clientes c
-                        JOIN Deudas d ON c.id = d.cliente_id''')
+                        JOIN Deudas d ON c.id = d.cliente_id
+                        ORDER BY c.nombre_cliente ASC''')
     deudas = cursor.fetchall()
     return render_template('/clientes/ver_deudas.html', deudas=deudas)
-from flask import session
 
 @deudas_bp.route('/actualizar_deuda', methods=['POST'])
 def actualizar_deuda():
