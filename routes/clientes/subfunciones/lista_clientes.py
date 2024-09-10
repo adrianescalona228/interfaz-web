@@ -15,6 +15,7 @@ def lista_clientes():
 
 @lista_clientes_bp.route('/actualizar_cliente', methods=['POST'])
 def actualizar_cliente():
+    print('hola estoy dentro de actualizar cliente')
     data = request.json
     cliente_id = data.get('id')
     columna = data.get('column')
