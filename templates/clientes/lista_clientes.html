@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 {% for item in clientes %}
-                <tr class="table-row-body">
+                <tr class="table-row-body" data-id="{{ item['id'] }}">  <!-- Añade data-id aquí -->
                     <td onclick="sortTable(0)" class="td nombre editable">{{ item['nombre_cliente'] }}</td>
                     <td onclick="sortTable(1)" class="td razon_social editable">{{ item['razon_social'] }}</td>
                     <td onclick="sortTable(2)" class="td rif editable">{{ item['rif_cedula'] }}</td>
@@ -38,6 +38,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            
         </table>
     </main>
     <footer>

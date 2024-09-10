@@ -14,9 +14,8 @@ document.getElementById('buscador-cliente').addEventListener('input', function (
     });
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
-    const table = document.querySelector('.tabla-inventario');
+    const table = document.querySelector('table'); // Seleccionamos la tabla de clientes
 
     table.addEventListener('dblclick', function(event) {
         const target = event.target;
@@ -32,37 +31,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
             input.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
-                const newValue = input.value.trim();
-                target.innerHTML = newValue;
+                    const newValue = input.value.trim();
+                    target.innerHTML = newValue;
 
-                const row = target.closest('tr');
-                const id = row.dataset.id;
-                const column = target.classList[1]; // Obtener la clase para identificar la columna
+                    const row = target.closest('tr');
+                    const id = row.dataset.id;  // Asegúrate de tener el ID en un atributo `data-id` en la fila
+                    const column = target.classList[1]; // Obtener la clase para identificar la columna
 
-                // Enviar los datos al backend
-                fetch('/ver_inventario/actualizar_producto', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        id: id,
-                        column: column,
-                        value: newValue
+                    // Enviar los datos al backend
+                    fetch('/ver_clientes/actualizar_cliente', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: id,
+                            column: column,
+                            value: newValue
+                        })
                     })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        console.log('Actualización exitosa:', data.message);
-                    } else {
-                        console.error('Error al actualizar:', data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }});
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log('Actualización exitosa:', data.message);
+                        } else {
+                            console.error('Error al actualizar:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            });
             
             // Interceptar el evento blur y reenfocar el input
             input.addEventListener('blur', function(e) {
