@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             target.innerHTML = ''; // Limpiar el contenido
             target.appendChild(input);
             input.focus();
+            input.select();
 
             input.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {

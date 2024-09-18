@@ -1,0 +1,948 @@
+2024-09-06 07:41:03,663 - INFO - Logging configurado correctamente
+2024-09-06 07:41:03,683 - INFO - b"* Serving Flask app 'app'"
+2024-09-06 07:41:03,683 - INFO - b'* Debug mode: on'
+2024-09-06 07:41:03,861 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.101:5000
+2024-09-06 07:41:03,861 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-06 07:41:03,868 - INFO -  * Restarting with stat
+2024-09-06 07:41:04,332 - INFO - Logging configurado correctamente
+2024-09-06 07:41:04,356 - WARNING -  * Debugger is active!
+2024-09-06 07:41:04,415 - INFO -  * Debugger PIN: 669-216-676
+2024-09-06 08:33:37,422 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,426 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,538 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,539 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,540 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,556 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,559 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,562 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,573 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,573 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,579 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,590 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,590 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,591 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:37,721 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-09-06 08:33:39,811 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,820 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,820 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,830 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,831 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,839 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,842 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,849 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,850 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,858 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,858 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,860 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/js/clientes/registrar_abono.js HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,871 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:33:39,872 - INFO - 127.0.0.1 - - [06/Sep/2024 08:33:39] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,286 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,296 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,298 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,300 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,306 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,307 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,362 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,364 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,367 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,384 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,386 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,387 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:31,390 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:31] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,649 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,746 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,750 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,750 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,750 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,752 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,766 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,777 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,791 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,793 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,794 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,796 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:34,799 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:34] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,459 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 08:43:36,500 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,516 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,518 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,518 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,519 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,524 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,528 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,528 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,532 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,536 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,543 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,545 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:36,545 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:36] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,663 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 08:43:37,708 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,740 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,741 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,741 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,742 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,742 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,758 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,758 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,763 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,764 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,767 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,775 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,776 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,780 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 08:43:37,946 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:37] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 08:43:41,261 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:41] "GET /nueva_venta/autocompletar_clientes?term=mi HTTP/1.1" 200 -
+2024-09-06 08:43:41,432 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:41] "GET /nueva_venta/autocompletar_clientes?term=mic HTTP/1.1" 200 -
+2024-09-06 08:43:41,824 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:41] "GET /nueva_venta/autocompletar_clientes?term=mich HTTP/1.1" 200 -
+2024-09-06 08:43:48,039 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:48] "GET /nueva_venta/autocompletar_productos?term=4514 HTTP/1.1" 200 -
+2024-09-06 08:43:51,992 - INFO - Datos recibidos: cliente=FRENOS MICHELENA                             , numero_venta=3037, fecha=2024-09-06, productos=[{'producto': 'BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL', 'cantidad': '1', 'precio': '58.00'}], monto_total=58
+2024-09-06 08:43:51,993 - INFO - Procesando producto: nombre_producto=BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, cantidad=1.0, precio=58.0
+2024-09-06 08:43:51,994 - INFO - Costo obtenido para BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL: 45.82
+2024-09-06 08:43:51,998 - INFO - Producto BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL insertado correctamente en la tabla Ventas
+2024-09-06 08:43:52,178 - INFO - Stock actualizado: Producto: BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, Cantidad anterior: 6.0, Cantidad vendida: 1.0, Nueva cantidad: 5.0
+2024-09-06 08:43:52,635 - INFO - Factura creada correctamente para el número de venta 3037
+2024-09-06 08:43:52,637 - INFO - Deuda actualizada para cliente FRENOS MICHELENA                             . Nuevo monto_total=635.0
+2024-09-06 08:43:52,810 - INFO - Venta procesada correctamente para el número de venta 3037
+2024-09-06 08:43:52,811 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:52] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 08:43:57,536 - INFO - 127.0.0.1 - - [06/Sep/2024 08:43:57] "GET /nueva_venta/autocompletar_clientes?term=jua HTTP/1.1" 200 -
+2024-09-06 08:44:07,711 - INFO - 127.0.0.1 - - [06/Sep/2024 08:44:07] "GET /nueva_venta/autocompletar_productos?term=873 HTTP/1.1" 200 -
+2024-09-06 08:44:22,696 - INFO - Datos recibidos: cliente=JUAN NAGUANAGUA                              , numero_venta=3038, fecha=2024-09-06, productos=[{'producto': 'TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE', 'cantidad': '2', 'precio': '185'}], monto_total=370
+2024-09-06 08:44:22,697 - INFO - Procesando producto: nombre_producto=TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE, cantidad=2.0, precio=185.0
+2024-09-06 08:44:22,697 - INFO - Costo obtenido para TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE: 145.0
+2024-09-06 08:44:22,698 - INFO - Producto TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE insertado correctamente en la tabla Ventas
+2024-09-06 08:44:22,880 - INFO - Stock actualizado: Producto: TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE, Cantidad anterior: 11.0, Cantidad vendida: 2.0, Nueva cantidad: 9.0
+2024-09-06 08:44:23,113 - INFO - Factura creada correctamente para el número de venta 3038
+2024-09-06 08:44:23,114 - INFO - Deuda actualizada para cliente JUAN NAGUANAGUA                              . Nuevo monto_total=368.0
+2024-09-06 08:44:23,306 - INFO - Venta procesada correctamente para el número de venta 3038
+2024-09-06 08:44:23,307 - INFO - 127.0.0.1 - - [06/Sep/2024 08:44:23] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 08:47:41,396 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "GET /clientes HTTP/1.1" 200 -
+2024-09-06 08:47:41,433 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,449 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,450 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,451 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,451 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,452 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,452 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,460 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,465 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,470 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,476 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,478 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:41,479 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:41] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,384 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "GET /registrar_abono/template_abonos HTTP/1.1" 200 -
+2024-09-06 08:47:43,457 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,462 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/js/clientes/registrar_abono.js HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,490 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,492 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,492 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,492 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,492 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,492 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,514 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,516 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,524 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,525 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,527 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:43,529 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:43] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:47:46,647 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:46] "GET /nueva_venta/autocompletar_clientes?term=ju HTTP/1.1" 200 -
+2024-09-06 08:47:54,553 - INFO - 127.0.0.1 - - [06/Sep/2024 08:47:54] "POST /registrar_abono/registrar_abono HTTP/1.1" 200 -
+2024-09-06 08:48:17,483 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,554 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,558 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,558 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,561 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,562 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:17,563 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:17] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,589 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,592 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,594 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,598 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,608 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:48:19,609 - INFO - 127.0.0.1 - - [06/Sep/2024 08:48:19] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,626 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,641 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,641 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,642 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,644 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,644 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,647 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,654 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,658 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,666 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,670 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,672 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:08,673 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:08] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,661 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 08:49:09,693 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,760 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,762 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,763 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,763 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,765 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,767 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,791 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,792 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,795 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,796 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,799 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:09,802 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:09] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,005 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 08:49:11,046 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,055 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,087 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,087 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,089 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,090 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,091 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,093 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,101 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,111 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,114 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,117 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,117 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,120 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:11,277 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:11] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 08:49:13,530 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:13] "GET /nueva_venta/autocompletar_clientes?term=mi HTTP/1.1" 200 -
+2024-09-06 08:49:14,283 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:14] "GET /nueva_venta/autocompletar_clientes?term=miche HTTP/1.1" 200 -
+2024-09-06 08:49:18,548 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:18] "GET /nueva_venta/autocompletar_productos?term=451 HTTP/1.1" 200 -
+2024-09-06 08:49:19,267 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:19] "GET /nueva_venta/autocompletar_productos?term=4514 HTTP/1.1" 200 -
+2024-09-06 08:49:23,195 - INFO - Datos recibidos: cliente=FRENOS MICHELENA                             , numero_venta=3039, fecha=2024-09-06, productos=[{'producto': 'BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL', 'cantidad': '1', 'precio': '58.00'}], monto_total=58
+2024-09-06 08:49:23,196 - INFO - Procesando producto: nombre_producto=BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, cantidad=1.0, precio=58.0
+2024-09-06 08:49:23,197 - INFO - Costo obtenido para BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL: 45.82
+2024-09-06 08:49:23,198 - INFO - Producto BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL insertado correctamente en la tabla Ventas
+2024-09-06 08:49:23,423 - INFO - Stock actualizado: Producto: BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, Cantidad anterior: 5.0, Cantidad vendida: 1.0, Nueva cantidad: 4.0
+2024-09-06 08:49:23,756 - INFO - Factura creada correctamente para el número de venta 3039
+2024-09-06 08:49:23,809 - INFO - Deuda actualizada para cliente FRENOS MICHELENA                             . Nuevo monto_total=693.0
+2024-09-06 08:49:23,918 - INFO - Venta procesada correctamente para el número de venta 3039
+2024-09-06 08:49:23,919 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:23] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 08:49:42,157 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 08:49:42,186 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,201 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,201 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,215 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,216 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,216 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,223 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,227 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,230 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,259 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,267 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,269 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:42,272 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:42] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,233 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:49:45,254 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,283 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,286 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,287 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,288 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,291 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,296 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,299 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,301 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,304 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,310 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,310 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,312 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:49:45,380 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:45] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:49:48,532 - INFO - Iniciando la creación de la nota de entrega...
+2024-09-06 08:49:48,545 - INFO - Ruta plantilla: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx
+2024-09-06 08:49:48,545 - INFO - Ruta guardar: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0
+2024-09-06 08:49:48,658 - INFO - COM de Python inicializada correctamente.
+2024-09-06 08:49:49,353 - INFO - Excel iniciado correctamente.
+2024-09-06 08:49:49,855 - INFO - Plantilla de Excel abierta correctamente.
+2024-09-06 08:49:49,857 - INFO - Hoja activa seleccionada correctamente.
+2024-09-06 08:49:49,927 - INFO - Datos del cliente (razón social y RIF/Cédula) insertados correctamente.
+2024-09-06 08:49:49,962 - INFO - Dirección del cliente insertada correctamente.
+2024-09-06 08:49:49,994 - INFO - Teléfono del cliente insertado correctamente.
+2024-09-06 08:49:50,157 - INFO - Datos de todos los productos insertados correctamente.
+2024-09-06 08:49:50,397 - INFO - Archivo guardado correctamente en: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE.3038_JUAN NAGUANAGUA.xlsx
+2024-09-06 08:49:51,722 - INFO - Archivo NDE.3038_JUAN NAGUANAGUA.xlsx abierto correctamente.
+2024-09-06 08:49:51,723 - INFO - Proceso de creación de la nota de entrega completado.
+2024-09-06 08:49:51,831 - INFO - 127.0.0.1 - - [06/Sep/2024 08:49:51] "POST /historial_ventas/generar_nota_entrega HTTP/1.1" 200 -
+2024-09-06 08:50:05,114 - INFO - Iniciando la creación de la nota de entrega...
+2024-09-06 08:50:05,115 - INFO - Ruta plantilla: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx
+2024-09-06 08:50:05,116 - INFO - Ruta guardar: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0
+2024-09-06 08:50:05,116 - INFO - COM de Python inicializada correctamente.
+2024-09-06 08:50:05,253 - INFO - Excel iniciado correctamente.
+2024-09-06 08:50:05,496 - INFO - Plantilla de Excel abierta correctamente.
+2024-09-06 08:50:05,497 - INFO - Hoja activa seleccionada correctamente.
+2024-09-06 08:50:05,560 - INFO - Datos del cliente (razón social y RIF/Cédula) insertados correctamente.
+2024-09-06 08:50:05,594 - INFO - Dirección del cliente insertada correctamente.
+2024-09-06 08:50:05,625 - INFO - Teléfono del cliente insertado correctamente.
+2024-09-06 08:50:05,791 - INFO - Datos de todos los productos insertados correctamente.
+2024-09-06 08:50:05,865 - INFO - Archivo guardado correctamente en: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE.3039_FRENOS MICHELENA.xlsx
+2024-09-06 08:50:06,250 - INFO - Archivo NDE.3039_FRENOS MICHELENA.xlsx abierto correctamente.
+2024-09-06 08:50:06,251 - INFO - Proceso de creación de la nota de entrega completado.
+2024-09-06 08:50:06,325 - INFO - 127.0.0.1 - - [06/Sep/2024 08:50:06] "POST /historial_ventas/generar_nota_entrega HTTP/1.1" 200 -
+2024-09-06 08:53:29,715 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "GET /clientes HTTP/1.1" 200 -
+2024-09-06 08:53:29,742 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,757 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,757 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,758 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,759 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,759 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,760 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,774 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,777 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,777 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,780 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,785 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:29,788 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:29] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,255 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "GET /ver_deudas/ver_deudas HTTP/1.1" 200 -
+2024-09-06 08:53:31,295 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,305 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,312 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,314 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,315 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,325 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,325 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,325 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,329 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,335 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,336 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,336 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,338 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:53:31,343 - INFO - 127.0.0.1 - - [06/Sep/2024 08:53:31] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,606 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "GET /historial_abonos/historial_abonos HTTP/1.1" 200 -
+2024-09-06 08:56:26,644 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,672 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,673 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,673 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,673 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,673 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,685 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,689 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,689 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,692 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,693 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,698 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,698 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:26,703 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:26] "[36mGET /static/js/clientes/historial_abonos.js HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,610 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 08:56:45,641 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,660 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,661 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,661 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,664 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,666 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,677 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,679 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,681 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,682 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,695 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,697 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:45,697 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:45] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,841 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:56:46,869 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,893 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,897 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,898 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,904 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,909 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,910 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,913 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,919 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,925 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,930 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,931 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,934 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:56:46,935 - INFO - 127.0.0.1 - - [06/Sep/2024 08:56:46] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:27,391 - INFO - Intentando eliminar la venta con número 3037
+2024-09-06 08:57:27,393 - INFO - Venta con número 3037 eliminada.
+2024-09-06 08:57:27,394 - INFO - Factura asociada a la venta 3037 eliminada.
+2024-09-06 08:57:27,394 - INFO - Deuda del cliente FRENOS MICHELENA actualizada a 635.0.
+2024-09-06 08:57:27,618 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:27] "POST /historial_ventas/eliminar_venta/3037 HTTP/1.1" 200 -
+2024-09-06 08:57:29,430 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:57:29,458 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,489 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,490 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,495 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,495 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,507 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,509 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,514 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,522 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,523 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,524 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,530 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,533 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:29,538 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:29] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:37,879 - INFO - Intentando eliminar producto con id 266 de la venta 3038
+2024-09-06 08:57:38,054 - INFO - Producto con id 266 eliminado de la venta 3038.
+2024-09-06 08:57:38,056 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:38] "POST /historial_ventas/eliminar_producto/3038/266 HTTP/1.1" 200 -
+2024-09-06 08:57:51,046 - INFO - Intentando eliminar la venta con número 3038
+2024-09-06 08:57:51,047 - ERROR - La venta con número 3038 no existe.
+2024-09-06 08:57:51,049 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:51] "POST /historial_ventas/eliminar_venta/3038 HTTP/1.1" 200 -
+2024-09-06 08:57:53,099 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:57:53,121 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,151 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,152 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,157 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,162 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,162 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,168 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,170 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,175 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,181 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,184 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,191 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,194 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:57:53,195 - INFO - 127.0.0.1 - - [06/Sep/2024 08:57:53] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:01,551 - INFO - Intentando eliminar la venta con número 3039
+2024-09-06 08:58:01,553 - INFO - Venta con número 3039 eliminada.
+2024-09-06 08:58:01,553 - INFO - Factura asociada a la venta 3039 eliminada.
+2024-09-06 08:58:01,554 - INFO - Deuda del cliente FRENOS MICHELENA actualizada a 577.0.
+2024-09-06 08:58:01,722 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:01] "POST /historial_ventas/eliminar_venta/3039 HTTP/1.1" 200 -
+2024-09-06 08:58:03,601 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:58:03,621 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,654 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,656 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,658 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,661 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,661 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,664 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,680 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,692 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,692 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,694 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,706 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,707 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:03,724 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:03] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,663 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 08:58:10,694 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,705 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,727 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,727 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,727 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,732 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,729 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,732 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,742 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,748 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,752 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,754 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,759 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,760 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:58:10,776 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:10] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 08:58:18,212 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:18] "GET /nueva_venta/autocompletar_clientes?term=ju HTTP/1.1" 200 -
+2024-09-06 08:58:27,482 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:27] "GET /nueva_venta/autocompletar_productos?term=873 HTTP/1.1" 200 -
+2024-09-06 08:58:37,377 - INFO - Datos recibidos: cliente=JUAN NAGUANAGUA                              , numero_venta=3037, fecha=2024-09-06, productos=[{'producto': 'TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE', 'cantidad': '2', 'precio': '185'}], monto_total=370
+2024-09-06 08:58:37,378 - INFO - Procesando producto: nombre_producto=TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE, cantidad=2.0, precio=185.0
+2024-09-06 08:58:37,379 - INFO - Costo obtenido para TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE: 145.0
+2024-09-06 08:58:37,380 - INFO - Producto TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE insertado correctamente en la tabla Ventas
+2024-09-06 08:58:37,549 - INFO - Stock actualizado: Producto: TAMBOR 873 TRAS ENCAVA ENT 610/ENT 600 AIRE, Cantidad anterior: 9.0, Cantidad vendida: 2.0, Nueva cantidad: 7.0
+2024-09-06 08:58:37,715 - INFO - Factura creada correctamente para el número de venta 3037
+2024-09-06 08:58:37,717 - INFO - Deuda actualizada para cliente JUAN NAGUANAGUA                              . Nuevo monto_total=183.0
+2024-09-06 08:58:37,876 - INFO - Venta procesada correctamente para el número de venta 3037
+2024-09-06 08:58:37,878 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:37] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 08:58:42,019 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:42] "GET /nueva_venta/autocompletar_clientes?term=mi HTTP/1.1" 200 -
+2024-09-06 08:58:42,354 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:42] "GET /nueva_venta/autocompletar_clientes?term=mic HTTP/1.1" 200 -
+2024-09-06 08:58:42,666 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:42] "GET /nueva_venta/autocompletar_clientes?term=mich HTTP/1.1" 200 -
+2024-09-06 08:58:56,986 - INFO - 127.0.0.1 - - [06/Sep/2024 08:58:56] "GET /nueva_venta/autocompletar_productos?term=4514 HTTP/1.1" 200 -
+2024-09-06 08:59:00,461 - INFO - Datos recibidos: cliente=FRENOS MICHELENA                             , numero_venta=3038, fecha=2024-09-06, productos=[{'producto': 'BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL', 'cantidad': '1', 'precio': '58.00'}], monto_total=58
+2024-09-06 08:59:00,462 - INFO - Procesando producto: nombre_producto=BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, cantidad=1.0, precio=58.0
+2024-09-06 08:59:00,463 - INFO - Costo obtenido para BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL: 45.82
+2024-09-06 08:59:00,464 - INFO - Producto BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL insertado correctamente en la tabla Ventas
+2024-09-06 08:59:00,637 - INFO - Stock actualizado: Producto: BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, Cantidad anterior: 4.0, Cantidad vendida: 1.0, Nueva cantidad: 3.0
+2024-09-06 08:59:00,638 - INFO - La factura con el número de venta 3038 ya existe
+2024-09-06 08:59:00,640 - INFO - Deuda actualizada para cliente FRENOS MICHELENA                             . Nuevo monto_total=368.0
+2024-09-06 08:59:00,810 - INFO - Venta procesada correctamente para el número de venta 3038
+2024-09-06 08:59:00,811 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:00] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 08:59:12,407 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 08:59:12,436 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,463 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,472 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,474 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,474 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,476 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,485 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,485 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,489 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,496 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,498 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,499 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,502 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:12,508 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:12] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:17,993 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:17] "GET /clientes HTTP/1.1" 200 -
+2024-09-06 08:59:18,021 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,036 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,036 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,037 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,040 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,046 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,050 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,051 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,053 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,060 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,062 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,063 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,065 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:18,982 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:18] "GET /ver_deudas/ver_deudas HTTP/1.1" 200 -
+2024-09-06 08:59:19,014 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,020 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,031 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,032 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,033 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,034 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,035 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,044 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,048 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,049 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,049 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,054 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,057 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 08:59:19,061 - INFO - 127.0.0.1 - - [06/Sep/2024 08:59:19] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,662 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,659 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/js/clientes/registrar_abono.js HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,667 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "GET /static/css/global/style.css HTTP/1.1" 200 -
+2024-09-06 10:36:44,902 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,904 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,914 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,922 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,935 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,941 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,947 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,952 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,958 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,961 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,965 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:44,966 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:44] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,608 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,633 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,638 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,638 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,641 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,643 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,646 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,651 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,651 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,657 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,669 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,672 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:53,677 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:53] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,695 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 10:36:54,772 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,786 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,789 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,792 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,798 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,799 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,804 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,806 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,810 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,816 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,817 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,818 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:54,820 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:54] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,837 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 10:36:55,877 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,947 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,948 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,950 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,951 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,952 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,953 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,973 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,981 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,982 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,992 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,994 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,995 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:36:55,996 - INFO - 127.0.0.1 - - [06/Sep/2024 10:36:55] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:01,023 - INFO - Intentando eliminar la venta con número 3038
+2024-09-06 10:46:01,051 - INFO - Venta con número 3038 eliminada.
+2024-09-06 10:46:01,052 - INFO - Factura asociada a la venta 3038 eliminada.
+2024-09-06 10:46:01,103 - INFO - Deuda del cliente FRENOS MICHELENA actualizada a 183.0.
+2024-09-06 10:46:02,288 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:02] "POST /historial_ventas/eliminar_venta/3038 HTTP/1.1" 200 -
+2024-09-06 10:46:04,714 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 10:46:04,834 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,835 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,859 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,861 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,865 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,873 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,878 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,886 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,889 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,890 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,895 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,903 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,904 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:04,906 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:04] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,533 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,549 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,668 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,669 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,670 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,672 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,673 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,679 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,693 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,698 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,698 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,699 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,704 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:34,711 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:34] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,486 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,504 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,513 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,520 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,521 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,526 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,531 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,533 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,536 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,536 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,544 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,546 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:35,551 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:35] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,856 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 10:46:37,897 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,957 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,977 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,979 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,984 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,985 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,990 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:37,992 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:37] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,005 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,007 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,015 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,071 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,071 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,073 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:46:38,152 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:38] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 10:46:51,708 - INFO - 127.0.0.1 - - [06/Sep/2024 10:46:51] "GET /nueva_venta/autocompletar_clientes?term=mich HTTP/1.1" 200 -
+2024-09-06 10:47:12,634 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:12] "GET /nueva_venta/autocompletar_productos?term=BLOQUE%20INCOLBEST%204514D%20-%20FORD%20INT-5000%20/%20DODGE%20/C-60%20DEL HTTP/1.1" 200 -
+2024-09-06 10:47:14,991 - INFO - Datos recibidos: cliente=FRENOS MICHELENA                             , numero_venta=3038, fecha=2024-09-06, productos=[{'producto': 'BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL', 'cantidad': '1', 'precio': '58.00'}], monto_total=58
+2024-09-06 10:47:14,995 - INFO - Procesando producto: nombre_producto=BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, cantidad=1.0, precio=58.0
+2024-09-06 10:47:14,996 - INFO - Costo obtenido para BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL: 45.82
+2024-09-06 10:47:14,999 - INFO - Producto BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL insertado correctamente en la tabla Ventas
+2024-09-06 10:47:15,265 - INFO - Stock actualizado: Producto: BLOQUE INCOLBEST 4514D - FORD INT-5000 / DODGE /C-60 DEL, Cantidad anterior: 3.0, Cantidad vendida: 1.0, Nueva cantidad: 2.0
+2024-09-06 10:47:15,512 - INFO - Factura creada correctamente para el número de venta 3038
+2024-09-06 10:47:15,514 - INFO - Deuda actualizada para cliente FRENOS MICHELENA                             . Nuevo monto_total=635.0
+2024-09-06 10:47:15,678 - INFO - Venta procesada correctamente para el número de venta 3038
+2024-09-06 10:47:15,729 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:15] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 10:47:19,639 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 10:47:19,676 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,705 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,709 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,714 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,717 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,728 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,728 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,737 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,737 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,748 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,752 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,753 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,754 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:19,755 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:19] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:23,893 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:23] "GET /ver_deudas/ver_deudas HTTP/1.1" 200 -
+2024-09-06 10:47:23,932 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:23] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:23,999 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:23] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,001 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,001 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,007 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,016 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,075 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,087 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,087 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,094 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,110 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,115 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,117 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:47:24,119 - INFO - 127.0.0.1 - - [06/Sep/2024 10:47:24] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:07,889 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:07] "GET /clientes HTTP/1.1" 200 -
+2024-09-06 10:54:07,925 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:07] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,040 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,044 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,045 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,046 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,051 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,057 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,074 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,075 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,131 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,133 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,134 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,138 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:08,934 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "GET /historial_abonos/historial_abonos HTTP/1.1" 200 -
+2024-09-06 10:54:08,964 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:08] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,014 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,015 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,015 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,016 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,017 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,023 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/js/clientes/historial_abonos.js HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,039 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,096 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,098 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,099 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,103 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,105 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:09,109 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:09] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:45,300 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:45] "POST /ver_deudas/actualizar_deuda HTTP/1.1" 200 -
+2024-09-06 10:54:51,925 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "GET /ver_deudas/ver_deudas HTTP/1.1" 200 -
+2024-09-06 10:54:51,943 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,956 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,961 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,964 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,966 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,967 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,978 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,980 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,984 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,990 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,994 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:51,999 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:51] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:52,000 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:52] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 10:54:52,004 - INFO - 127.0.0.1 - - [06/Sep/2024 10:54:52] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:24,948 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:24] "GET /inventario HTTP/1.1" 200 -
+2024-09-06 11:00:25,023 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,051 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,052 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,052 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,053 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,054 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,055 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,071 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,077 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,080 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,080 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,088 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:25,089 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:25] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,092 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "GET /ver_inventario/ver_inventario HTTP/1.1" 200 -
+2024-09-06 11:00:26,130 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,160 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,161 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,162 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,162 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,168 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,170 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,204 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/js/inventario/ver_inventario.js HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,211 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,213 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,218 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,222 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,223 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:00:26,223 - INFO - 127.0.0.1 - - [06/Sep/2024 11:00:26] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,146 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "GET /ventas HTTP/1.1" 200 -
+2024-09-06 11:42:07,532 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,654 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,659 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,664 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,669 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,687 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,756 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,766 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,769 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,777 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,784 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,791 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:07,791 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:07] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,806 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 11:42:10,853 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,951 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,952 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,953 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,954 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,955 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,957 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,976 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,977 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,978 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,988 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,990 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,991 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:10,991 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:10] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:11,208 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:11] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 11:42:13,569 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:13] "GET /nueva_venta/autocompletar_clientes?term=LA%20 HTTP/1.1" 200 -
+2024-09-06 11:42:13,759 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:13] "GET /nueva_venta/autocompletar_clientes?term=LA%20B HTTP/1.1" 200 -
+2024-09-06 11:42:14,094 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:14] "GET /nueva_venta/autocompletar_clientes?term=LA%20BO HTTP/1.1" 200 -
+2024-09-06 11:42:19,603 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:19] "GET /nueva_venta/autocompletar_productos?term=210 HTTP/1.1" 200 -
+2024-09-06 11:42:30,283 - INFO - Datos recibidos: cliente=LA BOUTIQUE DEL FRENO                        , numero_venta=3039, fecha=2024-09-06, productos=[{'producto': "ROLLO FRENOSVEN 2' 1/2  X  210 16-0036", 'cantidad': '2', 'precio': '36.00'}], monto_total=72
+2024-09-06 11:42:30,286 - INFO - Procesando producto: nombre_producto=ROLLO FRENOSVEN 2' 1/2  X  210 16-0036, cantidad=2.0, precio=36.0
+2024-09-06 11:42:30,287 - INFO - Costo obtenido para ROLLO FRENOSVEN 2' 1/2  X  210 16-0036: 26.45
+2024-09-06 11:42:30,393 - INFO - Producto ROLLO FRENOSVEN 2' 1/2  X  210 16-0036 insertado correctamente en la tabla Ventas
+2024-09-06 11:42:30,681 - INFO - Stock actualizado: Producto: ROLLO FRENOSVEN 2' 1/2  X  210 16-0036, Cantidad anterior: -4.0, Cantidad vendida: 2.0, Nueva cantidad: -6.0
+2024-09-06 11:42:30,903 - INFO - Factura creada correctamente para el número de venta 3039
+2024-09-06 11:42:30,957 - INFO - Deuda actualizada para cliente LA BOUTIQUE DEL FRENO                        . Nuevo monto_total=251.0
+2024-09-06 11:42:31,194 - INFO - Venta procesada correctamente para el número de venta 3039
+2024-09-06 11:42:31,243 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:31] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 11:42:37,901 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:37] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 11:42:38,053 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,054 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,086 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,087 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,089 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,097 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,109 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,115 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,120 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,121 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,129 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,188 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,191 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:38,193 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:38] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:42:44,182 - INFO - Iniciando la creación de la nota de entrega...
+2024-09-06 11:42:44,216 - INFO - Ruta plantilla: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx
+2024-09-06 11:42:44,217 - INFO - Ruta guardar: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0
+2024-09-06 11:42:44,324 - INFO - COM de Python inicializada correctamente.
+2024-09-06 11:42:45,485 - INFO - Excel iniciado correctamente.
+2024-09-06 11:42:46,000 - INFO - Plantilla de Excel abierta correctamente.
+2024-09-06 11:42:46,008 - INFO - Hoja activa seleccionada correctamente.
+2024-09-06 11:42:46,196 - INFO - Datos del cliente (razón social y RIF/Cédula) insertados correctamente.
+2024-09-06 11:42:46,314 - INFO - Dirección del cliente insertada correctamente.
+2024-09-06 11:42:46,345 - INFO - Teléfono del cliente insertado correctamente.
+2024-09-06 11:42:46,508 - INFO - Datos de todos los productos insertados correctamente.
+2024-09-06 11:42:46,873 - INFO - Archivo guardado correctamente en: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE.3039_LA BOUTIQUE DEL FRENO.xlsx
+2024-09-06 11:42:48,852 - INFO - Archivo NDE.3039_LA BOUTIQUE DEL FRENO.xlsx abierto correctamente.
+2024-09-06 11:42:48,852 - INFO - Proceso de creación de la nota de entrega completado.
+2024-09-06 11:42:49,053 - INFO - 127.0.0.1 - - [06/Sep/2024 11:42:49] "POST /historial_ventas/generar_nota_entrega HTTP/1.1" 200 -
+2024-09-06 11:44:15,953 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:15] "GET /nueva_venta/nueva_venta HTTP/1.1" 200 -
+2024-09-06 11:44:16,193 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/registro_venta.js HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,194 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,225 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,226 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,227 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,228 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,232 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,235 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,240 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,244 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,253 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,258 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,259 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,262 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:16,314 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:16] "GET /nueva_venta/obtener_ultimo_numero_venta HTTP/1.1" 200 -
+2024-09-06 11:44:19,455 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:19] "GET /nueva_venta/autocompletar_clientes?term=RED HTTP/1.1" 200 -
+2024-09-06 11:44:19,961 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:19] "GET /nueva_venta/autocompletar_clientes?term=REDI HTTP/1.1" 200 -
+2024-09-06 11:44:25,900 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:25] "GET /nueva_venta/autocompletar_productos?term=8709 HTTP/1.1" 200 -
+2024-09-06 11:44:36,488 - INFO - Datos recibidos: cliente=REDIVAL                                      , numero_venta=3040, fecha=2024-09-06, productos=[{'producto': 'BANDA INCOLBEST 8709 ENCAVA ENT 900 DEL/TRAS 20181', 'cantidad': '2', 'precio': '33.00'}], monto_total=66
+2024-09-06 11:44:36,490 - INFO - Procesando producto: nombre_producto=BANDA INCOLBEST 8709 ENCAVA ENT 900 DEL/TRAS 20181, cantidad=2.0, precio=33.0
+2024-09-06 11:44:36,491 - INFO - Costo obtenido para BANDA INCOLBEST 8709 ENCAVA ENT 900 DEL/TRAS 20181: 28.26
+2024-09-06 11:44:36,492 - INFO - Producto BANDA INCOLBEST 8709 ENCAVA ENT 900 DEL/TRAS 20181 insertado correctamente en la tabla Ventas
+2024-09-06 11:44:36,679 - INFO - Stock actualizado: Producto: BANDA INCOLBEST 8709 ENCAVA ENT 900 DEL/TRAS 20181, Cantidad anterior: 6.0, Cantidad vendida: 2.0, Nueva cantidad: 4.0
+2024-09-06 11:44:37,079 - INFO - Factura creada correctamente para el número de venta 3040
+2024-09-06 11:44:37,257 - INFO - Deuda actualizada para cliente REDIVAL                                      . Nuevo monto_total=579.0
+2024-09-06 11:44:37,418 - INFO - Venta procesada correctamente para el número de venta 3040
+2024-09-06 11:44:37,419 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:37] "POST /nueva_venta/procesar_venta HTTP/1.1" 200 -
+2024-09-06 11:44:41,511 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 11:44:41,539 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,690 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,691 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,692 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,695 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,697 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,705 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,717 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,720 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,721 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,735 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,739 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,740 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:41,741 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:41] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:44:43,835 - INFO - Iniciando la creación de la nota de entrega...
+2024-09-06 11:44:43,863 - INFO - Ruta plantilla: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE._PLANTILLA2.xlsx
+2024-09-06 11:44:43,863 - INFO - Ruta guardar: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0
+2024-09-06 11:44:43,967 - INFO - COM de Python inicializada correctamente.
+2024-09-06 11:44:44,391 - INFO - Excel iniciado correctamente.
+2024-09-06 11:44:44,844 - INFO - Plantilla de Excel abierta correctamente.
+2024-09-06 11:44:44,847 - INFO - Hoja activa seleccionada correctamente.
+2024-09-06 11:44:44,926 - INFO - Datos del cliente (razón social y RIF/Cédula) insertados correctamente.
+2024-09-06 11:44:45,004 - INFO - Dirección del cliente insertada correctamente.
+2024-09-06 11:44:45,035 - INFO - Teléfono del cliente insertado correctamente.
+2024-09-06 11:44:45,194 - INFO - Datos de todos los productos insertados correctamente.
+2024-09-06 11:44:45,527 - INFO - Archivo guardado correctamente en: C:\Users\arnaldo\Dropbox\TRABAJO\NOTA_DE_ENTREGA 2.0\NDE.3040_REDIVAL.xlsx
+2024-09-06 11:44:46,546 - INFO - Archivo NDE.3040_REDIVAL.xlsx abierto correctamente.
+2024-09-06 11:44:46,547 - INFO - Proceso de creación de la nota de entrega completado.
+2024-09-06 11:44:46,628 - INFO - 127.0.0.1 - - [06/Sep/2024 11:44:46] "POST /historial_ventas/generar_nota_entrega HTTP/1.1" 200 -
+2024-09-06 11:46:14,346 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "GET /historial_ventas/historial_ventas HTTP/1.1" 200 -
+2024-09-06 11:46:14,367 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,457 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/js/ventas/historial_ventas.js HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,458 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,459 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,467 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,469 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,472 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,477 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,486 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,493 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,503 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,509 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,509 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:46:14,510 - INFO - 127.0.0.1 - - [06/Sep/2024 11:46:14] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,742 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,747 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/js/clientes/historial_abonos.js HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,840 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,842 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,846 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,847 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,855 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,864 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,872 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,881 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,886 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,889 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,894 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:47,948 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:47] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,075 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,102 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,103 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,114 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,115 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,120 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,130 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,136 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,137 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,138 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,145 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,148 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,149 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,757 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,822 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,830 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,831 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,831 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,838 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,855 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,862 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,864 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,890 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,890 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,895 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:48,898 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:48] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,803 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "GET / HTTP/1.1" 200 -
+2024-09-06 11:49:49,831 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,852 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,853 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,854 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,854 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,856 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,858 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,862 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,870 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,880 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,881 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,891 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:49,895 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:49] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,158 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "GET /ver_deudas/ver_deudas HTTP/1.1" 200 -
+2024-09-06 11:49:51,204 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/global/style.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,219 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/layouts/botones.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,220 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/components/formularios.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,220 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/components/tarjetas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,221 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/components/tablas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,223 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/index.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,229 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/ventas/historial_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,233 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/ventas/formulario_ventas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,237 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/compras/comprar_stock.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,242 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/compras/historial_compras.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,242 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/inventario/ver_inventario.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,246 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/clientes/historial_abonos.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,247 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/css/sections/clientes/ver_deudas.css HTTP/1.1[0m" 304 -
+2024-09-06 11:49:51,308 - INFO - 127.0.0.1 - - [06/Sep/2024 11:49:51] "[36mGET /static/js/clientes/ver_deudas.js HTTP/1.1[0m" 304 -
