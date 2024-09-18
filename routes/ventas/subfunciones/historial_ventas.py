@@ -101,6 +101,11 @@ def eliminar_venta(numero_venta):
                 cliente_id = factura[1]
 
                 try:
+                    # Obtener los productos y cantidades de la venta antes de eliminarla
+                    cursor.execute('SELECT producto, cantidad FROM Ventas WHERE numero_venta = ?', (numero_venta,))
+                    detalles_venta = cursor.fetchall()
+                    print(detalles_venta)
+
                     # Eliminar la venta
                     cursor.execute('DELETE FROM Ventas WHERE numero_venta = ?', (numero_venta,))
                     logger.info(f'Venta con número {numero_venta} eliminada.')
@@ -125,7 +130,12 @@ def eliminar_venta(numero_venta):
                             logger.info(f'Deuda del cliente {cliente} eliminada debido a saldo negativo.')
                     else:
                         logger.warning(f'No se encontró deuda para el cliente {cliente_id}.')
-                    
+
+                    for producto, cantidad in detalles_venta:
+                        # Actualiza el inventario sumando de nuevo las cantidades que se vendieron
+                        cursor.execute('UPDATE Inventario SET CANTIDAD = CANTIDAD + ? WHERE PRODUCTO = ?', (cantidad, producto))
+                        logger.info(f'Inventario actualizado: Producto {producto}, cantidad restituida {cantidad}')
+
                 except Exception as e:
                     db.rollback()  # Deshacer cualquier cambio en caso de error
                     logger.error(f'Error al eliminar la venta o actualizar la deuda: {e}')

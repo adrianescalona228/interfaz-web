@@ -2,3 +2,146 @@
 2024-09-10 10:41:57,986 ERROR: Chat no encontrado con el nombre Pipa.
 2024-09-10 10:41:59,431 ERROR: Chat no encontrado con el nombre +58 424-4074402.
 2024-09-10 10:42:00,410 ERROR: Chat no encontrado con el nombre Andres Guerra.
+2024-09-10 11:50:44,663 ERROR: Chat no encontrado con el nombre Andres Guerra.
+2024-09-10 11:50:45,532 ERROR: Chat no encontrado con el nombre Ruth Juge.
+2024-09-10 11:51:05,603 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 11:51:08,497 ERROR: Chat no encontrado con el nombre Andres Guerra.
+2024-09-10 11:51:27,569 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 11:51:32,497 ERROR: Chat no encontrado con el nombre Andres Guerra.
+2024-09-10 11:52:19,476 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 11:52:24,761 ERROR: Chat no encontrado con el nombre Andres Guerra.
+2024-09-10 11:52:58,804 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 11:53:04,041 ERROR: Chat no encontrado con el nombre Andrés Guerra.
+2024-09-10 11:53:36,641 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 11:53:39,616 ERROR: Chat no encontrado con el nombre Andrés Guerra.
+2024-09-10 12:05:12,569 ERROR: Error al enviar el mensaje: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF77D16B5D2+29090]
+	(No symbol) [0x00007FF77D0DE689]
+	(No symbol) [0x00007FF77CF9B1CA]
+	(No symbol) [0x00007FF77CFEEFD7]
+	(No symbol) [0x00007FF77CFEF22C]
+	(No symbol) [0x00007FF77D0397F7]
+	(No symbol) [0x00007FF77D01672F]
+	(No symbol) [0x00007FF77D0365D9]
+	(No symbol) [0x00007FF77D016493]
+	(No symbol) [0x00007FF77CFE09B1]
+	(No symbol) [0x00007FF77CFE1B11]
+	GetHandleVerifier [0x00007FF77D488C5D+3295277]
+	GetHandleVerifier [0x00007FF77D4D4843+3605523]
+	GetHandleVerifier [0x00007FF77D4CA707+3564247]
+	GetHandleVerifier [0x00007FF77D226EB6+797318]
+	(No symbol) [0x00007FF77D0E980F]
+	(No symbol) [0x00007FF77D0E53F4]
+	(No symbol) [0x00007FF77D0E5580]
+	(No symbol) [0x00007FF77D0D4A1F]
+	BaseThreadInitThunk [0x00007FFF57A8257D+29]
+	RtlUserThreadStart [0x00007FFF598AAF28+40]
+
+2024-09-10 12:05:44,872 ERROR: Error al enviar el mensaje: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF77D16B5D2+29090]
+	(No symbol) [0x00007FF77D0DE689]
+	(No symbol) [0x00007FF77CF9B1CA]
+	(No symbol) [0x00007FF77CFEEFD7]
+	(No symbol) [0x00007FF77CFEF22C]
+	(No symbol) [0x00007FF77D0397F7]
+	(No symbol) [0x00007FF77D01672F]
+	(No symbol) [0x00007FF77D0365D9]
+	(No symbol) [0x00007FF77D016493]
+	(No symbol) [0x00007FF77CFE09B1]
+	(No symbol) [0x00007FF77CFE1B11]
+	GetHandleVerifier [0x00007FF77D488C5D+3295277]
+	GetHandleVerifier [0x00007FF77D4D4843+3605523]
+	GetHandleVerifier [0x00007FF77D4CA707+3564247]
+	GetHandleVerifier [0x00007FF77D226EB6+797318]
+	(No symbol) [0x00007FF77D0E980F]
+	(No symbol) [0x00007FF77D0E53F4]
+	(No symbol) [0x00007FF77D0E5580]
+	(No symbol) [0x00007FF77D0D4A1F]
+	BaseThreadInitThunk [0x00007FFF57A8257D+29]
+	RtlUserThreadStart [0x00007FFF598AAF28+40]
+
+2024-09-10 12:06:17,775 ERROR: Error al enviar el mensaje: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF77D16B5D2+29090]
+	(No symbol) [0x00007FF77D0DE689]
+	(No symbol) [0x00007FF77CF9B1CA]
+	(No symbol) [0x00007FF77CFEEFD7]
+	(No symbol) [0x00007FF77CFEF22C]
+	(No symbol) [0x00007FF77D0397F7]
+	(No symbol) [0x00007FF77D01672F]
+	(No symbol) [0x00007FF77D0365D9]
+	(No symbol) [0x00007FF77D016493]
+	(No symbol) [0x00007FF77CFE09B1]
+	(No symbol) [0x00007FF77CFE1B11]
+	GetHandleVerifier [0x00007FF77D488C5D+3295277]
+	GetHandleVerifier [0x00007FF77D4D4843+3605523]
+	GetHandleVerifier [0x00007FF77D4CA707+3564247]
+	GetHandleVerifier [0x00007FF77D226EB6+797318]
+	(No symbol) [0x00007FF77D0E980F]
+	(No symbol) [0x00007FF77D0E53F4]
+	(No symbol) [0x00007FF77D0E5580]
+	(No symbol) [0x00007FF77D0D4A1F]
+	BaseThreadInitThunk [0x00007FFF57A8257D+29]
+	RtlUserThreadStart [0x00007FFF598AAF28+40]
+
+2024-09-10 12:06:26,375 ERROR: Error al enviar el mensaje: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=128.0.6613.120)
+Stacktrace:
+	GetHandleVerifier [0x00007FF77D16B5D2+29090]
+	(No symbol) [0x00007FF77D0DE689]
+	(No symbol) [0x00007FF77CF9B1CA]
+	(No symbol) [0x00007FF77CF6FAF5]
+	(No symbol) [0x00007FF77D01E2E7]
+	(No symbol) [0x00007FF77D035EE1]
+	(No symbol) [0x00007FF77D016493]
+	(No symbol) [0x00007FF77CFE09B1]
+	(No symbol) [0x00007FF77CFE1B11]
+	GetHandleVerifier [0x00007FF77D488C5D+3295277]
+	GetHandleVerifier [0x00007FF77D4D4843+3605523]
+	GetHandleVerifier [0x00007FF77D4CA707+3564247]
+	GetHandleVerifier [0x00007FF77D226EB6+797318]
+	(No symbol) [0x00007FF77D0E980F]
+	(No symbol) [0x00007FF77D0E53F4]
+	(No symbol) [0x00007FF77D0E5580]
+	(No symbol) [0x00007FF77D0D4A1F]
+	BaseThreadInitThunk [0x00007FFF57A8257D+29]
+	RtlUserThreadStart [0x00007FFF598AAF28+40]
+
+2024-09-10 12:27:24,066 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 12:28:59,434 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 12:47:34,652 ERROR: Chat no encontrado con el nombre Pipa.
+2024-09-10 12:56:15,626 ERROR: Error al confirmar el chat +58 424-4074402: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=128.0.6613.120)
+Stacktrace:
+	GetHandleVerifier [0x00007FF610A7B5D2+29090]
+	(No symbol) [0x00007FF6109EE689]
+	(No symbol) [0x00007FF6108AB1CA]
+	(No symbol) [0x00007FF61087FAF5]
+	(No symbol) [0x00007FF61092E2E7]
+	(No symbol) [0x00007FF610945EE1]
+	(No symbol) [0x00007FF610926493]
+	(No symbol) [0x00007FF6108F09B1]
+	(No symbol) [0x00007FF6108F1B11]
+	GetHandleVerifier [0x00007FF610D98C5D+3295277]
+	GetHandleVerifier [0x00007FF610DE4843+3605523]
+	GetHandleVerifier [0x00007FF610DDA707+3564247]
+	GetHandleVerifier [0x00007FF610B36EB6+797318]
+	(No symbol) [0x00007FF6109F980F]
+	(No symbol) [0x00007FF6109F53F4]
+	(No symbol) [0x00007FF6109F5580]
+	(No symbol) [0x00007FF6109E4A1F]
+	BaseThreadInitThunk [0x00007FFF57A8257D+29]
+	RtlUserThreadStart [0x00007FFF598AAF28+40]
+
+2024-09-10 13:05:05,634 ERROR: Error al confirmar el chat +58 424-4074402: Message: 
+
+2024-09-10 13:05:38,403 ERROR: Error al confirmar el chat Pipa: Message: 
+
+2024-09-10 13:19:39,568 ERROR: Error al confirmar el chat +58 424-4074402: Message: 
+
+2024-09-10 13:20:12,319 ERROR: Error al confirmar el chat Pipa: Message: 
+
