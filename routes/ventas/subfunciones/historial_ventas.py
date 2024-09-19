@@ -175,7 +175,7 @@ def eliminar_producto(numero_venta, id):
         if producto:
             precio = producto[5]
             cantidad = producto[4]
-
+            nombre_producto = producto[3]
             monto_total_producto = precio * cantidad
 
             # Obtener datos de la factura
@@ -200,6 +200,11 @@ def eliminar_producto(numero_venta, id):
                     cursor.execute('UPDATE Facturas SET monto_total = ? WHERE numero_venta = ?', (monto_final_factura, numero_venta))
                 else:
                     cursor.execute('DELETE FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+
+                # Actualizar el inventario sumando de nuevo la cantidad eliminada
+                cursor.execute('UPDATE Inventario SET CANTIDAD = CANTIDAD + ? WHERE PRODUCTO = ?', (cantidad, nombre_producto))
+                logger.info(f'Inventario actualizado: Producto {nombre_producto}, cantidad restituida {cantidad}')
+
                 
                 db.commit()
                 logger.info(f'Producto con id {id} eliminado de la venta {numero_venta}.')
