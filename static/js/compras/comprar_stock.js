@@ -97,7 +97,7 @@ function agregarProducto(producto, cantidad, costo) {
             <td>${producto}</td>
             <td><input type="number" class="cantidad" value="${cantidad}" min="1"></td>
             <td><input type="number" class="costo" value="${parsedCosto.toFixed(2)}" step="0.01"></td>
-            <td class="total-producto">$${(cantidad * parsedCosto).toFixed(2)}</td>
+            <td class="total-producto">$${(parseFloat(cantidad) * parsedCosto).toFixed(2)}</td>
             <td><span class="eliminar-producto" title="Eliminar Producto" style="color: red; cursor: pointer;">&#x2716;</span></td>
         </tr>
     `;
@@ -154,10 +154,10 @@ function procesarCompra() {
         vaciarCarrito();
         $('#proveedor').val('');
         $('#numero_compra').val('');
-        alert('Success:', data);  // Manejar la respuesta con éxito
+        alert('Success: '+ data.message);  // Manejar la respuesta con éxito
         // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito o redirigir
     })
     .catch((error) => {
-        alert('Error:', error);  // Manejar cualquier error
+        alert('Error: '+ data.error);  // Manejar cualquier error
     });
 } 

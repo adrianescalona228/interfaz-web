@@ -32,6 +32,12 @@ def procesar_compra():
         db.execute('BEGIN TRANSACTION')
         logger.info(f"Transacción iniciada para la compra: {numero_compra}")
 
+        # Verificar si el número de compra ya existe
+        cursor.execute('SELECT 1 FROM compras WHERE numero_compra = ?', (numero_compra,))
+        if cursor.fetchone():
+            raise ValueError('Este número de factura ya ha sido registrado.')
+
+
         proveedor_id = obtener_proveedor_id(cursor, proveedor)
         if proveedor_id is None:
             raise ValueError('Proveedor no encontrado')
@@ -77,7 +83,8 @@ def obtener_proveedor_id(cursor, proveedor):
         raise
 def calcular_total_compra(productos):
     try:
-        return sum(float(producto['costo']) * int(producto['cantidad']) for producto in productos)
+        total_compra = sum(float(producto['costo']) * int(producto['cantidad']) for producto in productos)
+        return round(total_compra, 2)
     except (ValueError, KeyError) as e:
         logging.error(f'Error al calcular el total de la compra: {e}')
         raise
@@ -139,15 +146,15 @@ def autocompletar_proveedores():
     return jsonify(clientes)
 
 
-@comprar_stock_bp.route('/obtener_ultimo_numero_venta', methods=['GET'])
-def obtener_ultimo_numero_venta():
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute('SELECT MAX(numero_compra) as ultimo_numero FROM Compras')
-    result = cursor.fetchone()
-    ultimo_numero = result['ultimo_numero']
+# @comprar_stock_bp.route('/obtener_ultimo_numero_venta', methods=['GET'])
+# def obtener_ultimo_numero_venta():
+#     db = get_db()
+#     cursor = db.cursor()
+#     cursor.execute('SELECT MAX(numero_compra) as ultimo_numero FROM Compras')
+#     result = cursor.fetchone()
+#     ultimo_numero = result['ultimo_numero']
     
-    if ultimo_numero is None:
-        return jsonify({'ultimo_numero': 1})  # Si no hay ventas, empezar desde 1
-    else:
-        return jsonify({'ultimo_numero': int(ultimo_numero) + 1})
+#     if ultimo_numero is None:
+#         return jsonify({'ultimo_numero': 1})  # Si no hay ventas, empezar desde 1
+#     else:
+#         return jsonify({'ultimo_numero': int(ultimo_numero) + 1})

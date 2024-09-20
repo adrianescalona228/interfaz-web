@@ -52,7 +52,7 @@
                             <td>{{ producto.producto }}</td>
                             <td>{{ producto.cantidad }}</td>
                             <td>{{ producto.costo }}</td>
-                            <td>{{ producto.cantidad * producto.costo }}</td>
+                            <td>{{ (producto.cantidad * producto.costo) | round(2) }}</td>
                             <td>
                                 <button class="eliminar-producto" title="Eliminar Producto" data-compra-id="{{ compra.numero_compra }}" data-producto-id="{{ producto.producto_id }}">&#x2716;</button>
                             </td>
@@ -64,7 +64,7 @@
                             <td></td>
                             <td></td>
                             <td><strong>Total Compra:</strong></td>
-                            <td><strong>{{ compra.total_compra }}</strong></td>
+                            <td><strong>{{ (compra.total_compra) | round(2) }}</strong></td>
                             <td></td>
                         </tr>
                     </tfoot>
