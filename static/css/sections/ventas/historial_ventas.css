@@ -12,8 +12,7 @@
     flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no caben */
     flex-direction: column;
     justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
-
-  }
+}
 
 .contenedor {
     flex: 1;
@@ -24,6 +23,7 @@
 
 .info-cliente {
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
 }
 
 .info-productos-body {
@@ -33,3 +33,7 @@
 .total-venta-row {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+/* .info-productos {
+    display: none; Oculta la tabla de productos por defecto
+} */

@@ -138,3 +138,10 @@ document.querySelectorAll('.eliminar-producto').forEach(button => {
         });
     });
 });
+
+$(document).ready(function() {
+    $('.cliente').on('click', function() {
+        // Selecciona la fila siguiente (que contiene la tabla de productos)
+        $(this).closest('tr').next('.info-productos').toggle();
+    });
+});

@@ -7,3 +7,5 @@ venv/
 
 *.xlsx
 /logs/
+
+logs_pipa/
