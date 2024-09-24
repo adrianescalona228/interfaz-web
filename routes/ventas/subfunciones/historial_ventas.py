@@ -126,8 +126,7 @@ def eliminar_venta(numero_venta):
                             cursor.execute('UPDATE Deudas SET monto_total = ? WHERE cliente_id = ?', (monto_final_deuda, cliente_id))
                             logger.info(f'Deuda del cliente {cliente} actualizada a {monto_final_deuda}.')
                         else:
-                            cursor.execute('DELETE FROM Deudas WHERE cliente_id = ?', (cliente_id,))
-                            logger.info(f'Deuda del cliente {cliente} eliminada debido a saldo negativo.')
+                            logger.info(f'Deuda del cliente {cliente} tiene saldo negativo.')
                     else:
                         logger.warning(f'No se encontró deuda para el cliente {cliente_id}.')
 
