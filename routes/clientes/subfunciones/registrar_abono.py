@@ -36,7 +36,7 @@ def registrar_abono():
         actualizar_deuda_cliente(cursor, cliente_id, monto_abono)
 
         db.commit()
-        logging.info('Abono registrado correctamente: cliente_id=%d, monto_abono=%.2f, fecha=%s', cliente_id, monto_abono, fecha)
+        logging.info('Abono registrado correctamente: cliente=%s, monto_abono=%.2f, fecha=%s', cliente, monto_abono, fecha)
         return jsonify({'success': True, 'message': 'Abono registrado correctamente'})
 
     except Exception as e:
