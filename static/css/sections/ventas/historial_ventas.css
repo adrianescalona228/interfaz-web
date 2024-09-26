@@ -37,3 +37,7 @@
 /* .info-productos {
     display: none; Oculta la tabla de productos por defecto
 } */
+
+.oculto {
+    display: none;
+}

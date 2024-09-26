@@ -25,6 +25,7 @@
                     <th>Nro. de venta</th>
                     <th>Cliente</th>
                     <th>Fecha</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -34,15 +35,17 @@
                     <td>{{ venta.numero_venta }}</td>
                     <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
                     <td>{{ venta.fecha }}</td>
+                    <td style="text-transform: uppercase;">{{ venta.estado }}</td>
+                    <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
                     <td>
                         <button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button>
                     </td>
                 </tr>
                 <tr class="info-productos" style="display: none;">
-                    <td colspan="4">
+                    <td colspan="6"> <!-- Cambié a 6 para que abarque toda la fila -->
                         <table class="info-productos">
                             <thead>
-                                <tr class="info-productos-head">
+                                <tr>
                                     <th>Producto</th>
                                     <th>Cantidad</th>
                                     <th>Precio Unitario</th>

@@ -32,54 +32,33 @@ let filtroActivo = false; // Variable para llevar el seguimiento del estado del 
 
 document.getElementById('buscador').addEventListener('input', function () {
     let filtro = this.value.toLowerCase();
-    let contenedoresVentas = document.querySelectorAll('.contenedor');
+    let contenedoresVentas = document.querySelectorAll('.ventas-principal tbody tr:not(.info-productos)');
 
     contenedoresVentas.forEach(function (contenedor) {
-        let numeroVenta = contenedor.querySelector('tbody td:nth-child(1)').textContent.toLowerCase();
-        let nombreCliente = contenedor.querySelector('tbody td:nth-child(2)').textContent.toLowerCase();
-        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(5)').textContent.trim();
-        let estado = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim(); // Ajusta según la columna de estado
-
-        let mostrar = numeroVenta.includes(filtro) || nombreCliente.includes(filtro);
-
-        if (filtroActivo) {
-            // Si el filtro de vencimiento está activo, verificamos también la fecha y el estado
-            mostrar = mostrar && fechaVencimiento && fechaVencimiento < new Date().toISOString().split('T')[0] && estado.toUpperCase() === 'PENDIENTE';
-        }
-
-        contenedor.style.display = mostrar ? '' : 'none';
-    });
-});
-
-document.getElementById('mostrar_facturas_vencidas').addEventListener('click', function() {
-    filtroActivo = !filtroActivo; // Alternar el estado del filtro de vencimiento
-
-    let today = new Date().toISOString().split('T')[0];
-    let contenedoresVentas = document.querySelectorAll('.contenedor');
-
-    contenedoresVentas.forEach(function(contenedor) {
-        let fechaVencimiento = contenedor.querySelector('tbody td:nth-child(5)').textContent.trim();
-        let estado = contenedor.querySelector('tbody td:nth-child(4)').textContent.trim(); // Ajusta según la columna de estado
-
-        let mostrar = true;
-
-        if (filtroActivo) {
-            // Si el filtro de vencimiento está activo, mostramos solo las facturas vencidas y pendientes
-            mostrar = fechaVencimiento && fechaVencimiento < today && estado.toUpperCase() === 'PENDIENTE';
-        }
-
-        // Aplicar el filtro de búsqueda también
-        let filtro = document.getElementById('buscador').value.toLowerCase();
-        let numeroVenta = contenedor.querySelector('tbody td:nth-child(1)').textContent.toLowerCase();
-        let nombreCliente = contenedor.querySelector('tbody td:nth-child(2)').textContent.toLowerCase();
+        let numeroVentaCelda = contenedor.querySelector('tbody td:nth-child(1)');
+        let nombreClienteCelda = contenedor.querySelector('tbody td:nth-child(2)');
+        let estadoCelda = contenedor.querySelector('tbody td:nth-child(4)');
         
-        mostrar = mostrar && (numeroVenta.includes(filtro) || nombreCliente.includes(filtro));
+        // Comprobaciones de existencia
+        if (numeroVentaCelda && nombreClienteCelda && estadoCelda) {
+            let numeroVenta = numeroVentaCelda.textContent.toLowerCase();
+            let nombreCliente = nombreClienteCelda.textContent.toLowerCase();
+            let estado = estadoCelda.textContent.trim();
 
-        contenedor.style.display = mostrar ? '' : 'none';
+            let mostrar = numeroVenta.includes(filtro) || nombreCliente.includes(filtro);
+
+            contenedor.style.display = mostrar ? '' : 'none';
+        }
     });
-
-    this.textContent = filtroActivo ? 'Mostrar Todas las Facturas' : 'Mostrar Facturas Vencidas';
 });
+
+// Ejemplo de cómo activar el filtro de vencimiento
+document.getElementById('mostrar_facturas_vencidas').addEventListener('click', function () {
+    filtroActivo = !filtroActivo; // Alternar el estado del filtro
+    this.textContent = filtroActivo ? 'Mostrar Todas las Facturas' : 'Mostrar Facturas Vencidas'; // Cambiar el texto del botón
+    document.getElementById('buscador').dispatchEvent(new Event('input')); // Disparar el evento de entrada para actualizar la búsqueda
+});
+
 
 document.querySelectorAll('.eliminar-venta').forEach(button => {
     button.addEventListener('click', function() {
