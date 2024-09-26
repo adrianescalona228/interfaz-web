@@ -1,3 +1,12 @@
+
+/* .container-principal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+} */
+
 #buscador {
     width: 30%;
     padding: 10px;
@@ -12,8 +21,7 @@
     flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no caben */
     flex-direction: column;
     justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
-
-  }
+}
 
 .contenedor {
     flex: 1;

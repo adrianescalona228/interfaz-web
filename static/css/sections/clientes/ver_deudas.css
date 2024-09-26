@@ -6,12 +6,20 @@
     background-color: white; /* Opcional: Fija un fondo para el buscador */
     z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
 }
-
+.table-container {
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    height: calc(75vh - 90px); /* Altura del contenedor ajustada */
+    width: 100%;
+}
 .tabla-deudas {
+    width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho del contenedor */
     display: block;
 }
 
 .tabla-deudas tbody td{
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
 }
+
+
 
