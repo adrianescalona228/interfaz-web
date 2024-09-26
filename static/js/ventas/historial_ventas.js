@@ -37,7 +37,7 @@ document.getElementById('buscador').addEventListener('input', function () {
     contenedoresVentas.forEach(function (contenedor) {
         let numeroVentaCelda = contenedor.querySelector('tbody td:nth-child(1)');
         let nombreClienteCelda = contenedor.querySelector('tbody td:nth-child(2)');
-        let estadoCelda = contenedor.querySelector('tbody td:nth-child(4)');
+        let estadoCelda = contenedor.querySelector('tbody td:nth-child(5)');
         
         // Comprobaciones de existencia
         if (numeroVentaCelda && nombreClienteCelda && estadoCelda) {
