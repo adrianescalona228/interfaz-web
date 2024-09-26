@@ -6,7 +6,7 @@ from flask import g
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Configura la base de datos usando una ruta relativa
-DATABASE = os.path.join(basedir, '..', 'DATABASE', 'inventory2.db')
+DATABASE = os.path.join(basedir, '..', 'DATABASE', 'inventory2_copy3.db')
 
 def get_db():
     if 'db' not in g:

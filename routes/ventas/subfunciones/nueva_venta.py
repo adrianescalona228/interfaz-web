@@ -1,7 +1,7 @@
 # routes/ventas/subfunciones/nueva_venta.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from ...database import get_db
+from ...database2 import get_db
 from datetime import datetime, timedelta
 import logging
 
