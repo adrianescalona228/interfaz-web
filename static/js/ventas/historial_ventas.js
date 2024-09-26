@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-    
+
 let filtroActivo = false; // Variable para llevar el seguimiento del estado del filtro de vencimiento
 
 document.getElementById('buscador').addEventListener('input', function () {
@@ -35,22 +35,61 @@ document.getElementById('buscador').addEventListener('input', function () {
     let contenedoresVentas = document.querySelectorAll('.ventas-principal tbody tr:not(.info-productos)');
 
     contenedoresVentas.forEach(function (contenedor) {
-        let numeroVentaCelda = contenedor.querySelector('tbody td:nth-child(1)');
-        let nombreClienteCelda = contenedor.querySelector('tbody td:nth-child(2)');
-        let estadoCelda = contenedor.querySelector('tbody td:nth-child(5)');
-        
-        // Comprobaciones de existencia
-        if (numeroVentaCelda && nombreClienteCelda && estadoCelda) {
-            let numeroVenta = numeroVentaCelda.textContent.toLowerCase();
-            let nombreCliente = nombreClienteCelda.textContent.toLowerCase();
-            let estado = estadoCelda.textContent.trim();
+        let numeroVentaCell = contenedor.querySelector('td:nth-child(1)');
+        let nombreClienteCell = contenedor.querySelector('td:nth-child(2)');
+        let estadoCell = contenedor.querySelector('td:nth-child(5)');
 
+        // Aquí accedemos a la fecha de vencimiento de una forma diferente
+        let fechaVencimientoCell = contenedor.querySelector('td:nth-child(6)'); // sigue existiendo
+        let fechaVencimiento = fechaVencimientoCell ? fechaVencimientoCell.textContent.trim() : null;
+
+        // Comprobaciones para evitar null
+        if (numeroVentaCell && nombreClienteCell && estadoCell && fechaVencimiento) {
+            let numeroVenta = numeroVentaCell.textContent.toLowerCase();
+            let nombreCliente = nombreClienteCell.textContent.toLowerCase();
+            let estado = estadoCell.textContent.trim().toUpperCase(); // Estado
+
+            let hoy = new Date().toISOString().split('T')[0]; // Fecha actual
+
+            // Lógica para mostrar
             let mostrar = numeroVenta.includes(filtro) || nombreCliente.includes(filtro);
 
+            if (filtroActivo) {
+                // Si el filtro de vencimiento está activo, verificamos también la fecha y el estado
+                mostrar = mostrar && (estado === 'PENDIENTE') && (fechaVencimiento && fechaVencimiento < hoy);
+            }
+
+            // Mostrar u ocultar la fila de la venta
             contenedor.style.display = mostrar ? '' : 'none';
+        } else {
+            // Si alguno de los elementos es null, ocultar la fila
+            contenedor.style.display = 'none';
         }
+
     });
 });
+
+// document.getElementById('buscador').addEventListener('input', function () {
+//     let filtro = this.value.toLowerCase();
+//     let contenedoresVentas = document.querySelectorAll('.ventas-principal tbody tr:not(.info-productos)');
+
+//     contenedoresVentas.forEach(function (contenedor) {
+//         let numeroVentaCelda = contenedor.querySelector('tbody td:nth-child(1)');
+//         let nombreClienteCelda = contenedor.querySelector('tbody td:nth-child(2)');
+//         let estadoCelda = contenedor.querySelector('tbody td:nth-child(5)');
+        
+//         // Comprobaciones de existencia
+//         if (numeroVentaCelda && nombreClienteCelda && estadoCelda) {
+//             let numeroVenta = numeroVentaCelda.textContent.toLowerCase();
+//             let nombreCliente = nombreClienteCelda.textContent.toLowerCase();
+//             let estado = estadoCelda.textContent.trim();
+
+//             let mostrar = numeroVenta.includes(filtro) || nombreCliente.includes(filtro);
+
+//             contenedor.style.display = mostrar ? '' : 'none';
+//         }
+//     });
+// });
 
 // Ejemplo de cómo activar el filtro de vencimiento
 document.getElementById('mostrar_facturas_vencidas').addEventListener('click', function () {
@@ -58,7 +97,6 @@ document.getElementById('mostrar_facturas_vencidas').addEventListener('click', f
     this.textContent = filtroActivo ? 'Mostrar Todas las Facturas' : 'Mostrar Facturas Vencidas'; // Cambiar el texto del botón
     document.getElementById('buscador').dispatchEvent(new Event('input')); // Disparar el evento de entrada para actualizar la búsqueda
 });
-
 
 document.querySelectorAll('.eliminar-venta').forEach(button => {
     button.addEventListener('click', function() {
@@ -118,9 +156,21 @@ document.querySelectorAll('.eliminar-producto').forEach(button => {
     });
 });
 
-$(document).ready(function() {
-    $('.cliente').on('click', function() {
-        // Selecciona la fila siguiente (que contiene la tabla de productos)
-        $(this).closest('tr').next('.info-productos').toggle();
-    });
+$('.cliente').on('click', function() {
+    // Selecciona la fila siguiente (que contiene la tabla de productos)
+    var $infoProductos = $(this).closest('tr').next('.info-productos');
+
+    // Comprobar si la fila de productos está visible
+    if ($infoProductos.is(':visible')) {
+        // Si está visible, ocultamos todos los hijos
+        $infoProductos.hide(); // Oculta la fila de productos
+    } else {
+        // Si está oculta, mostramos la fila
+        $infoProductos.show(); // Muestra la fila de productos
+        
+        // Opcional: Mostrar todos los elementos hijos dentro de la fila
+        $infoProductos.find('*').each(function() {
+            $(this).css('display', ''); // Restablece el display a su valor predeterminado
+        });
+    }
 });
