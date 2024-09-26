@@ -19,31 +19,35 @@
         <input type="text" id="buscador" placeholder="Buscar por número de venta o cliente...">
         <!-- Botón para mostrar facturas vencidas -->
         <button id="mostrar_facturas_vencidas">Mostrar Facturas Vencidas</button>
-        <section class="container-principal">
-
-            <div class="contenedor-ventas">
-                {% for venta in ventas | reverse%}
-                <section class="contenedor">
-                        <table class="info-cliente">
-                            <thead>
-                                <tr>
-                                    <th><strong>Nro. de venta:</strong></th>
-                                    <th><strong>Cliente:</strong></th>
-                                    <th><strong>Fecha:</strong></th>
-                                    <th><button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td>{{ venta.numero_venta }}</td>
-                                <td class="cliente">{{ venta.cliente }}</td> <!-- Cambié id por class -->
-                                <td>{{ venta.fecha }}</td>
-                                <td style="text-transform: uppercase;">{{ venta.estado }}</td>
-                                <td style="display: none;">{{ venta.fecha_vencimiento }}</td>
-                            </tbody>                        
-                        </table>
+        <table class="ventas-principal">
+            <thead>
+                <tr>
+                    <th>Nro. de venta</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Por pagar</th>
+                    <th>Estado</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas | reverse %}
+                <tr>
+                    <td>{{ venta.numero_venta }}</td>
+                    <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
+                    <td>{{ venta.fecha }}</td>
+                    <td><strong>{{ (venta.total_venta - venta.monto_pagado) }}</strong></td>
+                    <td style="text-transform: uppercase;">{{ venta.estado }}</td>
+                    <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
+                    <td>
+                        <button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button>
+                    </td>
+                </tr>
+                <tr class="info-productos" style="display: none;">
+                    <td colspan="6"> <!-- Cambié a 6 para que abarque toda la fila -->
                         <table class="info-productos">
                             <thead>
-                                <tr class="info-productos-head">
+                                <tr>
                                     <th>Producto</th>
                                     <th>Cantidad</th>
                                     <th>Precio Unitario</th>
@@ -74,10 +78,11 @@
                                 </tr>
                             </tfoot>
                         </table>
-                </section>
+                    </td>
+                </tr>
                 {% endfor %}
-            </div>
-        </section>
+            </tbody>
+        </table>
     </main>
     <footer>
         <span>Representaciones EG</span>
