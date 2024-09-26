@@ -7,10 +7,13 @@
     z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
 }
 .table-container {
-    flex: 1;
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    height: calc(80vh - 70px); /* Altura del contenedor ajustada */
 }
 .tabla-inventario {
-    display: block;
+    width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse; /* Para evitar espacios entre celdas */
+    min-width: 80vh; /* Ancho mínimo para la tabla */
 }
 /* Media queries para pantallas pequeñas */
 @media (max-width: 480px){
