@@ -5,7 +5,7 @@ from openpyxl import load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 import io
 import os
-from .database import get_db
+from .database2 import get_db
 
 crear_notas_entrega_bp = Blueprint('crear_notas_entrega', __name__)
 ruta_libro = '/home/apolito/Programacion/Proyectos/interfaz_web/DATABASE/NDE_PLANTILLA.xlsx'

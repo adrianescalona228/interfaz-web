@@ -5,7 +5,7 @@ from routes.ventas.ventas import ventas_bp
 from routes.compras.compras import compras_bp
 from routes.clientes.clientes import clientes_bp
 from routes.inventario.inventario import inventario_bp
-from routes.database import get_db
+from routes.database2 import get_db
 import os
 import logging
 import socket
@@ -18,7 +18,7 @@ import configparser
 class StreamToLogger:
     def __init__(self, logger, level):
         self.logger = logger
-        self.level = level
+        self.level = levels
         self.linebuf = ''
 
     def write(self, buf):

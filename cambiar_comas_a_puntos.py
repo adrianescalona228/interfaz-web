@@ -1,5 +1,5 @@
 import sqlite3
-from routes.database import get_db
+from routes.database2 import get_db
 
 # Conectar a la base de datos
 conn = get_db()
