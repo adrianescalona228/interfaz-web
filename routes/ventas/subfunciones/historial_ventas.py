@@ -1,7 +1,7 @@
 # routes/historial_ventas.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from ...database import get_db
+from ...database2 import get_db
 from urllib.parse import quote, unquote
 import os
 from openpyxl import load_workbook

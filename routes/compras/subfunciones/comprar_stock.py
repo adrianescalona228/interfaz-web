@@ -1,6 +1,6 @@
 # routes/compras/agregar_stock.py
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from ...database import get_db
+from ...database2 import get_db
 import logging
 
 logger = logging.getLogger(__name__)

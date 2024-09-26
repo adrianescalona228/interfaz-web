@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from ...database import get_db
+from ...database2 import get_db
 import logging
 
 historial_abonos_bp = Blueprint('historial_abonos', __name__)

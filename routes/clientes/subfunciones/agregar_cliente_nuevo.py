@@ -1,7 +1,7 @@
 # routes/agregar_stock.py
 import sqlite3
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from ...database import get_db
+from ...database2 import get_db
 import logging
 
 agregar_clientes_nuevos_bp = Blueprint('agregar_clientes_nuevos', __name__)
