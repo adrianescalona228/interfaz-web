@@ -40,12 +40,21 @@ $(function() {
             },
             minLength: 2,
             select: function(event, ui) {
-                agregarProducto(ui.item.value, 1, ui.item.precio);
+                // Agregar un console.log para ver qué contiene ui.item
+                console.log(ui.item); // Depuración para verificar el objeto
+        
+                // Verificar si existe la cantidad antes de pasarla
+                if (ui.item.cantidad !== undefined) {
+                    agregarProducto(ui.item.value, 1, ui.item.precio, ui.item.cantidad);
+                } else {
+                    console.error("El producto no tiene cantidad definida.");
+                }
+        
                 $('#producto').val('');
                 return false;
             }
         });
-    
+            
         $('#cliente').autocomplete({
             source: '/nueva_venta/autocompletar_clientes'
         });
@@ -97,7 +106,7 @@ $(function() {
         calcularTotalVenta();
     }
     
-    function agregarProducto(producto, cantidad, precio) {
+    function agregarProducto(producto, cantidad, precio, cantidadInventario) {
         var parsedPrecio;
 
         try {
@@ -116,6 +125,7 @@ $(function() {
                 <td><input type="number" class="cantidad" value="${cantidad}" min="1"></td>
                 <td><input type="number" class="precio" value="${precio.toFixed(2)}" step="0.01"></td>
                 <td class="total-producto">$${(cantidad * precio).toFixed(2)}</td>
+                <td class="inventario">(${cantidadInventario})</td>
                 <td><span class="eliminar-producto" title="Eliminar Producto" style="color: red; cursor: pointer;">&#x2716;</span></td>
             </tr>
         `;

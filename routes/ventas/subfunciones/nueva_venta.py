@@ -180,10 +180,10 @@ def autocompletar_productos():
     
     # Conexión a la base de datos y consulta
     db = get_db()
-    cursor = db.execute('SELECT PRODUCTO, PRECIO, COSTO FROM Inventario WHERE PRODUCTO LIKE ?', ('%' + term + '%',))
+    cursor = db.execute('SELECT PRODUCTO, PRECIO, COSTO, CANTIDAD FROM Inventario WHERE PRODUCTO LIKE ?', ('%' + term + '%',))
     
     # Recoger resultados y formatearlos en un formato JSON adecuado
-    productos = [{'label': row['PRODUCTO'], 'value': row['PRODUCTO'], 'precio': row['PRECIO'], 'costo': row['COSTO']} for row in cursor.fetchall()]
+    productos = [{'label': row['PRODUCTO'], 'value': row['PRODUCTO'], 'precio': row['PRECIO'], 'costo': row['COSTO'], 'cantidad': row['CANTIDAD']} for row in cursor.fetchall()]
     
     return jsonify(productos)
 

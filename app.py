@@ -18,7 +18,7 @@ import configparser
 class StreamToLogger:
     def __init__(self, logger, level):
         self.logger = logger
-        self.level = levels
+        self.level = level  
         self.linebuf = ''
 
     def write(self, buf):
