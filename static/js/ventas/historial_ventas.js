@@ -100,13 +100,31 @@ document.getElementById('mostrar_facturas_vencidas').addEventListener('click', f
 
 document.querySelectorAll('.eliminar-venta').forEach(button => {
     button.addEventListener('click', function() {
+        console.log('hola');
+
         const ventaId = this.getAttribute('data-venta-id');
-        const nombreCliente = this.closest('section').querySelector('tbody td:nth-child(2)').textContent.trim();
-        eliminarVenta(ventaId, nombreCliente);
+        const fila = this.closest('tr');  // Obtener la fila <tr> más cercana
+        console.log('Fila encontrada:', fila);
+
+        if (fila) {
+            const nombreClienteElement = fila.querySelector('td:nth-child(2)');  // Buscar el segundo <td> dentro de la fila
+            console.log('Elemento del nombre del cliente:', nombreClienteElement);
+
+            if (nombreClienteElement) {
+                const nombreCliente = nombreClienteElement.textContent.trim();  // Obtener el texto del cliente
+                eliminarVenta(ventaId, nombreCliente);
+            } else {
+                console.error('No se encontró el <td> con el nombre del cliente');
+            }
+        } else {
+            console.error('No se encontró la fila <tr> más cercana');
+        }
     });
 });
 
+
 function eliminarVenta(ventaId, nombreCliente) {
+    // console.log('hola')
     // Aquí puedes implementar la lógica para enviar la solicitud al backend
     fetch(`/historial_ventas/eliminar_venta/${ventaId}`, {
         method: 'POST',

@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     // Opcional: Vaciar el formulario
+                    alert(data.message);
                     formCliente.reset();
-                    console.log(data.message);
                 } else {
                     alert('Error al agregar cliente: ' + data.message);
                 }
