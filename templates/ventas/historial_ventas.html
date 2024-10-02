@@ -39,7 +39,7 @@
                         <td>{{ venta.numero_venta }}</td>
                         <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
                         <td>{{ venta.fecha }}</td>
-                        <td><strong>{{ (venta.total_venta - venta.monto_pagado) }}</strong></td>
+                        <td><strong>{{ (venta.total_venta - venta.monto_pagado) | round(2) }}</strong></td>
                         <td style="text-transform: uppercase;">{{ venta.estado }}</td>
                         <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
                         <td>

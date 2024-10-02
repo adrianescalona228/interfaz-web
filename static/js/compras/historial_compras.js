@@ -1,18 +1,25 @@
 document.getElementById('buscador').addEventListener('input', function () {
     let filtro = this.value.toLowerCase();
-    let contenedoresCompras = document.querySelectorAll('.contenedor');
+    let filasCompras = document.querySelectorAll('.compras-principal tbody tr:not(.info-productos)'); // Seleccionamos las filas principales de compras
 
-    contenedoresCompras.forEach(function (contenedor) {
-        let numeroVenta = contenedor.querySelector('tbody td:nth-child(1)').textContent.toLowerCase();
-        let nombreProveedor = contenedor.querySelector('tbody td:nth-child(2)').textContent.toLowerCase();
+    filasCompras.forEach(function (fila) {
+        let numeroCompraCell = fila.querySelector('td:nth-child(1)'); // Nro. de compra
+        let nombreProveedorCell = fila.querySelector('td:nth-child(2)'); // Proveedor
 
-        if (numeroVenta.includes(filtro) || nombreProveedor.includes(filtro)) {
-            contenedor.style.display = '';
-        } else {
-            contenedor.style.display = 'none';
+        // Comprobaciones para evitar null
+        if (numeroCompraCell && nombreProveedorCell) {
+            let numeroCompra = numeroCompraCell.textContent.toLowerCase();
+            let nombreProveedor = nombreProveedorCell.textContent.toLowerCase();
+
+            // Lógica para mostrar
+            let mostrar = numeroCompra.includes(filtro) || nombreProveedor.includes(filtro);
+
+            // Mostrar u ocultar la fila de la compra
+            fila.style.display = mostrar ? '' : 'none';
         }
     });
 });
+
 document.querySelectorAll('.eliminar-compra').forEach(button => {
     button.addEventListener('click', function() {
         const compraId = this.getAttribute('data-compra-id');
@@ -67,4 +74,23 @@ document.querySelectorAll('.eliminar-producto').forEach(button => {
             }
         });
     });
+});
+
+$('.proveedor').on('click', function() {
+    // Selecciona la fila siguiente (que contiene la tabla de productos)
+    var $infoProductos = $(this).closest('tr').next('.info-productos');
+
+    // Comprobar si la fila de productos está visible
+    if ($infoProductos.is(':visible')) {
+        // Si está visible, ocultamos todos los hijos
+        $infoProductos.hide(); // Oculta la fila de productos
+    } else {
+        // Si está oculta, mostramos la fila
+        $infoProductos.show(); // Muestra la fila de productos
+        
+        // Opcional: Mostrar todos los elementos hijos dentro de la fila
+        $infoProductos.find('*').each(function() {
+            $(this).css('display', ''); // Restablece el display a su valor predeterminado
+        });
+    }
 });
