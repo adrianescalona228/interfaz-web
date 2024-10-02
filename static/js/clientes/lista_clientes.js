@@ -4,15 +4,17 @@ document.getElementById('buscador-cliente').addEventListener('input', function (
 
     filasProductos.forEach(function (fila) { // Iterar sobre cada fila
         let productoNombre = fila.querySelector('td.nombre').textContent.toLowerCase(); // Obtener el nombre del producto y convertirlo a minúsculas
+        let direccion = fila.querySelector('td.direccion').textContent.toLowerCase(); // Obtener la dirección y convertirla a minúsculas
 
-        // Mostrar u ocultar la fila basada en si el nombre del producto incluye el filtro
-        if (productoNombre.includes(filtro)) {
+        // Mostrar u ocultar la fila basada en si el nombre del producto o la dirección incluye el filtro
+        if (productoNombre.includes(filtro) || direccion.includes(filtro)) {
             fila.style.display = ''; // Mostrar la fila
         } else {
             fila.style.display = 'none'; // Ocultar la fila
         }
     });
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const table = document.querySelector('table'); // Seleccionamos la tabla de clientes

@@ -21,70 +21,72 @@
         <input type="text" id="buscador" placeholder="Buscar por número de venta o cliente...">
         <!-- Botón para mostrar facturas vencidas -->
         <button id="mostrar_facturas_vencidas">Mostrar Facturas Vencidas</button>
-        <table class="ventas-principal">
-            <thead>
-                <tr>
-                    <th>Nro. de venta</th>
-                    <th>Cliente</th>
-                    <th>Fecha</th>
-                    <th>Por pagar</th>
-                    <th>Estado</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for venta in ventas | reverse %}
-                <tr>
-                    <td>{{ venta.numero_venta }}</td>
-                    <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
-                    <td>{{ venta.fecha }}</td>
-                    <td><strong>{{ (venta.total_venta - venta.monto_pagado) }}</strong></td>
-                    <td style="text-transform: uppercase;">{{ venta.estado }}</td>
-                    <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
-                    <td>
-                        <button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button>
-                    </td>
-                </tr>
-                <tr class="info-productos" style="display: none;">
-                    <td colspan="6"> <!-- Cambié a 6 para que abarque toda la fila -->
-                        <table class="info-productos">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Unitario</th>
-                                    <th>Total por Producto</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for producto in venta.productos %}
-                                <tr class="info-productos-body">
-                                    <td>{{ producto.producto }}</td>
-                                    <td>{{ producto.cantidad }}</td>
-                                    <td>{{ producto.precio }}</td>
-                                    <td>{{ producto.cantidad * producto.precio }}</td>
-                                    <td>
-                                        <button class="eliminar-producto" title="Eliminar Producto" data-venta-id="{{ venta.numero_venta }}" data-producto-id="{{ producto.id }}">&#x2716;</button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr class="total-venta-row">
-                                    <td></td>
-                                    <td></td>
-                                    <td><strong>Total Venta:</strong></td>
-                                    <td><strong>{{ venta.monto_pagado }}/{{ venta.total_venta }}</strong></td>
-                                    <td><button class="crear-nota-entrega" data-venta-id="{{ venta.numero_venta }}">Crear Nota de Entrega</button></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <section class="table-container">
+            <table class="ventas-principal">
+                <thead>
+                    <tr>
+                        <th>Nro. de venta</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Por pagar</th>
+                        <th>Estado</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas | reverse %}
+                    <tr>
+                        <td>{{ venta.numero_venta }}</td>
+                        <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
+                        <td>{{ venta.fecha }}</td>
+                        <td><strong>{{ (venta.total_venta - venta.monto_pagado) }}</strong></td>
+                        <td style="text-transform: uppercase;">{{ venta.estado }}</td>
+                        <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
+                        <td>
+                            <button class="eliminar-venta" title="Eliminar Venta" data-venta-id="{{ venta.numero_venta }}">&#x2716;</button>
+                        </td>
+                    </tr>
+                    <tr class="info-productos" style="display: none;">
+                        <td colspan="6"> <!-- Cambié a 6 para que abarque toda la fila -->
+                            <table class="info-productos">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Total por Producto</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for producto in venta.productos %}
+                                    <tr class="info-productos-body">
+                                        <td>{{ producto.producto }}</td>
+                                        <td>{{ producto.cantidad }}</td>
+                                        <td>{{ producto.precio }}</td>
+                                        <td>{{ producto.cantidad * producto.precio }}</td>
+                                        <td>
+                                            <button class="eliminar-producto" title="Eliminar Producto" data-venta-id="{{ venta.numero_venta }}" data-producto-id="{{ producto.id }}">&#x2716;</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr class="total-venta-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong>Total Venta:</strong></td>
+                                        <td><strong>{{ venta.monto_pagado }}/{{ venta.total_venta }}</strong></td>
+                                        <td><button class="crear-nota-entrega" data-venta-id="{{ venta.numero_venta }}">Crear Nota de Entrega</button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
     </main>
     <footer>
         <span>Representaciones EG</span>
