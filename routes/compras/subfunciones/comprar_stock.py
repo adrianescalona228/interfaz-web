@@ -49,11 +49,27 @@ def procesar_compra():
         insertar_compra(cursor, proveedor_id, numero_compra, fecha, total_compra)
         logger.info(f"Compra insertada: {numero_compra}, Fecha: {fecha}, Total: {total_compra}")
 
+        # Insertar productos en la compra
         insertar_productos_compra(cursor, productos, numero_compra)
-        logger.info(f"Productos de la compra insertados: {productos}")
 
+                # Insertar productos en la compra y registrar cantidades compradas
+        for producto in productos:
+            producto_compra = producto['producto']
+            cantidad_comprada = producto['cantidad']
+            logger.info(f"Cantidad comprada para el producto {producto_compra}: {cantidad_comprada}")
+
+        # Actualizar inventario y registrar cantidades finales
         actualizar_inventario(cursor, productos)
-        logger.info(f"Inventario actualizado para los productos de la compra: {productos}")
+
+        for producto in productos:
+            producto_compra = producto['producto']
+            cursor.execute('SELECT CANTIDAD FROM Inventario WHERE PRODUCTO = ?', (producto_compra,))
+            row = cursor.fetchone()
+            if row:
+                cantidad_actual = row[0]  # Cambié a row[0] para obtener el valor directamente
+                logger.info(f"Cantidad actualizada para el producto {producto_compra}. Nueva cantidad: {cantidad_actual}")
+            else:
+                raise ValueError(f"El producto {producto_compra} no se encuentra en el inventario")
 
         db.commit()
         logger.info(f"Transacción confirmada para la compra: {numero_compra}")
