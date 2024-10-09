@@ -9,4 +9,5 @@ venv/
 /logs/
 /logs_pipa/
 /routes/database2.py
+# /routes/graficas
 

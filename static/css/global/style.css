@@ -10,6 +10,7 @@
 @import url('/static/css/sections/inventario/ver_inventario.css');
 @import url('/static/css/sections/clientes/historial_abonos.css');
 @import url('/static/css/sections/clientes/ver_deudas.css');
+@import url('/static/css/sections/graficas/graficas.css');
 
 /* Reset de estilos para normalizar el diseño */
 * {

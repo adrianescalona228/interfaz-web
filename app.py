@@ -5,6 +5,7 @@ from routes.ventas.ventas import ventas_bp
 from routes.compras.compras import compras_bp
 from routes.clientes.clientes import clientes_bp
 from routes.inventario.inventario import inventario_bp
+from routes.graficas.graficas import graficas_bp
 from routes.database2 import get_db
 import os
 import logging
@@ -100,6 +101,7 @@ def create_app():
     app.register_blueprint(compras_bp)
     app.register_blueprint(clientes_bp)
     app.register_blueprint(inventario_bp)
+    app.register_blueprint(graficas_bp)
 
     return app
 
