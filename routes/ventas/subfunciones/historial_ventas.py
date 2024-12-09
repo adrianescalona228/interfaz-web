@@ -5,8 +5,8 @@ from ...database2 import get_db
 from urllib.parse import quote, unquote
 import os
 from openpyxl import load_workbook
-import win32com.client as win32
-import pythoncom
+#import win32com.client as win32
+#import pythoncom
 import logging
 from config_global import config_global
 
@@ -221,6 +221,7 @@ def eliminar_producto(numero_venta, id):
     
     return '', 200
 
+'''
 @historial_ventas_bp.route('/generar_nota_entrega', methods=['POST'])
 def generar_nota_entrega():
     try:
@@ -321,6 +322,7 @@ def insertar_direccion(sheet, direccion, fila_inicial):
         logging.error('Error al insertar dirección en la hoja de Excel: %s', e, exc_info=True)
         raise
 
+
 def crear_nota_entrega(datos_cliente):
     logging.info("Iniciando la creación de la nota de entrega...")
 
@@ -404,3 +406,4 @@ def crear_nota_entrega(datos_cliente):
     except Exception as e:
         logging.error('Se encontró un error: %s', e, exc_info=True)
         raise
+'''
