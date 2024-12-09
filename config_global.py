@@ -10,7 +10,8 @@ def config_global():
     entornos = {
         'Adrian': 'development',
         'arnaldo-PC': 'production',
-        'ubuntu': 'development-linux'
+        'ubuntu': 'development-linux',
+	'ip-10-0-1-137.us-east-2.compute.internal': 'production-linux'
     }
 
     entorno = entornos.get(nombre_maquina)
