@@ -9,7 +9,8 @@ def config_global():
     nombre_maquina = socket.gethostname()
     entornos = {
         'Adrian': 'development',
-        'arnaldo-PC': 'production'
+        'arnaldo-PC': 'production',
+        'ubuntu': 'development-linux'
     }
 
     entorno = entornos.get(nombre_maquina)

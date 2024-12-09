@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from ...database2 import get_db
 from urllib.parse import quote, unquote
 import os
+import openpyxl
 from openpyxl import load_workbook
 #import win32com.client as win32
 #import pythoncom
@@ -407,3 +408,147 @@ def crear_nota_entrega(datos_cliente):
         logging.error('Se encontró un error: %s', e, exc_info=True)
         raise
 '''
+
+@historial_ventas_bp.route('/generar_nota_entrega', methods=['POST'])
+def generar_nota_entrega():
+    try:
+        data = request.json
+        numero_venta = data.get('numero_venta')
+
+        datos_cliente = obtener_datos_cliente_y_venta(numero_venta)
+        if not datos_cliente:
+            logging.error('Cliente o venta no encontrado para el número de venta: %s', numero_venta)
+            return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
+
+        ruta_nota = crear_nota_entrega(datos_cliente)
+        return jsonify({"message": "Nota de entrega generada", "ruta": ruta_nota}), 200
+
+    except Exception as e:
+        logging.error('Error al generar la nota de entrega: %s', e, exc_info=True)
+        return jsonify({'error': 'Error interno del servidor'}), 500
+    
+def obtener_datos_cliente_y_venta(numero_venta):
+    db = get_db()
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("SELECT cliente FROM Ventas WHERE numero_venta = ?", (numero_venta,))
+        cliente = cursor.fetchone()
+        if not cliente:
+            return None
+        
+        nombre_cliente = cliente[0]
+
+        cursor.execute("SELECT razon_social, rif_cedula, direccion, telefono FROM Clientes WHERE nombre_cliente = ?", (nombre_cliente,))
+        cliente = cursor.fetchone()
+        if not cliente:
+            return None
+        
+        razon_social, rif_cedula, direccion, telefono = cliente
+        
+        cursor.execute("SELECT numero_venta, producto, cantidad, precio, fecha FROM Ventas WHERE numero_venta = ?", (numero_venta,))
+        productos = cursor.fetchall()  # Obtener todas las ventas asociadas
+
+        if productos:
+            ventas_list = [
+                {
+                    'numero_venta': producto[0],
+                    'producto': producto[1].strip(),
+                    'cantidad': producto[2],
+                    'precio': producto[3],
+                    'fecha': producto[4]
+                }
+                for producto in productos
+            ]
+
+            return {
+                'nombre_cliente': nombre_cliente.strip(),
+                'razon_social': razon_social.strip(),
+                'rif_cedula': rif_cedula.strip(),
+                'direccion': direccion.strip(),
+                'telefono': telefono.strip(),
+                'ventas': ventas_list
+            }
+        else:
+            return {'error': 'No se encontró la venta'}
+
+    except Exception as e:
+        logging.error('Error al obtener datos del cliente y la venta: %s', e, exc_info=True)
+        raise
+    finally:
+        db.close()
+
+def insertar_direccion(sheet, direccion, fila_inicial):
+    ancho_maximo = 80
+
+    if len(direccion) > ancho_maximo:
+        punto_corte = direccion.rfind(' ', 0, ancho_maximo)
+        if punto_corte == -1:
+            punto_corte = ancho_maximo
+
+        direccion_1 = direccion[:punto_corte]
+        direccion_2 = direccion[punto_corte + 1:]
+
+        sheet[f'F{fila_inicial}'] = direccion_1
+        sheet[f'F{fila_inicial + 1}'] = direccion_2
+    else:
+        sheet[f'F{fila_inicial}'] = direccion
+
+def crear_nota_entrega(datos_cliente):
+    logging.info("Iniciando la creación de la nota de entrega...")
+
+    ruta_plantilla, ruta_guardar = config_global()
+
+    if not os.path.exists(ruta_plantilla):
+        raise FileNotFoundError(f"La plantilla no se encontró en la ruta: {ruta_plantilla}")
+
+    try:
+        workbook = openpyxl.load_workbook(ruta_plantilla)
+        logging.info("Plantilla de Excel abierta correctamente.")
+    except Exception as e:
+        logging.error('Error al abrir la plantilla de Excel: %s', e, exc_info=True)
+        raise
+
+    try:
+        sheet = workbook.active
+        logging.info("Hoja activa seleccionada correctamente.")
+
+        sheet['I3'] = datos_cliente['razon_social']
+        sheet['AC3'] = datos_cliente['rif_cedula']
+        logging.info("Datos del cliente (razón social y RIF/Cédula) insertados correctamente.")
+        
+        insertar_direccion(sheet, datos_cliente['direccion'], 5)
+        logging.info("Dirección del cliente insertada correctamente.")
+        
+        sheet['AC7'] = datos_cliente['telefono']
+        logging.info("Teléfono del cliente insertado correctamente.")
+
+        if datos_cliente['ventas']:
+            primer_producto = datos_cliente['ventas'][0]
+            sheet['G7'] = primer_producto['fecha']
+            sheet['AF1'] = primer_producto['numero_venta']
+
+        fila_inicio = 12
+        for producto in datos_cliente['ventas']:
+            sheet[f'A{fila_inicio}'] = producto['cantidad']
+            sheet[f'D{fila_inicio}'] = producto['producto']
+            sheet[f'Y{fila_inicio}'] = producto['precio']
+            fila_inicio += 1
+        logging.info("Datos de todos los productos insertados correctamente.")
+
+    except Exception as e:
+        logging.error('Error al modificar la hoja activa: %s', e, exc_info=True)
+        raise
+
+    try:
+        nombre_archivo = f"NDE.{primer_producto['numero_venta']}_{datos_cliente['nombre_cliente']}.xlsx"
+        ruta_completa = os.path.join(ruta_guardar, nombre_archivo)
+        workbook.save(ruta_completa)
+        workbook.close()
+        logging.info("Archivo guardado correctamente en: %s", ruta_completa)
+    except Exception as e:
+        logging.error('Error al guardar el archivo: %s', e, exc_info=True)
+        raise
+
+    logging.info("Proceso de creación de la nota de entrega completado.")
+    return ruta_completa
