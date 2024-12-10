@@ -1,6 +1,6 @@
 # routes/historial_ventas.py
 import sqlite3
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash, send_file
 from ...database2 import get_db
 from urllib.parse import quote, unquote
 import os
@@ -10,9 +10,15 @@ from openpyxl import load_workbook
 #import pythoncom
 import logging
 from config_global import config_global
+from datetime import datetime
+import subprocess
 
 logger = logging.getLogger(__name__)
 historial_ventas_bp = Blueprint('historial_ventas', __name__)
+
+def formatear_fecha(fecha): 
+    fecha_obj = datetime.strptime(fecha, '%Y-%m-%d') 
+    return fecha_obj.strftime('%d-%m-%Y')
 
 @historial_ventas_bp.route('/historial_ventas')
 def historial_ventas():
@@ -42,7 +48,7 @@ def historial_ventas():
             venta_actual = {
                 'numero_venta': venta['numero_venta'],
                 'cliente': venta['cliente'],
-                'fecha': venta['fecha'],
+                'fecha': formatear_fecha(venta['fecha']),
                 'productos': [],
                 'fecha_vencimiento': venta['fecha_vencimiento'],
                 'monto_pagado': venta['monto_pagado'],
@@ -421,7 +427,8 @@ def generar_nota_entrega():
             return jsonify({'mensaje': 'Cliente o venta no encontrado'}), 404
 
         ruta_nota = crear_nota_entrega(datos_cliente)
-        return jsonify({"message": "Nota de entrega generada", "ruta": ruta_nota}), 200
+
+        return send_file(ruta_nota, as_attachment=False)
 
     except Exception as e:
         logging.error('Error al generar la nota de entrega: %s', e, exc_info=True)
@@ -546,6 +553,11 @@ def crear_nota_entrega(datos_cliente):
         workbook.save(ruta_completa)
         workbook.close()
         logging.info("Archivo guardado correctamente en: %s", ruta_completa)
+
+        pdf_path = ruta_completa.replace('.xlsx', '.pdf')
+        subprocess.run(["libreoffice", "--headless", "--convert-to", "pdf", ruta_completa])
+        logging.info("Archivo convertido a PDF en: %s", pdf_path)
+
     except Exception as e:
         logging.error('Error al guardar el archivo: %s', e, exc_info=True)
         raise

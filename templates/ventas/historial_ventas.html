@@ -87,10 +87,37 @@
                 </tbody>
             </table>
         </section>
+        <iframe id="iframePdf" style="display:none;" width="100%" height="600px"></iframe>
     </main>
     <footer>
         <span>Representaciones EG</span>
     </footer>
     <script src="{{ url_for('static', filename='/js/ventas/historial_ventas.js')}}"></script>
+    <script> 
+        $(document).ready(function() {
+            $('.crear-nota-entrega').click(function() {
+                const numeroVenta = $(this).data('venta-id');
+                $.ajax({
+                    url: '/historial_ventas/generar_nota_entrega',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ numero_venta: numeroVenta }),
+                    success: function(response) {
+                        if (response.error) {
+                            alert('Error al generar la nota de entrega: ' + response.error);
+                        } else {
+                            const iframePdf = document.getElementById('iframePdf');
+                            iframePdf.src = response.ruta_pdf;
+                            iframePdf.style.display = 'block';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                        alert('Error al generar la nota de entrega');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
