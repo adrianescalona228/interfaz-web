@@ -1,5 +1,6 @@
 # routes/historial_ventas.py
 import sqlite3
+from datetime import datetime
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from ...database2 import get_db
 from urllib.parse import quote, unquote
@@ -47,6 +48,14 @@ def historial_ventas():
                 'monto_pagado': venta['monto_pagado'],
                 'estado': venta['estado']
             }
+            try:
+                fecha_objeto = datetime.strptime(venta_actual['fecha'], '%Y-%m-%d') #YYYY-MM-DD
+                venta_actual['fecha'] = fecha_objeto.strftime('%d-%m-%Y') #DD-MM-YYYY
+            except ValueError:
+            # Manejar el error si la fecha no tiene el formato esperado
+                print(f"Error: Formato de fecha incorrecto encontrado: {venta_actual['fecha']}")
+            # Puedes dejar la fecha sin cambios o asignarle un valor por defecto
+            # venta_actual['fecha'] = 'Fecha Inválida'
             current_numero_venta = venta['numero_venta']
 
                 # Verificar y convertir cantidad y precio
@@ -220,6 +229,53 @@ def eliminar_producto(numero_venta, id):
         flash('Ocurrió un error al eliminar el producto', 'error')
     
     return '', 200
+
+@historial_ventas_bp.route('/actualizar_monto_pagado', methods=['POST'])
+def actualizar_monto_pagado():
+    logger = logging.getLogger(__name__)
+    db = get_db()
+    cursor = db.cursor()
+
+    try:
+        data = request.get_json()
+        numero_venta = data['numero_venta']
+        nuevo_monto_pagado = data['monto_pagado']
+
+        # Validar que los datos sean correctos
+        if not numero_venta or not isinstance(numero_venta, str):
+            logger.error(f"Error: Número de venta inválido: {numero_venta}")
+            return jsonify({'success': False, 'message': 'Número de venta inválido'}), 400
+
+        if not isinstance(nuevo_monto_pagado, (int, float)):
+            logger.error(f"Error: Monto pagado inválido: {nuevo_monto_pagado}")
+            return jsonify({'success': False, 'message': 'Monto pagado inválido'}), 400
+
+        # Convertir a float si es necesario
+        nuevo_monto_pagado = float(nuevo_monto_pagado)
+
+        # Verificar si la venta existe
+        cursor.execute('SELECT * FROM Facturas WHERE numero_venta = ?', (numero_venta,))
+        factura = cursor.fetchone()
+
+        if not factura:
+            logger.error(f"Error: No se encontró la factura con número de venta: {numero_venta}")
+            return jsonify({'success': False, 'message': 'Factura no encontrada'}), 404
+
+        # Actualizar el monto pagado en la base de datos
+        cursor.execute('UPDATE Facturas SET monto_pagado = ? WHERE numero_venta = ?', (nuevo_monto_pagado, numero_venta))
+        db.commit()
+        logger.info(f"Monto pagado actualizado correctamente para la venta: {numero_venta}, nuevo monto: {nuevo_monto_pagado}")
+
+        return jsonify({
+            'success': True,
+            'message': 'Monto pagado actualizado correctamente',
+            'nuevo_monto_pagado': nuevo_monto_pagado
+        }), 200
+
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error al actualizar el monto pagado: {e}")
+        return jsonify({'success': False, 'message': f'Error al actualizar el monto pagado: {str(e)}'}), 500
 
 @historial_ventas_bp.route('/generar_nota_entrega', methods=['POST'])
 def generar_nota_entrega():

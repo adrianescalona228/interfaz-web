@@ -192,3 +192,57 @@ $('.cliente').on('click', function() {
         });
     }
 });
+
+
+$(document).ready(function() {
+    $('.monto-pagado-container').on('dblclick', function() {
+        const $container = $(this);
+        const $texto = $container.find('.monto-pagado-texto');
+        const montoPagado = parseFloat($texto.text());
+        const totalVenta = parseFloat($container.text().split('/')[1]);
+
+        const $input = $('<input type="number" class="monto-pagado-input">');
+        $input.val(montoPagado);
+        $texto.replaceWith($input);
+        $input.focus();
+
+        // Evento para detectar la tecla "Enter"
+        $input.on('keypress', function(event) {
+            if (event.which === 13) { // 13 es el código de la tecla "Enter"
+                $input.blur(); // Simula un "blur" para finalizar la edición
+            }
+        });
+
+        $input.on('blur', function() {
+            let nuevoMontoPagado = parseFloat($input.val());
+
+            if (isNaN(nuevoMontoPagado) || nuevoMontoPagado < 0) {
+                alert('Por favor, ingrese un número válido.');
+                nuevoMontoPagado = montoPagado;
+            } else if (nuevoMontoPagado > totalVenta) {
+                alert('El monto pagado no puede ser mayor que el total de la venta.');
+                nuevoMontoPagado = montoPagado;
+            }
+
+            // Enviar al servidor con fetch
+            $.ajax({
+                url: '/historial_ventas/actualizar_monto_pagado',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    numero_venta: $(this).closest('tr').find('td:first-child').text(),
+                    monto_pagado: nuevoMontoPagado
+                }),
+                success: function(response) {
+                    console.log('Monto pagado actualizado correctamente:', response);
+                    $input.replaceWith(`<span class="monto-pagado-texto">${nuevoMontoPagado}</span>`);
+                },
+                error: function(error) {
+                    console.error('Error al actualizar el monto pagado:', error);
+                    alert('Error al actualizar el monto pagado.');
+                    $input.replaceWith(`<span class="monto-pagado-texto">${montoPagado}</span>`);
+                }
+            });
+        });
+    });
+});

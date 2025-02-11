@@ -28,7 +28,7 @@
                         <th>Nro. de venta</th>
                         <th>Cliente</th>
                         <th>Fecha</th>
-                        <th>Por pagar</th>
+                        <th>Abono/Total Venta</th>
                         <th>Estado</th>
                         <th>Eliminar</th>
                     </tr>
@@ -39,7 +39,12 @@
                         <td>{{ venta.numero_venta }}</td>
                         <td class="cliente" style="cursor: pointer;">{{ venta.cliente }}</td>
                         <td>{{ venta.fecha }}</td>
-                        <td><strong>{{ (venta.total_venta - venta.monto_pagado) | round(2) }}</strong></td>
+                        <td>
+                            <strong class="monto-pagado-container">
+                                <span class="monto-pagado-texto">{{ venta.monto_pagado }}</span>
+                                /{{ venta.total_venta }}
+                            </strong>
+                        </td>
                         <td style="text-transform: uppercase;">{{ venta.estado }}</td>
                         <td style="display: none;">{{ venta.fecha_vencimiento }}</td> <!-- Agregada la fecha de vencimiento -->
                         <td>
@@ -75,8 +80,8 @@
                                     <tr class="total-venta-row">
                                         <td></td>
                                         <td></td>
-                                        <td><strong>Total Venta:</strong></td>
-                                        <td><strong>{{ venta.monto_pagado }}/{{ venta.total_venta }}</strong></td>
+                                        <td><strong>Por pagar:</strong></td>
+                                        <td><strong>{{ (venta.total_venta - venta.monto_pagado) | round(2) }}</strong></td>
                                         <td><button class="crear-nota-entrega" data-venta-id="{{ venta.numero_venta }}">Crear Nota de Entrega</button></td>
                                     </tr>
                                 </tfoot>
