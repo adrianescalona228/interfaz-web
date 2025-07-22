@@ -15,19 +15,6 @@ This is a modular management system developed using Python and Flask. The applic
 
 > ⚠️ Note: Some functions, variables, and folder names are in Spanish due to the project's original development context.
 
-## 📁 Project Structure
-
-app/
-├── app.py
-├── routes/
-│ ├── ventas/ # Sales module
-│ ├── compras/ # Purchases module
-│ ├── clientes/ # Clients module
-│ ├── inventario/ # Inventory module
-├── templates/
-├── logs/
-└── query.txt # Secret key
-
 
 ## ⚙️ How to Run the Project
 
