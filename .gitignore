@@ -11,3 +11,4 @@ venv/
 /routes/database2.py
 # /routes/graficas
 
+*.csv
