@@ -30,7 +30,7 @@ function configurarEventos() {
 }
 
 function obtenerUltimoNumeroVenta() {
-    fetch('/comprar_stock/obtener_ultimo_numero_venta', {
+    fetch('/new_sale/last_sale_number', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ function inicializarFechaActual() {
 function inicializarAutocompletado() {
     $('#producto').autocomplete({
         source: function(request, response) {
-            fetch('/nueva_venta/autocompletar_productos?term=' + encodeURIComponent(request.term))
+            fetch('/new_sale/autocomplete_products?term=' + encodeURIComponent(request.term))
                 .then(res => res.json())
                 .then(data => {
                     response(data);
@@ -69,13 +69,13 @@ function inicializarAutocompletado() {
         },
         minLength: 2,
         select: function(event, ui) {
-            agregarProducto(ui.item.value, 1, ui.item.costo);
+            agregarProducto(ui.item.value, 1, ui.item.cost);
             $('#producto').val('');
             return false;
         }
     });
     $('#proveedor').autocomplete({
-        source: '/comprar_stock/autocompletar_proveedores'
+        source: '/purchase_stock/autocomplete_suppliers'
     });
 }
 
@@ -116,8 +116,13 @@ function procesarCompra() {
     var proveedor = $('#proveedor').val();
     var compra_id = $('#numero_compra').val();
     var fecha = $('#fecha').val();
+    
 
-    if (!proveedor || !compra_id || !fecha) {
+    if (!proveedor) {
+        proveedor = "";
+    }
+
+    if (!compra_id || !fecha) {
         alert('Por favor completa todos los campos obligatorios.');
         return;
     }
@@ -128,36 +133,43 @@ function procesarCompra() {
 
     var productos = [];
     $('#tabla_compra tbody tr').each(function() {
-        var producto = $(this).find('td:first').text();
-        var cantidad = $(this).find('.cantidad').val();
-        var costo = $(this).find('.costo').val();
-        productos.push({ producto: producto, cantidad: cantidad, costo: costo });
+        var product = $(this).find('td:first').text();
+        var quantity = $(this).find('.cantidad').val();
+        var cost = $(this).find('.costo').val();
+        productos.push({ product: product, quantity: quantity, cost: cost });
     });
 
+    console.log(`estos son los productos: ${productos}`);
     var data = {
-        proveedor: proveedor,
-        compra_id: compra_id,
-        fecha: fecha,
-        productos: productos
+        supplier: proveedor,
+        purchase_id: compra_id,
+        date: fecha,
+        products: productos
     };
     
     // Enviar los datos con fetch
-    fetch('/comprar_stock/procesar_compra', {
+    fetch('/purchase_stock/process_purchase', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'  // Establecer el tipo de contenido como JSON
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)  // Convertir los datos a JSON
+        body: JSON.stringify(data)
     })
-    .then(response => response.json())  // Parsear la respuesta como JSON
+    .then(response => {
+        return response.json().then(data => {
+            if (!response.ok) {
+                throw new Error(data.message); // Esto manda el control al .catch()
+            }
+            return data;
+        });
+    })
     .then(data => {
         vaciarCarrito();
         $('#proveedor').val('');
         $('#numero_compra').val('');
-        alert('Success: '+ data.message);  // Manejar la respuesta con éxito
-        // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito o redirigir
+        alert('Success: ' + data.message);
     })
     .catch((error) => {
-        alert('Error: '+ data.error);  // Manejar cualquier error
+        alert('Error: ' + error.message);
     });
 } 

@@ -1,14 +1,21 @@
+# Python
+__pycache__/
 *.pyc
-*.sqlite3
-*.db
-DATABASE/inventory2.db
 
+# Logs
+*.log
+
+# Entornos virtuales
 venv/
+intervaz-venv/
 
-*.xlsx
-/logs/
-/logs_pipa/
-/routes/database2.py
-# /routes/graficas
+# Archivos de base de datos locales
+instance/
+*.db
 
+# Archivos de pruebas o personales
+*.txt
 *.csv
+
+# Configuración local
+config.ini

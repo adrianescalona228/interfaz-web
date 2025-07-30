@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const column = target.classList[1]; // Obtener la clase para identificar la columna
 
                 // Enviar los datos al backend
-                fetch('/ver_inventario/actualizar_producto', {
+                fetch('/view_inventory/update_product', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

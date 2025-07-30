@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('purchases.purchases') }}" class="btn-flecha"><i class="fas fa-arrow-left"></i></a>
+        <h1>Comprar</h1>
+    </header>
+    <main>
+        <section class="contenedor-form-carrito">
+            <form class="form-left" autocomplete="off">
+                <label for="producto">Producto:</label>
+                <input type="text" id="producto" name="producto" required><br>
+
+                <label for="proveedor">Proveedor:</label>
+                <input type="text" id="proveedor" name="proveedor" required><br>
+
+                <label for="numero_compra">Nro. de factura:</label>
+                <input type="text" id="numero_compra" name="numero_factura" required><br>
+                    
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required><br>
+    
+                <div class="botones-container">
+                    <button type="button" id="vaciar_carrito">Vaciar Carrito</button>
+                    <input type="submit" id="procesar_compra" value="Registrar Comp" formnovalidate>
+                </div>
+            </form>
+            <div class="carrito-derecha">
+                <table id="tabla_compra">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Costo Unitario</th>
+                            <th>Total por Producto</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>    
+                    <tfoot>
+    
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+    <script src="{{ url_for('static', filename='js/compras/comprar_stock.js')}}"></script>
+</body>
+</html>

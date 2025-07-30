@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* You can add your styles here */
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('inventory.inventory') }}" class="btn-arrow"><i class="fas fa-arrow-left"></i></a>
+        <h1>Inventory</h1>
+    </header>
+    <main>
+        <div>
+            <input type="text" id="inventory-search" placeholder="Search product..."> 
+        </div>
+        <section class="table-container">
+            <table class="inventory-table">
+                <thead>
+                    <tr>
+                        <th class="th id header">ID</th>
+                        <th class="th product">Product</th>
+                        <th class="th">Quantity</th>
+                        <th class="th">Price</th>
+                        <th class="th">Cost</th>
+                        <th class="th">Brand</th>
+                    </tr>
+                <tbody>
+                  {% for item in inventory %}
+                  <tr class="table-row-body" data-id="{{ item.id }}">
+                    <td class="td id body editable">{{ item.id }}</td>
+                    <td class="td product editable">{{ item.product.name if item.product else '' }}</td>
+                    <td class="td quantity editable">{{ item.quantity }}</td>
+                    <td class="td price editable">{{ item.product.price }}</td>
+                    <td class="td cost editable">{{ item.product.cost }}</td>
+                    <td class="td brand editable">{{ item.product.brand_name if item.product else '' }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>    
+        </section>
+    </main>
+    <footer>
+        Representaciones EG
+    </footer>
+    <script src="{{ url_for('static', filename='js/inventario/ver_inventario.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/global/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <title>Sales History</title>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('sales.sales') }}" class="btn-arrow"><i class="fas fa-arrow-left"></i></a>
+        <h1>Sales History</h1>
+    </header>
+    <main>
+        <input type="text" id="search-input" placeholder="Search by sale number or client..." />
+        <button id="show-overdue-invoices">Show Overdue Invoices</button>
+        <section class="table-wrapper">
+            <table class="main-sales-table">
+                <thead>
+                    <tr>
+                        <th>Sale Number</th>
+                        <th>Client</th>
+                        <th>Date</th>
+                        <th>Paid / Total</th>
+                        <th>Status</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales | reverse %}
+                    <tr>
+                        <td>{{ sale.sale_number }}</td>
+                        <td class="client-name" style="cursor: pointer;">{{ sale.client_name }}</td>
+                        <td>{{ sale.issue_date }}</td>
+                        <td>
+                            <strong class="paid-amount-container">
+                                <span class="paid-amount-text">{{ sale.paid_amount }}</span>
+                                /{{ sale.total_amount }}
+                            </strong>
+                        </td>
+                        <td style="text-transform: uppercase;">{{ sale.status }}</td>
+                        <td style="display: none;">{{ sale.due_date }}</td> <!-- Added due date -->
+                        <td>
+                            <button class="delete-sale" title="Delete Sale" data-sale-id="{{ sale.sale_number }}">&#x2716;</button>
+                        </td>
+                    </tr>
+                    <tr class="products-info" style="display: none;">
+                        <td colspan="6">
+                            <table class="products-info-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total per Product</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in sale.products %}
+                                    <tr class="product-info-row">
+                                        <td>{{ product.product }}</td>
+                                        <td>{{ product.quantity }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.quantity * product.price }}</td>
+                                        <td>
+                                            <button class="delete-product" title="Delete Product" data-sale-id="{{ sale.sale_number }}" data-product-id="{{ product.id }}">&#x2716;</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr class="total-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong>Outstanding:</strong></td>
+                                        <td><strong>{{ (sale.total_amount - sale.paid_amount) | round(2) }}</strong></td>
+                                        <td><button class="create-delivery-note" data-sale-id="{{ sale.sale_number }}">Create Delivery Note</button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <span>EG Representations</span>
+    </footer>
+    <script src="{{ url_for('static', filename='js/ventas/historial_ventas.js') }}"></script>
+</body>
+</html>

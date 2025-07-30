@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sale Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static//css/global/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('sales.sales') }}" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+        <h1>Sales</h1>
+    </header>
+    <main>
+        <section class="form-cart-container">
+            <form class="form-left" autocomplete="off">
+                <label for="client">Client:</label>
+                <input type="text" id="client" name="client" required><br><br>
+                
+                <label for="sale_number">Sale Number:</label>
+                <input type="text" id="sale_number" name="sale_number" required><br><br>
+                <span id="sale_number_error_message" style="color: red;"></span>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <label for="product">Product:</label>
+                <input type="text" id="product" name="product" required><br><br>
+
+                <div class="buttons-container">
+                    <button type="button" id="empty_cart">Empty Cart</button>
+                    <input type="submit" id="process_sale" value="Register Sale" formnovalidate>
+                </div>
+            </form>
+
+            <div class="cart-right">
+                <table id="sales_table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total per Product</th>
+                            <th>Inventory Quantity</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí se agregarán dinámicamente los productos -->
+                    </tbody>    
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: right;"><strong>Total Sale:</strong></td>
+                            <td><span id="total_sale_value" class="total_sale_value">$0.00</span></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <script src="{{ url_for('static', filename='js/ventas/registro_venta.js') }}"></script>
+        <button id="reset_button_id" class="reset_button_id" type="button">Reset</button>
+    </main>
+    <footer>
+        <span>Representations EG</span>
+    </footer>
+</body>
+</html>

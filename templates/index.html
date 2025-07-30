@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
+    <title>Main Page</title>
     <link rel="stylesheet" href="/static/css/global/style.css">
-    
 </head>
 <body>
     <header>
-        <h1 class="title">Administracion</h1>
+        <h1 class="title">Administration</h1>
     </header>
     <main>
         <div class="tarjetas">
-            <a href="{{ url_for('ventas.ventas') }}" class="tarjeta ventas">
-                <!-- <img src="/static/icons/ventas.svg" alt="Ventas"> -->
-                <h2>Ventas</h2>
-            </a>
-            <a href="{{ url_for('compras.compras') }}" class="tarjeta compras">
-                <!-- <img src="/static/icons/compras.svg" alt="Compras"> -->
-                <h2>Compras</h2>
-            </a>
-            <a href="{{ url_for('clientes.clientes') }}" class="tarjeta clientes">
-                <!-- <img src="/static/icons/clientes.svg" alt="Clientes"> -->
-                <h2>Clientes</h2>
-            </a>
-            <a href="{{ url_for('inventario.inventario') }}" class="tarjeta inventario">
-                <!-- <img src="/static/icons/inventario.svg" alt="Inventario"> -->
-                <h2>Inventario</h2>
-            </a>
+          <a href="{{ url_for('sales.sales') }}" class="tarjeta ventas">
+              <h2>Ventas</h2>
+          </a>
+          <a href="{{ url_for('purchases.purchases') }}" class="tarjeta compras">
+              <h2>Compras</h2>
+          </a>
+          <a href="{{ url_for('clients.clients') }}" class="tarjeta clientes">
+              <h2>Clientes</h2>
+          </a>
+          <a href="{{ url_for('inventory.inventory') }}" class="tarjeta inventario">
+              <h2>Inventario</h2>
+          </a>
         </div>
     </main>
     <footer>

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const formInventario = document.querySelector('#producto-form');
+    const formInventario = document.querySelector('#product-form');
+    console.log("hola")
 
     formInventario.addEventListener('submit', function(event) {
         event.preventDefault(); // Evita el envío tradicional del formulario
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(data)
 
             // Enviar datos al backend usando fetch
-            fetch('/registrar_producto_nuevo/guardar_producto', {
+            fetch('/register_new_product/save_product', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

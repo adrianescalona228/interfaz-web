@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="/static/css/global/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('clients.clients') }}" class="btn-flecha"><i class="fas fa-arrow-left"></i></a>
+        <h1>Lista de clientes</h1>
+    </header>
+    <main>
+        <div>
+            <input type="text" id="buscador-cliente" placeholder="Buscar producto..."> 
+        </div>
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Razón Social</th>
+                        <th>RIF</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in clients %}
+                    <tr class="table-row-body" data-id="{{ item.id }}">
+                        <td onclick="sortTable(0)" class="td nombre editable">{{ item.client_name }}</td>
+                        <td onclick="sortTable(1)" class="td razon_social editable">{{ item.legal_name }}</td>
+                        <td onclick="sortTable(2)" class="td rif editable">{{ item.tax_id }}</td>
+                        <td onclick="sortTable(3)" class="td direccion editable">{{ item.address }}</td>
+                        <td onclick="sortTable(4)" class="td telefono editable">{{ item.phone }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+    <script src="{{ url_for('static', filename='js/clients/clients_list.js') }}"></script>
+</body>
+</html>

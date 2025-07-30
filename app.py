@@ -1,20 +1,19 @@
-# app.py
-#from flask import Flask, g, render_template
-from flask import Flask, g, render_template
-from routes.ventas.ventas import ventas_bp
-from routes.compras.compras import compras_bp
-from routes.clientes.clientes import clientes_bp
-from routes.inventario.inventario import inventario_bp
-# from routes.graficas.graficas import graficas_bp
-from routes.database2 import get_db
 import os
+from flask import Flask, render_template
+from flask.json import load
+from flask_sqlalchemy import SQLAlchemy
+from routes.sales.sales import sales_bp
+from routes.purchases.purchases import purchases_bp
+from routes.clients.clients import clients_bp
+from routes.inventory.inventory import inventario_bp
 import logging
 import socket
 import sys
+from dotenv import load_dotenv
 from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
-import configparser
 
+load_dotenv()
 
 class StreamToLogger:
     def __init__(self, logger, level):
@@ -30,7 +29,6 @@ class StreamToLogger:
         pass
 
 def configurar_logging():
-    # Crear el directorio de logs si no existe
     if not os.path.exists('logs'):
         os.mkdir('logs')
 
@@ -41,67 +39,61 @@ def configurar_logging():
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
 
-    # Configurar el manejador de archivo con rotación diaria y codificación UTF-8
     file_handler = TimedRotatingFileHandler(
-        archivo_log,
-        when='midnight',       # Rotar a medianoche
-        interval=1,           # Intervalo de 1 día
-        backupCount=30        # Mantener archivos de log de los últimos 30 días
+        archivo_log, when='midnight', interval=1, backupCount=30
     )
     file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     file_handler.setLevel(logging.INFO)
-    file_handler.encoding = 'utf-8'  # Configurar la codificación para el archivo
-
+    file_handler.encoding = 'utf-8'
     logger.addHandler(file_handler)
 
-    # Configurar salida en la consola
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     console_handler.setLevel(logging.INFO)
     logger.addHandler(console_handler)
 
-    # Redirigir stdout y stderr a los logs
     sys.stdout = StreamToLogger(logger, logging.INFO)
     sys.stderr = StreamToLogger(logger, logging.ERROR)
 
     logging.info('Logging configurado correctamente')
 
-
 def cargar_clave_secreta():
-    clave_secreta = None
     with open('query.txt', 'r') as f:
-        clave_secreta = f.read().strip()
-    return clave_secreta
+        return f.read().strip()
 
-def close_db(error):
-    if hasattr(g, 'db'):
-        g.db.close()
+from database import db
 
-def create_app():
+def create_app(testing=False):
     app = Flask(__name__, template_folder='templates')
 
-    # Configuración secreta
+    if testing:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    else:
+        # Usa DATABASE_URL desde variables de entorno, o config.py como respaldo
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.db')  # fallback opcional
+
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = cargar_clave_secreta()
 
-    # Conexión y gestión de la base de datos
-    @app.before_request
-    def before_request():
-        g.db = get_db()
+    db.init_app(app)
 
-    @app.teardown_appcontext
-    def teardown_appcontext(error):
-        close_db(error)
+    with app.app_context():
+        db.create_all()
 
+
+    # Registrar Blueprints
+    app.register_blueprint(sales_bp)
+    app.register_blueprint(purchases_bp)
+    app.register_blueprint(clients_bp)
+    app.register_blueprint(inventario_bp)
+    # app.register_blueprint(graficas_bp)
+
+    #print("pruebita ROUTES:")
+    #for rule in app.url_map.iter_rules():
+    #    print(rule)
     @app.route('/')
     def index():
         return render_template('index.html')
-
-    # Registrar los Blueprints
-    app.register_blueprint(ventas_bp)
-    app.register_blueprint(compras_bp)
-    app.register_blueprint(clientes_bp)
-    app.register_blueprint(inventario_bp)
-    # app.register_blueprint(graficas_bp)
 
     return app
 

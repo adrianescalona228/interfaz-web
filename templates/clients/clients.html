@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clients</title>
+    <link rel="stylesheet" href="/static/css/global/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <a href="/" class="btn-arrow"><i class="fas fa-arrow-left"></i></a>
+        <h1>Clients</h1>
+    </header>
+    <main>
+        <div class="tarjetas">
+            <a href="{{ url_for('clients.new_clients.add_new_clients') }}" class="tarjeta clientes">
+                <h2>Add New Client</h2>
+            </a>
+            <a href="{{ url_for('clients.clients_list.clients') }}" class="tarjeta clientes">
+                <h2>Client List</h2>
+            </a>
+            <a href="{{ url_for('clients.payments.payment_template') }}" class="tarjeta clientes">
+                <h2>Register Payment</h2>
+            </a>
+            <a href="{{ url_for('clients.payment_history.payment_history') }}" class="tarjeta clientes">
+                <h2>Payment History</h2>
+            </a>
+            <a href="{{ url_for('clients.debts.view_debts') }}" class="tarjeta clientes">
+                <h2>View Debts</h2>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <span>Representaciones EG</span>
+    </footer>
+</body>
+</html>
