@@ -12,19 +12,22 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    networks:
+      - backend
 
   web:
     build: .
     container_name: miapp
     depends_on:
       - db
+    networks:
+      - backend
     environment:
-      DB_URL: postgresql+psycopg2://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-myapp_db}
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-myapp_db}
     ports:
       - "5000:5000"
-    command: ["python", "app.py"]
 
 volumes:
   postgres_data:
+networks:
+  backend:
