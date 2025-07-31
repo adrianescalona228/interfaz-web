@@ -19,3 +19,4 @@ instance/
 
 # Configuración local
 config.ini
+.env
